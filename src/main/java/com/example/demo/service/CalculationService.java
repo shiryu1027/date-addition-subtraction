@@ -18,7 +18,12 @@ public class CalculationService {
 	AdditionSubtractionMapper mapper;
 	
 	@Autowired
-	UsersService uService; 
+	UsersService uService;
+	
+	/* 加減算用データを取得(1件) */
+	public CalcData calcDataOne(int id) {
+		return mapper.calcDataOne(id);
+	}
 	
 	/* ユーザーが持つ加減算用データを取得 */
 	public List<CalcData> calcDataAll(String mailAddress) {
@@ -36,6 +41,16 @@ public class CalculationService {
 		
 		/* 新規登録 */
 		mapper.calcDataInsert(form);
+	}
+	
+	/* 加減算用データの更新 */
+	public void calcDataUpdate(CalcDataForm form, Principal principal) {
+		
+		AppUser user = uService.getSignInUser(principal.getName());
+		
+		form.setUserId(user.getUserId());
+		
+		mapper.calcDataUpdate(form);
 	}
 	
 }

@@ -32,7 +32,7 @@
 		</div>
 		
 		
-		<!-- データ一覧 -->
+		<!-- 加減算データ新規登録 -->
 		<div class="dataInsert">
 			<h2 th:if="${calcList}">登録データ</h2>
 			<h2 th:if="${results}">計算結果</h2>
@@ -80,7 +80,9 @@
 					<td th:text="*{month}"></td>
 					<td th:text="*{day}"></td>
 					<td th:text="*{explanation}"></td>
-					<td></td>
+					<!-- 更新ボタン -->
+					<td><form th:action="@{/calc/update/id={id}(id=*{additionSubtractionId})}"><button>更新</button></form></td>
+					
 					<td></td>
 				</tr>
 			</table>

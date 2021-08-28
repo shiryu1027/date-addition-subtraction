@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,9 +38,11 @@ public class CalculationController {
 		
 		/* 加減算用データを取得 */
 		List<CalcData> calcList = service.calcDataAll(name);
+		List<CalcData> calcListForUpdate = service.calcDataAll(name);
 		
 		model.addAttribute("name", name);
 		model.addAttribute("calcList", calcList);
+		model.addAttribute("calcListForUpdate", calcListForUpdate);
 		
 		return "calc/index";
 	}
@@ -72,5 +75,32 @@ public class CalculationController {
 		
 		return "calc/index";
 	}
+	
+	/* 加減算用データを更新データ画面を表示 */
+	@GetMapping("/update/id={id}")
+	public String updateDisplay(@PathVariable("id") int id, Principal principal, Model model) {
+		
+		/* 加減算データ1件取得 */
+		CalcData calcData = service.calcDataOne(id);
+		
+		model.addAttribute("calcData", calcData);
+		
+		return "/calc/update";
+	}
+	
+	/* 加減算用データを更新 */
+	@PostMapping("/update/id={id}/post")
+	public String update(@ModelAttribute CalcDataForm form, Principal principal, @PathVariable("id") int id) {
+		
+		form.setAdditionSubtractionId(id);
+		
+		service.calcDataUpdate(form, principal);
+		
+		return "redirect:/calc/";
+	}
+	
+	/* 加減算用データの削除 */
+	
+	
 	
 }

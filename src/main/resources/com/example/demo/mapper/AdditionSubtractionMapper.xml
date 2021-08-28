@@ -12,6 +12,12 @@
 	<result column="user_id" property="userId" />
 </resultMap>
 
+<select id="calcDataOne" resultMap="calc">
+	SELECT *
+	FROM addition_subtraction
+	WHERE addition_subtraction_id=#{id}
+</select>
+
 <select id="calcDataAll" resultMap="calc">
 	SELECT * 
 	FROM addition_subtraction 
@@ -26,5 +32,11 @@
 	INSERT INTO addition_subtraction (nickname, year, month, day, explanation, user_id)
 	VALUES (#{nickname}, #{year}, #{month}, #{day}, #{explanation}, #{userId})
 </insert>
+
+<update id="calcDataUpdate">
+	UPDATE addition_subtraction
+	SET nickname=#{nickname}, year=#{year}, month=#{month}, day=#{day}, explanation=#{explanation}, user_id=#{userId}
+	WHERE addition_subtraction_id=#{additionSubtractionId}
+</update>
 
 </mapper>

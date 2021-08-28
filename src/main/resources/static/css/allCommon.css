@@ -165,8 +165,17 @@ td {
 #pop-up {
 	display: none; /* label でコントロールするので input は非表示に */
 }
+
+#pop-up2 {
+	/*display: none;*/ /* label でコントロールするので input は非表示に */
+}
+
 .overlay {
 	display: none; /* input にチェックが入るまでは非表示に */
+}
+
+.overlay2 {
+	/*display: none;*/ /* input にチェックが入るまでは非表示に */
 }
 
 /* pop-upというidを持つ要素にチェックが入ったら、overlayというクラスを持つ要素にこのcssを当てる */
@@ -180,6 +189,18 @@ td {
 	top: 0;
 	left: 0;
 }
+
+/*#pop-up2:checked + .overlay2 {
+	display: block;
+	z-index: 9999;
+	background-color:rgba(0,0,0,0.5);
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+}*/
+
 .window {
 	width: 90vw;
 	max-width: 380px;
