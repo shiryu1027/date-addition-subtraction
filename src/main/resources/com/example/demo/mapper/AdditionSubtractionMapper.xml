@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.AdditionSubtractionMapper">
+
+<resultMap type="com.example.demo.entity.CalcData" id="calc">
+	<id column="addition_subtraction_id" property="additionSubtractionId" />
+	<result column="nickname" property="nickname" />
+	<result column="year" property="year" />
+	<result column="month" property="month" />
+	<result column="day" property="day" />
+	<result column="explanation" property="explanation" />
+	<result column="user_id" property="userId" />
+</resultMap>
+
+<select id="calcDataAll" resultMap="calc">
+	SELECT * 
+	FROM addition_subtraction 
+	WHERE user_id=(
+		SELECT user_id
+		FROM users
+		WHERE mail_address=#{mailAddress}
+	)
+</select>
+
+<insert id="calcDataInsert">
+	INSERT INTO addition_subtraction (nickname, year, month, day, explanation, user_id)
+	VALUES (#{nickname}, #{year}, #{month}, #{day}, #{explanation}, #{userId})
+</insert>
+
+</mapper>

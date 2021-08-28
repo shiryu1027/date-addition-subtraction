@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UsersMapper">
+
+<resultMap type="com.example.demo.entity.AppUser" id="users">
+	<id column="user_id" property="userId" />
+	<result column="mail_address" property="mailAddress" />
+	<result column="password" property="password" />
+	<result column="role" property="role" />
+</resultMap>
+
+<select id="findOne" resultMap="users">
+	SELECT * FROM users WHERE mail_Address=#{mailAddress}
+</select>
+
+<insert id="signUp">
+	INSERT INTO users(mail_address, password, role) VALUES (#{mailAddress}, #{password}, #{role})
+</insert>
+
+</mapper>

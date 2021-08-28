@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>+++日付の加減算---</title>
+<link href="/css/allCommon.css" rel="stylesheet">
+</head>
+<body>
+<header>
+	<div class="header-content">
+		<div class="header-left">
+			<h1><a th:href="@{/calc/}">Date Arithmetic ~日付加減算~ </a></h1>
+		</div>
+		<div class="header-right">
+			<h3>[[${name}]]さん、こんにちは</h3>
+			<form th:action="@{/user/signOut}" method="post">
+				<input type="submit" th:value="サインアウト">
+			</form>
+		</div>
+	</div>
+</header>
+<main>
+	<div class="content">
+		
+		<!-- 基準日登録 -->
+		<div class="recordDate">
+			<p>計算したい日付を入力して下さい
+			<form th:action="@{/calc/result}" method="post">
+				<input name="date" type="text">
+				<button>計算結果</button>
+			</form>
+		</div>
+		
+		
+		<!-- データ一覧 -->
+		<div class="dataInsert">
+			<h2 th:if="${calcList}">登録データ</h2>
+			<h2 th:if="${results}">計算結果</h2>
+			<label class="open" for="pop-up">新規登録</label>
+			<input type="checkbox" id="pop-up">
+			<div class="overlay">
+				<div class="window">
+					<label class="close" for="pop-up">×</label>
+					<div class="window-content">
+						<h3>新規登録</h3><br>
+						<form th:action="@{/calc/insert}" method="post">
+							<label>ニックネーム:</label>
+							<input name="nickname" type="text"><br>
+							<label>年:</label>
+							<input name="year" type="text"><br>
+							<label>月:</label>
+							<input name="month" type="text"><br>
+							<label>日:</label>
+							<input name="day" type="text"><br>
+							<label>説明:</label>
+							<input name="explanation" type="text"><br>
+							<button>登録</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!-- 加減算データ一覧 -->
+		<div th:if="${calcList}" class="calcList">
+			<table>
+				<tr>
+					<th>ニックネーム</th>
+					<th>年</th>
+					<th>月</th>
+					<th>日</th>
+					<th>説明</th>
+					<th>更新</th>
+					<th>削除</th>
+				</tr>
+				<tr th:each="data:${calcList}" th:object="${data}">
+					<td th:text="*{nickname}"></td>
+					<td th:text="*{year}"></td>
+					<td th:text="*{month}"></td>
+					<td th:text="*{day}"></td>
+					<td th:text="*{explanation}"></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+		
+		<!-- 計算データ一覧 -->
+		<table th:if="${results}">
+			<tr>
+				<th>ニックネーム</th>
+				<th>年</th>
+				<th>月</th>
+				<th>日</th>
+				<th>説明</th>
+				<th>計算結果</th>
+			</tr>
+			<tr th:each="result:${results}" th:object="${result}">
+				<td th:text="*{nickname}"></td>
+				<td th:text="*{year}"></td>
+				<td th:text="*{month}"></td>
+				<td th:text="*{day}"></td>
+				<td th:text="*{explanation}"></td>
+				<td th:text="*{calcResult}"></td>
+			</tr>
+		</table>
+	</div>
+</main>
+<footer>
+	<div class="footer-content">
+		<div class="footer-left">
+			<h3><a th:href="@{/calc/}">>日付の加減算</a></h3>
+		</div>
+		<div class="footer-right">
+			<p><a href="https://pixabay.com/ja/users/anncapictures-1564471/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3156771">anncapictures</a>による<a href="https://pixabay.com/ja/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3156771">Pixabay</a>からの画像
+		</div>
+	</div>
+</footer>
+
+</body>
+</html>
