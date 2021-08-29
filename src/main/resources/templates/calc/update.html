@@ -13,8 +13,6 @@ layout:decorate="~{layout/layout}">
 		<!-- 加減算データ一覧 -->
 		<h3>加減算データ更新</h3><br>
 		<form th:action="@{/calc/update/id={id}/post (id=*{additionSubtractionId})}" th:object="${calcData}" method="post">
-			<label>ニックネーム:</label>
-			<input name="nickname" th:value="*{nickname}" type="text"><br>
 			<label>年:</label>
 			<input name="year" th:value="*{year}" type="text"><br>
 			<label>月:</label>

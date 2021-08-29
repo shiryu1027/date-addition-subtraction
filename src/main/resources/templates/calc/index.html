@@ -33,8 +33,6 @@ layout:decorate="~{layout/layout}">
 					<div class="window-content">
 						<h3>新規登録</h3><br>
 						<form th:action="@{/calc/insert}" method="post">
-							<label>ニックネーム:</label>
-							<input name="nickname" type="text"><br>
 							<label>年:</label>
 							<input name="year" type="text"><br>
 							<label>月:</label>
@@ -55,7 +53,7 @@ layout:decorate="~{layout/layout}">
 		<div th:if="${calcList}" class="calcList">
 			<table>
 				<tr>
-					<th>ニックネーム</th>
+					<th>データコード</th>
 					<th>年</th>
 					<th>月</th>
 					<th>日</th>
@@ -72,7 +70,7 @@ layout:decorate="~{layout/layout}">
 					<!-- 更新ボタン -->
 					<td><form th:action="@{/calc/update/id={id}(id=*{additionSubtractionId})}"><button>更新</button></form></td>
 					
-					<td></td>
+					<td><form th:action="@{/calc/delete/id={id}(id=*{additionSubtractionId})}" method="post"><button>削除</button></form></td>
 				</tr>
 			</table>
 		</div>

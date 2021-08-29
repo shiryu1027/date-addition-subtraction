@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.CalcData;
 import com.example.demo.form.CalcDataForm;
+import com.example.demo.service.AutoNicknameService;
 import com.example.demo.service.CalculationLogicService;
 import com.example.demo.service.CalculationService;
 
@@ -29,11 +30,12 @@ public class CalculationController {
 	@Autowired
 	CalculationLogicService logicService;
 	
+	@Autowired
+	AutoNicknameService nicknameService;
+	
 	/* ホームぺージ取得 */
 	@GetMapping("/")
 	public String index(Principal principal, Model model) { // Principalはサインイン情報を格納している
-		
-		System.out.println("進撃の巨人");
 		
 		/* サインイン情報のIDを取得 */
 		String name = principal.getName();
@@ -52,6 +54,8 @@ public class CalculationController {
 	/* 加減算用データを新規登録 */
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute CalcDataForm form, Principal principal) {
+		
+		nicknameService.autoNickname(form);
 		
 		service.calcDataInsert(form, principal);
 		
@@ -98,6 +102,7 @@ public class CalculationController {
 	public String update(@ModelAttribute CalcDataForm form, Principal principal, @PathVariable("id") int id) {
 		
 		form.setAdditionSubtractionId(id);
+		nicknameService.autoNickname(form);
 		
 		service.calcDataUpdate(form, principal);
 		
@@ -105,7 +110,13 @@ public class CalculationController {
 	}
 	
 	/* 加減算用データの削除 */
-	
+	@PostMapping("/delete/id={id}")
+	public String delete(@PathVariable("id") int id, Principal principal, Model model) {
+		
+		service.calcDataDelete(id);
+		
+		return "redirect:/calc/";
+	}
 	
 	
 }

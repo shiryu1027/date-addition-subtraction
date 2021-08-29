@@ -53,4 +53,9 @@ public class CalculationService {
 		mapper.calcDataUpdate(form);
 	}
 	
+	/* 加減算用データの削除 */
+	public void calcDataDelete(int id) {
+		mapper.calcDataDelete(id);
+	}
+	
 }

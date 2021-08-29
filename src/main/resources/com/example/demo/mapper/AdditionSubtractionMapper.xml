@@ -39,4 +39,9 @@
 	WHERE addition_subtraction_id=#{additionSubtractionId}
 </update>
 
+<delete id="calcDataDelete">
+	DELETE FROM addition_subtraction
+	WHERE addition_subtraction_id=#{id}
+</delete>
+
 </mapper>

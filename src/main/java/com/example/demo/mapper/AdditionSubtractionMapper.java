@@ -22,4 +22,6 @@ public interface AdditionSubtractionMapper {
 	/* 加減算用データの更新 */
 	public void calcDataUpdate(CalcDataForm form);
 	
+	/* 加減算用データの削除 */
+	public void calcDataDelete(int id);
 }
