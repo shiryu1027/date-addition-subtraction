@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		PasswordEncoder encoder = passwordEncoder();
 		
 		/* インメモリ認証(後にコメントアウト)*/
-		auth
+		/*auth
 			.inMemoryAuthentication()
 				.withUser("user")
 					.password(encoder.encode("user"))
@@ -91,7 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.withUser("admin")
 					.password(encoder.encode("admin"))
-					.roles("ADMIN");
+					.roles("ADMIN");*/
 		
 		/* ユーザーデータで認証 */
 		auth
