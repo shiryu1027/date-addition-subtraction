@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.signIn {
+.signUp {
 	width:350px;
 	margin:0 auto;
 	margin-top:40px;
@@ -9,7 +9,7 @@
 	border-radius:10px;
 }
 
-.signIn h2 {
+.signUp h2 {
 	font-size:29px;
 	color:#3b3b3b;
 	border-bottom:solid 2px white;
@@ -18,25 +18,25 @@
 	margin-bottom:30px;
 }
 
-.signInTitle {
+.signUpTitle {
 	width:100%;
 	text-align:center;
 }
 
-.signIn label {
+.signUp label {
 	font-size:20px;
 	color:white;
 	font-weight:bold;
 }
 
-.signIn input {
+.signUp input {
 	width:95%;
 	margin-top:10px;
 	margin-bottom:25px;
 	padding:8px;
 }
 
-.signIn button {
+.signUp button {
 	width:100%;
 	padding:10px 0;
 	font-size:16px;
