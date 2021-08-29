@@ -12,6 +12,11 @@ layout:decorate="~{layout/layout}">
 	
 		<!-- 加減算データ一覧 -->
 		<h3>加減算データ更新</h3><br>
+		<ul class="error-message"> <!-- ulにth:eachを付けないのは、liのループではなくulのループになるから -->
+			<li th:if="${validationError}" th:each="error : ${validationError}" >
+				<span th:text="${error}" class="text-danger"></span>
+			</li>
+		</ul>
 		<form th:action="@{/calc/update/id={id}/post (id=*{additionSubtractionId})}" th:object="${calcData}" method="post">
 			<label>年:</label>
 			<input name="year" th:value="*{year}" type="text"><br>

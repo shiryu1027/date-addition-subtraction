@@ -2,11 +2,15 @@ package com.example.demo.controller;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,7 +57,16 @@ public class CalculationController {
 	
 	/* 加減算用データを新規登録 */
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute CalcDataForm form, Principal principal) {
+	public String insert(@Validated @ModelAttribute CalcDataForm form, BindingResult result, Principal principal, Model model) {
+		
+		if (result.hasErrors()) {
+			List<String> errorList = new ArrayList<String>();
+			for (ObjectError error : result.getAllErrors()) {
+				errorList.add(error.getDefaultMessage());
+			}
+			model.addAttribute("validationError", errorList);
+			return index(principal, model);
+		}
 		
 		nicknameService.autoNickname(form);
 		
@@ -99,7 +112,16 @@ public class CalculationController {
 	
 	/* 加減算用データを更新 */
 	@PostMapping("/update/id={id}/post")
-	public String update(@ModelAttribute CalcDataForm form, Principal principal, @PathVariable("id") int id) {
+	public String update(@Validated @ModelAttribute CalcDataForm form, BindingResult result, Model model, Principal principal, @PathVariable("id") int id) {
+		
+		if (result.hasErrors()) {
+			List<String> errorList = new ArrayList<String>();
+			for (ObjectError error : result.getAllErrors()) {
+				errorList.add(error.getDefaultMessage());
+			}
+			model.addAttribute("validationError", errorList);
+			return updateDisplay(id, principal, model);
+		}
 		
 		form.setAdditionSubtractionId(id);
 		nicknameService.autoNickname(form);

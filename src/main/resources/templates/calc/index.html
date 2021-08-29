@@ -31,14 +31,19 @@ layout:decorate="~{layout/layout}">
 				<div class="window">
 					<label class="close" for="pop-up">×</label>
 					<div class="window-content">
+						<ul class="error-message"> <!-- ulにth:eachを付けないのは、liのループではなくulのループになるから -->
+							<li th:if="${validationError}" th:each="error : ${validationError}" >
+								<span th:text="${error}" class="text-danger"></span>
+							</li>
+						</ul>
 						<h3>新規登録</h3><br>
 						<form th:action="@{/calc/insert}" method="post">
 							<label>年:</label>
-							<input name="year" type="text"><br>
+							<input name="year" type="number"><br>
 							<label>月:</label>
-							<input name="month" type="text"><br>
+							<input name="month" type="number"><br>
 							<label>日:</label>
-							<input name="day" type="text"><br>
+							<input name="day" type="number"><br>
 							<label>説明:</label>
 							<input name="explanation" type="text"><br>
 							<button>登録</button>
