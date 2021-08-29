@@ -5,34 +5,30 @@ layout:decorate="~{layout/layout}">
 <head>
 	<meta charset="UTF-8">
 	<title>サインイン</title>
+	<link href="/css/user/signIn.css" rel="stylesheet">
 </head>
 <body>
 <main layout:fragment="content">
 	<div class="content">
-		<p th:if="${session[SPRING_SECURITY_LAST_EXCEPTION]} != null"
-			th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"
-			class="text-danger"> <!-- 認証エラーによって投げられるExceptionは、'SPRING_SECURITY_LAST_EXCEPTION'として保存される -->
-			ログインエラーメッセージ
-		</p>
-		<form th:action="@{/user/signIn}" method="post">
-			<label>ユーザーID(メールアドレス)</label>
-			<input name="mailAddress" type="text"><br>
-			<label>パスワード</label>
-			<input name="password" type="password"><br>
-			<button>サインイン</button>
-		</form>
-		<form th:action="@{/user/signUp}"><button>新規登録はこちら</button></form>
+		<div class="signIn">
+			<div class="signInTitle">
+				<h2>サインイン</h2>
+			</div>
+			<p th:if="${session[SPRING_SECURITY_LAST_EXCEPTION]} != null"
+				th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"
+				class="text-danger"> <!-- 認証エラーによって投げられるExceptionは、'SPRING_SECURITY_LAST_EXCEPTION'として保存される -->
+				ログインエラーメッセージ
+			</p>
+			<form th:action="@{/user/signIn}" method="post">
+				<label for="mailAddress">ユーザーID</label><br>
+				<input name="mailAddress" id="mailAddress" type="text" placeholder="メールアドレス"><br>
+				<label for="password">パスワード</label><br>
+				<input name="password" id="password" type="password" placeholder="パスワード"><br>
+				<button>サインイン</button>
+			</form>
+			<form th:action="@{/user/signUp}" class="button2"><button>新規登録はこちら</button></form>
+		</div>
 	</div>
 </main>
-<!-- <footer>
-	<div class="footer-content">
-		<div class="footer-left">
-			<h3>>日付の加減算</h3>
-		</div>
-		<div class="footer-right">
-			<p><a href="https://pixabay.com/ja/users/anncapictures-1564471/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3156771">anncapictures</a>による<a href="https://pixabay.com/ja/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3156771">Pixabay</a>からの画像
-		</div>
-	</div>
-</footer> -->
 </body>
 </html>

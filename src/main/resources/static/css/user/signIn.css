@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+.signIn {
+	width:350px;
+	margin:0 auto;
+	margin-top:40px;
+	background-color:rgba(0,0,0,0.5);
+	padding:40px 50px;
+	border-radius:10px;
+}
+
+.signIn h2 {
+	font-size:29px;
+	color:#3b3b3b;
+	border-bottom:solid 2px white;
+	color:white;
+	width:50%;
+	margin-bottom:30px;
+}
+
+.signInTitle {
+	width:100%;
+	text-align:center;
+}
+
+.signIn label {
+	font-size:20px;
+	color:white;
+	font-weight:bold;
+}
+
+.signIn input {
+	width:95%;
+	margin-top:10px;
+	margin-bottom:25px;
+	padding:8px;
+}
+
+.signIn button {
+	width:100%;
+	padding:10px 0;
+	font-size:16px;
+}
+
+.button2 {
+	margin-top:10px;
+	margin-bottom:10px;
+}
