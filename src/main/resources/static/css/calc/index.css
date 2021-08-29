@@ -1,4 +1,24 @@
 @charset "UTF-8";
+/* テーブル */
+.th-id {
+	width:120px;
+}
+
+.th-date {
+	width:60px;
+}
+
+.th-explanation {
+	width:200px;
+}
+
+.th-button {
+	width:60px;
+}
+
+.th-result {
+	width:140px;
+}
 
 /* クラス */
 .recordDate {
@@ -12,6 +32,12 @@
 	border-radius:10px;
 	display:inline-block;
 	font-weight:normal;
+}
+
+.recordDate input {
+	padding:5px;
+	width:200px;
+	
 }
 
 .dataInsert {

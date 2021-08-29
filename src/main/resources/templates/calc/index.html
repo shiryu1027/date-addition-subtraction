@@ -15,7 +15,7 @@ layout:decorate="~{layout/layout}">
 		<div class="recordDate">
 			<p>計算したい日付を入力して下さい
 			<form th:action="@{/calc/result}" method="post">
-				<input name="date" type="text">
+				<input name="date" type="text" placeholder="1997/08/02">
 				<button>計算結果</button>
 			</form>
 		</div>
@@ -53,13 +53,13 @@ layout:decorate="~{layout/layout}">
 		<div th:if="${calcList}" class="calcList">
 			<table>
 				<tr>
-					<th>データコード</th>
-					<th>年</th>
-					<th>月</th>
-					<th>日</th>
-					<th>説明</th>
-					<th>更新</th>
-					<th>削除</th>
+					<th class="th-id">データコード</th>
+					<th class="th-date">年</th>
+					<th class="th-date">月</th>
+					<th class="th-date">日</th>
+					<th class="th-explanation">説明</th>
+					<th class="th-button">更新</th>
+					<th class="th-button">削除</th>
 				</tr>
 				<tr th:each="data:${calcList}" th:object="${data}">
 					<td th:text="*{nickname}"></td>
@@ -78,12 +78,12 @@ layout:decorate="~{layout/layout}">
 		<!-- 計算データ一覧 -->
 		<table th:if="${results}">
 			<tr>
-				<th>ニックネーム</th>
-				<th>年</th>
-				<th>月</th>
-				<th>日</th>
-				<th>説明</th>
-				<th>計算結果</th>
+				<th class="th-id">データコード</th>
+				<th class="th-date">年</th>
+				<th class="th-date">月</th>
+				<th class="th-date">日</th>
+				<th class="th-explanation">説明</th>
+				<th class="th-result">計算結果</th>
 			</tr>
 			<tr th:each="result:${results}" th:object="${result}">
 				<td th:text="*{nickname}"></td>
