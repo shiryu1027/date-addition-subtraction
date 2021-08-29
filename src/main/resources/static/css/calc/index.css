@@ -1,115 +1,6 @@
 @charset "UTF-8";
 
-/* タグ */
-body {
-	margin:0;
-}
-
-header {
-	height:100px;
-	background-color:#2f2f2f;
-	color:white;
-}
-
-main {
-	height:800px;
-	/*background-color:#f5fcfe;*/
-	background-image:url("/image/pocket-watch-3156771_1280.jpg");
-	background-size:cover;
-}
-
-footer {
-	height:70px;
-	background-color:#2f2f2f;
-	color:white;
-}
-
-/* タグ(不順) */
-
-table {
-	background-color:#ffffff;
-	border-collapse:collapse; /*セルの線を重ねる*/
-}
-
-th, td {
-	border:solid 1px #c0c0c0;
-	padding:10px;
-}
-
-th {
-	background-color:rgba(60, 60, 60, 0.4);
-	color:white;
-}
-
-td {
-	text-align:center;
-}
-
 /* クラス */
-.header-content {
-	width:90%;
-	margin:0 auto;
-}
-
-.header-left {
-	float:left;
-}
-
-.header-left h1 {
-	line-height:100px;
-	font-size:28px;
-	margin:0;
-	font-weight:normal;
-	font-style:italic;
-}
-
-.header-left a {
-	text-decoration: none;
-	color:white;
-	background-color:gray;
-	padding:10px;
-	border-radius:7px;
-	font-weight:normal;
-	font-style:italic;
-}
-
-.header-right {
-	float:right;
-}
-
-.header-right h3 {
-	display:inline-block;
-	padding-right:10px;
-}
-
-.header-right form {
-	display:inline-block;
-	line-height:100px;
-	background-color:#a7a7a7;
-	padding:0 20px;
-	font-size:19px;
-}
-
-.header-right input {
-	background-color:transparent;
-	border-style:none;
-	text-decoration:underline;
-	cursor:pointer;
-	font-size:21px;
-	width:auto;
-	color: #ffffff;
-}
-
-.content {
-	width:90%;
-	margin:0 auto;
-	padding-top:5px;
-}
-
-.content h2 {
-	display:inline-block;
-}
-
 .recordDate {
 	padding-top:30px;
 }
@@ -133,23 +24,6 @@ td {
 	font-size:23px;
 	padding:10px 20px;
 	border-radius:10px;
-}
-
-.footer-content {
-	width:90%;
-	margin:0 auto;
-}
-
-.footer-content a{
-	color:white;
-}
-
-.footer-left {
-	float:left;
-}
-
-.footer-right {
-	float:right;
 }
 
 /* ポップアップ表示 */
@@ -215,5 +89,3 @@ td {
 .window-content input, label{
 	margin-top:5px;
 }
-
-

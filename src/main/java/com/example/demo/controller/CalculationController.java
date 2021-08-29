@@ -83,7 +83,10 @@ public class CalculationController {
 		/* 加減算データ1件取得 */
 		CalcData calcData = service.calcDataOne(id);
 		
+		String name = principal.getName();
+		
 		model.addAttribute("calcData", calcData);
+		model.addAttribute("name", name);
 		
 		return "/calc/update";
 	}
