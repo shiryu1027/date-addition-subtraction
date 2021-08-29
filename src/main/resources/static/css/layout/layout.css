@@ -18,7 +18,7 @@ header {
 
 .header-left h1 {
 	line-height:100px;
-	font-size:28px;
+	font-size:29px;
 	margin:0;
 	font-weight:normal;
 	font-style:italic;
@@ -27,8 +27,8 @@ header {
 .header-left a {
 	text-decoration: none;
 	color:white;
-	background-color:rgba(140, 140, 140, 0.8);
-	padding:10px;
+	background-color:rgba(140, 140, 140, 0.4);
+	padding:10px 20px;
 	border-radius:7px;
 	font-weight:normal;
 	font-style:italic;
