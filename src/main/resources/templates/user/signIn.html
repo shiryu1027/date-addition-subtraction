@@ -9,6 +9,11 @@ layout:decorate="~{layout/layout}">
 <body>
 <main layout:fragment="content">
 	<div class="content">
+		<p th:if="${session[SPRING_SECURITY_LAST_EXCEPTION]} != null"
+			th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"
+			class="text-danger"> <!-- 認証エラーによって投げられるExceptionは、'SPRING_SECURITY_LAST_EXCEPTION'として保存される -->
+			ログインエラーメッセージ
+		</p>
 		<form th:action="@{/user/signIn}" method="post">
 			<label>ユーザーID(メールアドレス)</label>
 			<input name="mailAddress" type="text"><br>

@@ -33,6 +33,8 @@ public class CalculationController {
 	@GetMapping("/")
 	public String index(Principal principal, Model model) { // Principalはサインイン情報を格納している
 		
+		System.out.println("進撃の巨人");
+		
 		/* サインイン情報のIDを取得 */
 		String name = principal.getName();
 		

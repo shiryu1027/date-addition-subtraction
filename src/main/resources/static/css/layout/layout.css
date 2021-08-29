@@ -128,3 +128,7 @@ td {
 .content h2 {
 	display:inline-block;
 }
+
+.text-danger {
+	color:#ff0000;
+}
