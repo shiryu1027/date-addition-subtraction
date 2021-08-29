@@ -27,7 +27,7 @@ header {
 .header-left a {
 	text-decoration: none;
 	color:white;
-	background-color:gray;
+	background-color:rgba(140, 140, 140, 0.8);
 	padding:10px;
 	border-radius:7px;
 	font-weight:normal;
