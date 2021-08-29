@@ -26,6 +26,9 @@
 		FROM users
 		WHERE mail_address=#{mailAddress}
 	)
+	ORDER BY addition_subtraction_id DESC
+	LIMIT 7;
+	
 </select>
 
 <insert id="calcDataInsert">
