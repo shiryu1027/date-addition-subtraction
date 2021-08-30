@@ -80,7 +80,7 @@ public class CalculationController {
 				errorList.add(error.getDefaultMessage());
 			}
 			model.addAttribute("validationError", errorList);
-			return index(principal, model);
+			return insertDisplay(principal, model);
 		}
 		
 		nicknameService.autoNickname(form);
@@ -106,6 +106,8 @@ public class CalculationController {
 		model.addAttribute("results", calcListResult);
 		
 		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
+		
+		model.addAttribute("referenceDate", date);
 		
 		return "calc/index";
 	}

@@ -21,8 +21,9 @@ layout:decorate="~{layout/layout}">
 		</div>
 		
 		<h2 th:if="${calcList}" class="calcList-title">登録データ</h2>
-		<h2 th:if="${results}">計算結果</h2>
+		<h2 th:if="${results}" class="calcList-title">計算結果</h2>
 		<form th:action="@{/calc/insert}" class="insert-form"><button class="insert-button button">新規登録</button></form>
+		<h2 th:if="${results}" class="reference-date">基準日 : [[${referenceDate}]]</h2><br>
 		
 		<!-- 加減算データ一覧 -->
 		<div th:if="${calcList}" class="calcList">
@@ -51,9 +52,9 @@ layout:decorate="~{layout/layout}">
 		</div>
 		
 		<!-- 計算データ一覧 -->
-		<table th:if="${results}">
+		<table th:if="${results}" class="calcList">
 			<tr>
-				<th class="th-id">データコード</th>
+				<th class="th-id">加減算コード</th>
 				<th class="th-date">年</th>
 				<th class="th-date">月</th>
 				<th class="th-date">日</th>

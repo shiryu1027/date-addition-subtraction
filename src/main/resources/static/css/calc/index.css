@@ -64,6 +64,21 @@
 	height:50px;
 }
 
+.calcList {
+	max-height:500px;
+	overflow:scroll; /* 親要素に付ける */
+	display:inline-block;
+}
+
+.reference-date {
+	color:white;
+	background-color:rgba(40, 40, 40, 0.8);
+	font-size:23px;
+	padding:10px 20px;
+	border-radius:5px;
+	margin-top:40px;
+}
+
 /* ポップアップ表示 */
 .open {
 	cursor:pointer; /* マウスオーバーでカーソルの形状を変えることで、クリックできる要素だとわかりやすいように */
