@@ -20,9 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.CalcData;
 import com.example.demo.form.CalcDataForm;
-import com.example.demo.service.AutoNicknameService;
+import com.example.demo.service.AutoAdditionSubtractionCodeService;
 import com.example.demo.service.CalculationLogicService;
 import com.example.demo.service.CalculationService;
+import com.example.demo.service.UsersService;
 
 @Controller
 @RequestMapping("calc")
@@ -32,10 +33,13 @@ public class CalculationController {
 	CalculationService service;
 	
 	@Autowired
+	UsersService usersService;
+	
+	@Autowired
 	CalculationLogicService logicService;
 	
 	@Autowired
-	AutoNicknameService nicknameService;
+	AutoAdditionSubtractionCodeService nicknameService;
 	
 	/* ホームぺージ取得 */
 	@GetMapping("/")
@@ -48,7 +52,7 @@ public class CalculationController {
 		List<CalcData> calcList = service.calcDataAll(name);
 		List<CalcData> calcListForUpdate = service.calcDataAll(name);
 		
-		model.addAttribute("name", name);
+		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
 		model.addAttribute("calcList", calcList);
 		model.addAttribute("calcListForUpdate", calcListForUpdate);
 		
@@ -60,7 +64,7 @@ public class CalculationController {
 	public String insertDisplay(Principal principal, Model model) {
 		
 		String name = principal.getName();
-		model.addAttribute("name", name);
+		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
 		
 		return "calc/insert";
 	}
@@ -101,7 +105,7 @@ public class CalculationController {
 		
 		model.addAttribute("results", calcListResult);
 		
-		model.addAttribute("name", name);
+		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
 		
 		return "calc/index";
 	}
@@ -116,7 +120,7 @@ public class CalculationController {
 		String name = principal.getName();
 		
 		model.addAttribute("calcData", calcData);
-		model.addAttribute("name", name);
+		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
 		
 		return "/calc/update";
 	}

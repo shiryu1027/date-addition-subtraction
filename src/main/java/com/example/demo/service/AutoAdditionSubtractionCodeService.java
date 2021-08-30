@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.form.CalcDataForm;
 
 @Service
-public class AutoNicknameService {
+public class AutoAdditionSubtractionCodeService {
 	
 	public CalcDataForm autoNickname(CalcDataForm form) {
 		
@@ -22,14 +22,14 @@ public class AutoNicknameService {
 		list[1] = strMonth;
 		list[2] = strDay;
 		
-		String nickname = "";
+		String additionSubtractionCode = "";
 		for (String data: list) {
 			if (!(data.equals("+0Y") || data.equals("+0M") || data.equals("+0D"))) {
-				nickname = nickname + data;
+				additionSubtractionCode = additionSubtractionCode + data;
 			}
 		}
 		
-		form.setNickname(nickname);
+		form.setAdditionSubtractionCode(additionSubtractionCode);
 		
 		return form;
 	}

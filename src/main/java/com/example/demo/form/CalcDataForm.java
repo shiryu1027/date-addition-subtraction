@@ -10,7 +10,7 @@ public class CalcDataForm {
 	
 	private int additionSubtractionId;
 	
-	private String nickname;
+	private String additionSubtractionCode;
 	
 	@Max(value=100000, message="100,000以下の値を入力して下さい")
 	@Min(value=-100000, message="-100,000以上の値を入力して下さい")

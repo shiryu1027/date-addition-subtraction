@@ -28,7 +28,7 @@ layout:decorate="~{layout/layout}">
 		<div th:if="${calcList}" class="calcList">
 			<table>
 				<tr>
-					<th class="th-id">データコード</th>
+					<th class="th-id">加減算コード</th>
 					<th class="th-date">年</th>
 					<th class="th-date">月</th>
 					<th class="th-date">日</th>
@@ -37,7 +37,7 @@ layout:decorate="~{layout/layout}">
 					<th class="th-button">削除</th>
 				</tr>
 				<tr th:each="data:${calcList}" th:object="${data}">
-					<td th:text="*{nickname}"></td>
+					<td th:text="*{additionSubtractionCode}"></td>
 					<td th:text="*{year}"></td>
 					<td th:text="*{month}"></td>
 					<td th:text="*{day}"></td>
@@ -61,7 +61,7 @@ layout:decorate="~{layout/layout}">
 				<th class="th-result">計算結果</th>
 			</tr>
 			<tr th:each="result:${results}" th:object="${result}">
-				<td th:text="*{nickname}"></td>
+				<td th:text="*{additionSubtractionCode}"></td>
 				<td th:text="*{year}"></td>
 				<td th:text="*{month}"></td>
 				<td th:text="*{day}"></td>

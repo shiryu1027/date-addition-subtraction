@@ -10,6 +10,8 @@ public class AppUser {
 	
 	private String mailAddress;
 	
+	private String nickname;
+	
 	private String password;
 	
 	private String role;

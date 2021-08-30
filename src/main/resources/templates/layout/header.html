@@ -11,8 +11,8 @@ layout:decorate="~{layout/layout}">
 		<div class="header-left">
 			<h1><a th:href="@{/calc/}">Date Arithmetic ~日付加減算~ </a></h1>
 		</div>
-		<div class="header-right" th:if="${name}">
-			<h3>[[${name}]]さん、こんにちは</h3>
+		<div class="header-right" th:if="${nickname}">
+			<h3>[[${nickname}]]さん、こんにちは</h3>
 			<form th:action="@{/user/signOut}" method="post">
 				<input type="submit" th:value="サインアウト">
 			</form>

@@ -9,7 +9,7 @@ public class CalcData {
 	
 	private int additionSubtractionId;
 	
-	private String nickname;
+	private String additionSubtractionCode;
 	
 	private int year;
 	
