@@ -16,43 +16,13 @@ layout:decorate="~{layout/layout}">
 			<p>計算したい日付を入力して下さい
 			<form th:action="@{/calc/result}" method="post">
 				<input name="date" type="text" placeholder="1997/08/02">
-				<button>計算結果</button>
+				<button class="button">計算結果</button>
 			</form>
 		</div>
 		
-		
-		<!-- 加減算データ新規登録 -->
-		<div class="dataInsert">
-			<h2 th:if="${calcList}">登録データ</h2>
-			<h2 th:if="${results}">計算結果</h2>
-			<label class="open" for="pop-up">新規登録</label>
-			<input type="checkbox" id="pop-up">
-			<div class="overlay">
-				<div class="window">
-					<label class="close" for="pop-up">×</label>
-					<div class="window-content">
-						<ul class="error-message"> <!-- ulにth:eachを付けないのは、liのループではなくulのループになるから -->
-							<li th:if="${validationError}" th:each="error : ${validationError}" >
-								<span th:text="${error}" class="text-danger"></span>
-							</li>
-						</ul>
-						<h3>新規登録</h3><br>
-						<form th:action="@{/calc/insert}" method="post">
-							<label>年:</label>
-							<input name="year" type="number"><br>
-							<label>月:</label>
-							<input name="month" type="number"><br>
-							<label>日:</label>
-							<input name="day" type="number"><br>
-							<label>説明:</label>
-							<input name="explanation" type="text"><br>
-							<button>登録</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		
+		<h2 th:if="${calcList}" class="calcList-title">登録データ</h2>
+		<h2 th:if="${results}">計算結果</h2>
+		<form th:action="@{/calc/insert}" class="insert-form"><button class="insert-button button">新規登録</button></form>
 		
 		<!-- 加減算データ一覧 -->
 		<div th:if="${calcList}" class="calcList">
@@ -73,9 +43,9 @@ layout:decorate="~{layout/layout}">
 					<td th:text="*{day}"></td>
 					<td th:text="*{explanation}"></td>
 					<!-- 更新ボタン -->
-					<td><form th:action="@{/calc/update/id={id}(id=*{additionSubtractionId})}"><button>更新</button></form></td>
+					<td><form th:action="@{/calc/update/id={id}(id=*{additionSubtractionId})}"><button class="button3">更新</button></form></td>
 					
-					<td><form th:action="@{/calc/delete/id={id}(id=*{additionSubtractionId})}" method="post"><button>削除</button></form></td>
+					<td><form th:action="@{/calc/delete/id={id}(id=*{additionSubtractionId})}" method="post"><button class="button3">削除</button></form></td>
 				</tr>
 			</table>
 		</div>

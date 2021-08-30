@@ -133,3 +133,27 @@ td {
 .text-danger {
 	color:#ff0000;
 }
+
+.button {
+	background-color:rgba(50, 50, 50, 0.8);
+	color:white;
+	font-weight:bold;
+	border-radius:5px;
+	padding:5px 10px;
+}
+
+.button2 {
+	background-color:rgba(140, 140, 140, 0.9);
+	color:white;
+	font-weight:bold;
+	letter-spacing:3px;
+	border-radius:5px;
+}
+
+.button3 {
+	
+}
+
+.button-2up {
+	margin-top:20px;
+}

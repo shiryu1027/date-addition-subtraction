@@ -55,6 +55,17 @@ public class CalculationController {
 		return "calc/index";
 	}
 	
+	/* 加減算用データの新規登録画面の表示 */
+	@GetMapping("/insert")
+	public String insertDisplay(Principal principal, Model model) {
+		
+		String name = principal.getName();
+		model.addAttribute("name", name);
+		
+		return "calc/insert";
+	}
+	
+	
 	/* 加減算用データを新規登録 */
 	@PostMapping("/insert")
 	public String insert(@Validated @ModelAttribute CalcDataForm form, BindingResult result, Principal principal, Model model) {

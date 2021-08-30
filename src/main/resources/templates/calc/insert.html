@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>+++日付の加減算---</title>
+</head>
+<body>
+<main layout:fragment="content">
+	<div class="content">
+		<!-- 加減算データ新規登録 -->
+		<h3>加減算データ新規登録</h3><br>
+		<ul class="error-message"> <!-- ulにth:eachを付けないのは、liのループではなくulのループになるから -->
+			<li th:if="${validationError}" th:each="error : ${validationError}" >
+				<span th:text="${error}" class="text-danger"></span>
+			</li>
+		</ul>
+		<form th:action="@{/calc/insert}" method="post">
+			<label>年:</label>
+			<input name="year" type="number"><br>
+			<label>月:</label>
+			<input name="month" type="number"><br>
+			<label>日:</label>
+			<input name="day" type="number"><br>
+			<label>説明:</label>
+			<input name="explanation" type="text"><br>
+			<button>登録</button>
+		</form>
+	</div>
+</main>
+</body>
+</html>
