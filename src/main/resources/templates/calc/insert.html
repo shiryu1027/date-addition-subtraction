@@ -5,29 +5,40 @@ layout:decorate="~{layout/layout}">
 <head>
 	<meta charset="UTF-8">
 	<title>+++日付の加減算---</title>
+	<link href="/css/calc/insert.css" rel="stylesheet">
 </head>
 <body>
 <main layout:fragment="content">
 	<div class="content">
-		<!-- 加減算データ新規登録 -->
-		<h3>加減算データ新規登録</h3><br>
-		<ul class="error-message">
-			<li th:if="${validationError}" th:each="error : ${validationError}" >
-				<span th:text="${error}" class="text-danger"></span>
-			</li>
-		</ul>
-		<form th:action="@{/calc/insert}" method="post">
-			<label>年:</label>
-			<input name="year" type="number"><br>
-			<div th:if="${form}" th:errors="${form.year}"></div>
-			<label>月:</label>
-			<input name="month" type="number"><br>
-			<label>日:</label>
-			<input name="day" type="number"><br>
-			<label>説明:</label>
-			<input name="explanation" type="text"><br>
-			<button>登録</button>
-		</form>
+		<div class="insert">
+			<!-- 加減算データ新規登録 -->
+			<div class="insert-title">
+				<h3>加減算データ新規登録</h3>
+			</div>
+			
+			<ul th:if="${validationError}" class="error-message">
+				<li  th:each="error : ${validationError}" >
+					<span th:text="${error}" class="text-danger"></span>
+				</li>
+			</ul>
+			
+			<form th:action="@{/calc/insert}" method="post">
+				<div class="input-date">
+					<label for=year>年:</label>
+					<input name="year" id="year" type="number" value="0">
+					<label>月:</label>
+					<input name="month" type="number" value="0">
+					<label>日:</label>
+					<input name="day" type="number" value="0">
+				</div>
+				<div class="input-explanation">
+					<label>説明:</label>
+					<input class="input-explanation" name="explanation" type="text">
+				</div>
+				<br>
+				<button class="button2">新規登録</button>
+			</form>
+		</div>
 	</div>
 </main>
 </body>

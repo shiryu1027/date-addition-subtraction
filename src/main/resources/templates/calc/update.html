@@ -5,29 +5,38 @@ layout:decorate="~{layout/layout}">
 <head>
 	<meta charset="UTF-8">
 	<title>+++日付の加減算---</title>
+	<link href="/css/calc/update.css" rel="stylesheet">
 </head>
 <body>
 <main layout:fragment="content">
 	<div class="content">
-	
-		<!-- 加減算データ一覧 -->
-		<h3>加減算データ更新</h3><br>
-		<ul class="error-message"> <!-- ulにth:eachを付けないのは、liのループではなくulのループになるから -->
-			<li th:if="${validationError}" th:each="error : ${validationError}" >
-				<span th:text="${error}" class="text-danger"></span>
-			</li>
-		</ul>
-		<form th:action="@{/calc/update/id={id}/post (id=*{additionSubtractionId})}" th:object="${calcData}" method="post">
-			<label>年:</label>
-			<input name="year" th:value="*{year}" type="text"><br>
-			<label>月:</label>
-			<input name="month" th:value="*{month}" type="text"><br>
-			<label>日:</label>
-			<input name="day" th:value="*{day}" type="text"><br>
-			<label>説明:</label>
-			<input name="explanation" th:value="*{explanation}" type="text"><br>
-			<button>更新</button>
-		</form>
+		<div class="update">
+			<!-- 加減算データ一覧 -->
+			<div class="update-title">
+				<h3>加減算データ更新</h3>
+			</div>
+			<ul th:if="${validationError}" class="error-message"> <!-- ulにth:eachを付けないのは、liのループではなくulのループになるから -->
+				<li th:each="error : ${validationError}" >
+					<span th:text="${error}" class="text-danger"></span>
+				</li>
+			</ul>
+			<form th:action="@{/calc/update/id={id}/post (id=*{additionSubtractionId})}" th:object="${calcData}" method="post">
+				<div class="input-date">
+					<label>年:</label>
+					<input name="year" th:value="*{year}" type="text">
+					<label>月:</label>
+					<input name="month" th:value="*{month}" type="text">
+					<label>日:</label>
+					<input name="day" th:value="*{day}" type="text">
+				</div>
+				<div class="input-explanation">
+					<label>説明:</label>
+					<input name="explanation" th:value="*{explanation}" type="text">
+				</div>
+				<br>
+				<button class="button2">更新</button>
+			</form>
+		</div>
 	</div>
 </main>
 </body>

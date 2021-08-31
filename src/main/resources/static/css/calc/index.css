@@ -114,5 +114,5 @@ thead {
 tbody {
 	display:inline-block;
 	overflow-y:scroll; /* 親要素に付ける */
-	height:427px;
+	max-height:427px;
 }
