@@ -118,6 +118,10 @@ td {
 	text-align:center;
 }
 
+ul {
+	list-style:none;
+}
+
 /* クラス */
 
 .content {

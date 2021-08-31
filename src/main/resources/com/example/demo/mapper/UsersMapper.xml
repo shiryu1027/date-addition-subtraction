@@ -15,7 +15,7 @@
 </select>
 
 <insert id="signUp">
-	INSERT INTO users(mail_address, nickname, password, role) VALUES (#{mailAddress}, #{nickname} #{password}, #{role})
+	INSERT INTO users(mail_address, nickname, password, role) VALUES (#{mailAddress}, #{nickname}, #{password}, #{role})
 </insert>
 
 </mapper>

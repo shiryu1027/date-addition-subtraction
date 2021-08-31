@@ -24,7 +24,6 @@ public class UsersService {
 		String rawPassword = user.getPassword(); // 生のpassword取得
 		user.setPassword(encoder.encode(rawPassword)); // 暗号化
 		user.setRole("ROLE_GENERAL"); // 権限追加
-		
 		mapper.signUp(user);
 	}
 	
