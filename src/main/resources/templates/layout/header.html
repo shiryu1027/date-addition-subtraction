@@ -9,7 +9,8 @@ layout:decorate="~{layout/layout}">
 <header layout:fragment="header">
 	<div class="header-content">
 		<div class="header-left">
-			<h1><a th:href="@{/calc/}">Date Arithmetic ~日付加減算~ </a></h1>
+			<h1 th:if="${nickname}"><a th:href="@{/calc/}">Date Arithmetic ~日付加減算~ </a></h1>
+			<h1 th:if=${notSignIn}><a th:href="@{/user/signIn}" >Date Arithmetic ~日付加減算~ </a></h1>
 		</div>
 		<div class="header-right" th:if="${nickname}">
 			<h3>[[${nickname}]]さん、こんにちは</h3>

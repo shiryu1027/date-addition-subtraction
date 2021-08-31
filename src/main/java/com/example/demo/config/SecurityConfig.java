@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/user/signOut")) // GETメソッドでリクエストを送りたいときに付ける(DEFAULTはPOST)
 				.logoutUrl("/user/signOut") // ログアウトのリクエスト先パス
-				.logoutSuccessUrl("/signIn?signOut"); // ログアウト成功時の遷移先
+				.logoutSuccessUrl("/user/signIn?signOut"); // ログアウト成功時の遷移先
 		
 		/* サインアウトのコントローラーはSpringセキュリティがやってくれるため不要 */
 		
