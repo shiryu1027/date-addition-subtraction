@@ -1,10 +1,52 @@
 @charset "UTF-8";
 
-/* header */
+/*------------------------
+	タグ(header,footerを除く)
+--------------------------*/
+
+body {
+	margin:0;
+}
+
+main {
+	height:800px;
+	background-image:url("/image/pocket-watch-3156771_1280.jpg");
+	background-size:cover;
+}
+
+table {
+	background-color:#ffffff;
+	border-collapse:collapse; /*セルの線を重ねる*/
+}
+
+th, td {
+	height:40px;
+	padding:10px;
+	border:solid 1px #c0c0c0;
+}
+
+th {
+	color:white;
+	background-color:rgba(60, 60, 60, 0.4);
+}
+
+td {
+	text-align:center;
+}
+
+ul {
+	list-style:none;
+}
+
+
+/*----------------
+	ヘッダー/header
+------------------*/
+
 header {
 	height:100px;
-	background-color:#2f2f2f;
 	color:white;
+	background-color:#2f2f2f;
 }
 
 .header-content {
@@ -17,21 +59,21 @@ header {
 }
 
 .header-left h1 {
-	line-height:100px;
 	font-size:29px;
-	margin:0;
 	font-weight:normal;
 	font-style:italic;
+	line-height:100px;
+	margin:0;
 }
 
 .header-left a {
-	text-decoration: none;
-	color:white;
-	background-color:rgba(140, 140, 140, 0.4);
-	padding:10px 20px;
-	border-radius:7px;
+	text-decoration: none; /* aタグの下線を削除 */
+	color:white; /* 必須 */
 	font-weight:normal;
 	font-style:italic;
+	padding:10px 20px;
+	border-radius:7px;
+	background-color:rgba(140, 140, 140, 0.4);
 }
 
 .header-right {
@@ -45,27 +87,31 @@ header {
 
 .header-right form {
 	display:inline-block;
-	line-height:100px;
-	background-color:#a7a7a7;
-	padding:0 20px;
 	font-size:19px;
+	line-height:100px;
+	padding:0 20px;
+	background-color:#a7a7a7;
 }
 
 .header-right input {
-	background-color:transparent;
+	background-color:transparent; /* 要素の色が透明になる */
 	border-style:none;
-	text-decoration:underline;
+	text-decoration:underline; /* aタグのように下線を引く */
 	cursor:pointer;
-	font-size:21px;
 	width:auto;
-	color: #ffffff;
+	font-size:21px;
+	color: #ffffff; /* 必須 */
 }
 
-/* footer */
+
+/*----------------
+	フッター/footer
+------------------*/
+
 footer {
 	height:70px;
-	background-color:#2f2f2f;
 	color:white;
+	background-color:#2f2f2f;
 }
 
 .footer-content {
@@ -85,49 +131,14 @@ footer {
 	float:right;
 }
 
-/* その他タグ */
-body {
-	margin:0;
-}
 
-main {
-	height:800px;
-	background-image:url("/image/pocket-watch-3156771_1280.jpg");
-	background-size:cover;
-}
-
-/* タグ(不順) */
-
-table {
-	background-color:#ffffff;
-	border-collapse:collapse; /*セルの線を重ねる*/
-}
-
-th, td {
-	border:solid 1px #c0c0c0;
-	padding:10px;
-	height:40px;
-}
-
-th {
-	background-color:rgba(60, 60, 60, 0.4);
-	color:white;
-}
-
-td {
-	text-align:center;
-}
-
-ul {
-	list-style:none;
-}
-
-/* クラス */
-
+/*---------------------------
+	クラス(header,footerを除く)
+-----------------------------*/
 .content {
 	width:90%;
-	margin:0 auto;
 	padding-top:5px;
+	margin:0 auto;
 }
 
 .content h2 {
@@ -138,26 +149,35 @@ ul {
 	color:#ff0000;
 }
 
+/* 黒いボタン、かっこよさ重視 */
 .button {
-	background-color:rgba(50, 50, 50, 0.8);
 	color:white;
 	font-weight:bold;
-	border-radius:5px;
 	padding:5px 10px;
+	border-radius:5px;
+	background-color:rgba(50, 50, 50, 0.8);
 }
 
+/* signin,singup用ボタン */
 .button2 {
-	background-color:rgba(140, 140, 140, 0.9);
+	width:100%;
 	color:white;
+	font-size:16px;
 	font-weight:bold;
 	letter-spacing:3px;
+	padding:10px 0;
 	border-radius:5px;
+	background-color:rgba(140, 140, 140, 0.9);
 }
 
+/* テーブル用ボタン */
 .button3 {
-	
+	color:white;
+	padding:5px 10px;
+	background-color:rgba(50, 50, 50, 0.8);
 }
 
+/* ボタンが2個以上続くときのクラス */
 .button-2up {
 	margin-top:20px;
 }

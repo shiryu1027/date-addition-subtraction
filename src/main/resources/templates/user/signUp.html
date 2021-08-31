@@ -14,11 +14,11 @@ layout:decorate="~{layout/layout}">
 			<div class="signUpTitle">
 				<h2>新規登録</h2>
 			</div>
-			<ul class="error-message">
-			<li th:if="${validationError}" th:each="error : ${validationError}" >
-				<span th:text="${error}" class="text-danger"></span>
-			</li>
-		</ul>
+			<ul class="error-message" th:if="${validationError}">
+				<li  th:each="error : ${validationError}" >
+					<span th:text="${error}" class="text-danger"></span>
+				</li>
+			</ul>
 			<form th:action="@{/user/signUp}" method="post">
 				<label>ユーザーID</label>
 				<input name="mailAddress" type="Email" placeholder="メールアドレス"><br>

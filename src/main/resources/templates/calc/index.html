@@ -16,10 +16,11 @@ layout:decorate="~{layout/layout}">
 			<p>計算したい日付を入力して下さい
 			<form th:action="@{/calc/result}" method="post">
 				<input name="date" type="text" placeholder="1997/08/02">
-				<button class="button">計算結果</button>
+				<button class="result-button button">計算結果</button>
 			</form>
 		</div>
 		
+		<!-- タイトル/新規作成ボタン/基準日 -->
 		<h2 th:if="${calcList}" class="calcList-title">登録データ</h2>
 		<h2 th:if="${results}" class="calcList-title">計算結果</h2>
 		<form th:action="@{/calc/insert}" class="insert-form"><button class="insert-button button">新規登録</button></form>
@@ -72,7 +73,5 @@ layout:decorate="~{layout/layout}">
 		</table>
 	</div>
 </main>
-
-
 </body>
 </html>

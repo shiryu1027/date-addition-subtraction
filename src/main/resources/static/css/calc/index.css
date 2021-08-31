@@ -1,5 +1,9 @@
 @charset "UTF-8";
-/* テーブル */
+
+/*----------
+	テーブル
+------------*/
+
 .th-id {
 	width:120px;
 }
@@ -20,37 +24,47 @@
 	width:140px;
 }
 
-/* クラス */
+
+/*-------------
+	基準日登録
+---------------*/
+
 .recordDate {
-	padding-top:30px;
+	padding-top:15px;
 }
+
 .recordDate p {
+	display:inline-block;
 	color:white;
 	font-size:20px;
-	background-color:rgba(100,100,100,0.4);
+	font-weight:normal;
 	padding:10px 20px;
 	border-radius:10px;
-	display:inline-block;
-	font-weight:normal;
+	background-color:rgba(100,100,100,0.4);
 }
 
 .recordDate input {
-	padding:5px;
 	width:200px;
-	
+	padding:5px;
 }
 
-.dataInsert {
-	padding-top:20px;
+.result-button {
+	height:40px;
+	width:80px;
 }
+
+
+/*-------------------------------------------------
+	 加減算(計算)データ一覧 の タイトル/新規作成ボタン/基準日
+---------------------------------------------------*/
 
 .calcList-title{
 	color:white;
-	background-color:rgba(100,100,100,0.4);
 	font-size:23px;
 	padding:10px 20px;
 	border-radius:10px;
-	margin-top:40px;
+	margin-top:25px;
+	background-color:rgba(100,100,100,0.4);
 }
 
 .insert-form {
@@ -59,15 +73,9 @@
 }
 
 .insert-button {
-	margin:20px;
-	width:100px;
 	height:50px;
-}
-
-.calcList {
-	max-height:500px;
-	overflow:scroll; /* 親要素に付ける */
-	display:inline-block;
+	width:100px;
+	margin:20px;
 }
 
 .reference-date {
@@ -79,66 +87,13 @@
 	margin-top:40px;
 }
 
-/* ポップアップ表示 */
-.open {
-	cursor:pointer; /* マウスオーバーでカーソルの形状を変えることで、クリックできる要素だとわかりやすいように */
-	/*font-weight:bold;*/
-	border:solid 1px black;
-	background-color:white;
-	padding:5px 10px;
-	font-size:15px;
-	margin-left:20px;
-}
-#pop-up {
-	display: none; /* label でコントロールするので input は非表示に */
-}
 
-.overlay {
-	display: none; /* input にチェックが入るまでは非表示に */
-}
+/*--------------------------------------
+	加減算データ一覧 兼 計算データ一覧 のテーブル
+----------------------------------------*/
 
-/* pop-upというidを持つ要素にチェックが入ったら、overlayというクラスを持つ要素にこのcssを当てる */
-#pop-up:checked + .overlay {
-	display: block;
-	z-index: 9999;
-	background-color:rgba(0,0,0,0.5);
-	position: fixed;
-	width: 100%;
-	height: 100vh;
-	top: 0;
-	left: 0;
-}
-
-.window {
-	width: 90vw;
-	max-width: 380px;
-	height: 400px;
-	background-color: #f2ffff;
-	border-radius: 6px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-.text {
-	font-size: 18px;
-	margin: 0;
-}
-.close {
-	cursor:pointer;
-	position: absolute;
-	top: 4px;
-	right: 4px;
-	font-size: 20px;
-}
-
-.window-content h3{
-	margin:0;
-}
-
-.window-content input, label{
-	margin-top:5px;
+.calcList {
+	display:inline-block;
+	overflow:scroll; /* 親要素に付ける */
+	max-height:500px;
 }
