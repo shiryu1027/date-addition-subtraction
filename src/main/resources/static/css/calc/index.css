@@ -24,6 +24,11 @@
 	width:140px;
 }
 
+.th-blank {
+	width:16px;
+	padding:0;
+}
+
 
 /*-------------
 	基準日登録
@@ -84,7 +89,17 @@
 	font-size:23px;
 	padding:10px 20px;
 	border-radius:5px;
-	margin-top:40px;
+	margin-top:20px;
+}
+
+.calc-back {
+	display:inline-block;
+}
+
+.calc-back-button {
+	height:50px;
+	width:170px;
+	margin:20px;
 }
 
 
@@ -92,8 +107,12 @@
 	加減算データ一覧 兼 計算データ一覧 のテーブル
 ----------------------------------------*/
 
-.calcList {
+thead {
+	display:block;
+}
+
+tbody {
 	display:inline-block;
-	overflow:scroll; /* 親要素に付ける */
-	max-height:500px;
+	overflow-y:scroll; /* 親要素に付ける */
+	height:427px;
 }

@@ -24,52 +24,71 @@ layout:decorate="~{layout/layout}">
 		<h2 th:if="${calcList}" class="calcList-title">登録データ</h2>
 		<h2 th:if="${results}" class="calcList-title">計算結果</h2>
 		<form th:action="@{/calc/insert}" class="insert-form"><button class="insert-button button">新規登録</button></form>
-		<h2 th:if="${results}" class="reference-date">基準日 : [[${referenceDate}]]</h2><br>
+		<h2 th:if="${results}" class="reference-date">基準日 : [[${referenceDate}]]</h2>
+		<form th:if="${results}" th:action="@{/calc/}" class="calc-back"><button class="calc-back-button button">登録データに戻る</button></form><br>
 		
 		<!-- 加減算データ一覧 -->
 		<div th:if="${calcList}" class="calcList">
 			<table>
+				<thead>
+					<tr>
+						<th class="th-id">加減算コード</th>
+						<th class="th-date">年</th>
+						<th class="th-date">月</th>
+						<th class="th-date">日</th>
+						<th class="th-explanation">説明</th>
+						<th class="th-button">更新</th>
+						<th class="th-button">削除</th>
+						<th class="th-blank"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="data:${calcList}" th:object="${data}">
+						<td class="th-id" th:text="*{additionSubtractionCode}"></td>
+						<td class="th-date" th:text="*{year}"></td>
+						<td class="th-date" th:text="*{month}"></td>
+						<td class="th-date" th:text="*{day}"></td>
+						<td class="th-explanation" th:text="*{explanation}"></td>
+						<!-- 更新ボタン -->
+						<td class="th-button">
+							<form th:action="@{/calc/update/id={id}(id=*{additionSubtractionId})}">
+								<button class="button3">更新</button>
+							</form>
+						</td>
+						
+						<td class="th-button">
+							<form th:action="@{/calc/delete/id={id}(id=*{additionSubtractionId})}" method="post">
+								<button class="button3">削除</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<!-- 計算データ一覧 -->
+		<table th:if="${results}" class="calcList">
+			<thead>
 				<tr>
 					<th class="th-id">加減算コード</th>
 					<th class="th-date">年</th>
 					<th class="th-date">月</th>
 					<th class="th-date">日</th>
 					<th class="th-explanation">説明</th>
-					<th class="th-button">更新</th>
-					<th class="th-button">削除</th>
+					<th class="th-result">計算結果</th>
+					<th class="th-blank"></th>
 				</tr>
-				<tr th:each="data:${calcList}" th:object="${data}">
-					<td th:text="*{additionSubtractionCode}"></td>
-					<td th:text="*{year}"></td>
-					<td th:text="*{month}"></td>
-					<td th:text="*{day}"></td>
-					<td th:text="*{explanation}"></td>
-					<!-- 更新ボタン -->
-					<td><form th:action="@{/calc/update/id={id}(id=*{additionSubtractionId})}"><button class="button3">更新</button></form></td>
-					
-					<td><form th:action="@{/calc/delete/id={id}(id=*{additionSubtractionId})}" method="post"><button class="button3">削除</button></form></td>
+			</thead>
+			<tbody>
+				<tr th:each="result:${results}" th:object="${result}">
+					<td class="th-id" th:text="*{additionSubtractionCode}"></td>
+					<td class="th-date" th:text="*{year}"></td>
+					<td class="th-date" th:text="*{month}"></td>
+					<td class="th-date" th:text="*{day}"></td>
+					<td class="th-explanation" th:text="*{explanation}"></td>
+					<td class="th-result" th:text="*{calcResult}"></td>
 				</tr>
-			</table>
-		</div>
-		
-		<!-- 計算データ一覧 -->
-		<table th:if="${results}" class="calcList">
-			<tr>
-				<th class="th-id">加減算コード</th>
-				<th class="th-date">年</th>
-				<th class="th-date">月</th>
-				<th class="th-date">日</th>
-				<th class="th-explanation">説明</th>
-				<th class="th-result">計算結果</th>
-			</tr>
-			<tr th:each="result:${results}" th:object="${result}">
-				<td th:text="*{additionSubtractionCode}"></td>
-				<td th:text="*{year}"></td>
-				<td th:text="*{month}"></td>
-				<td th:text="*{day}"></td>
-				<td th:text="*{explanation}"></td>
-				<td th:text="*{calcResult}"></td>
-			</tr>
+			</tbody>
 		</table>
 	</div>
 </main>
