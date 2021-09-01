@@ -26,6 +26,10 @@
 	margin-bottom:30px;
 }
 
+.signInError {
+	text-align:center;
+}
+
 .signIn label {
 	color:white;
 	font-size:20px;

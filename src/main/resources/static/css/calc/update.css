@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+span {
+	display:block;
+	margin-top:10px;
+	margin-left:40px;
+	text-align:left;
+}
+
 .update {
 	width:400px;
 	padding:40px 50px 60px 50px;
@@ -31,7 +38,6 @@
 .update input {
 	padding:8px;
 	margin-top:10px;
-	margin-bottom:25px;
 }
 
 .update form {
@@ -41,11 +47,16 @@
 
 .input-date {
 	width:100%;
+	margin-bottom:25px;
 }
 
 .input-date input{
 	width:60px;
 	margin-right:10px;
+}
+
+.input-explanation {
+	margin-bottom:40px;
 }
 
 .input-explanation input {

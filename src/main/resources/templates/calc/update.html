@@ -15,25 +15,23 @@ layout:decorate="~{layout/layout}">
 			<div class="update-title">
 				<h3>加減算データ更新</h3>
 			</div>
-			<ul th:if="${validationError}" class="error-message"> <!-- ulにth:eachを付けないのは、liのループではなくulのループになるから -->
-				<li th:each="error : ${validationError}" >
-					<span th:text="${error}" class="text-danger"></span>
-				</li>
-			</ul>
-			<form th:action="@{/calc/update/id={id}/post (id=*{additionSubtractionId})}" th:object="${calcData}" method="post">
+			<form th:action="@{/calc/update/id={id}/post (id=${calcData.additionSubtractionId})}" th:object="${calcDataForm}" method="post">
 				<div class="input-date">
 					<label>年:</label>
-					<input name="year" th:value="*{year}" type="text">
+					<input name="year" th:value="${calcData.year}" type="number">
 					<label>月:</label>
-					<input name="month" th:value="*{month}" type="text">
+					<input name="month" th:value="${calcData.month}" type="number">
 					<label>日:</label>
-					<input name="day" th:value="*{day}" type="text">
+					<input name="day" th:value="${calcData.day}" type="number">
+					<span th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="text-danger"></span>
+					<span th:if="${#fields.hasErrors('month')}" th:errors="*{month}" class="text-danger"></span>
+					<span th:if="${#fields.hasErrors('day')}" th:errors="*{day}" class="text-danger"></span>
 				</div>
 				<div class="input-explanation">
 					<label>説明:</label>
-					<input name="explanation" th:value="*{explanation}" type="text">
+					<input name="explanation" th:value="${calcData.explanation}" type="text">
+					<span th:if="${#fields.hasErrors('explanation')}" th:errors="*{explanation}" class="text-danger"></span>
 				</div>
-				<br>
 				<button class="button2">更新</button>
 			</form>
 		</div>

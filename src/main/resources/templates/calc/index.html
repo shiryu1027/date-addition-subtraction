@@ -14,9 +14,12 @@ layout:decorate="~{layout/layout}">
 		<!-- 基準日登録 -->
 		<div class="recordDate">
 			<p>計算したい日付を入力して下さい
-			<form th:action="@{/calc/result}" method="post">
-				<input name="date" type="text" placeholder="1997/08/02">
-				<button class="result-button button">計算結果</button>
+			<form th:action="@{/calc/result}" method="post" >
+				<input name="recordDate" type="text" placeholder="1997/08/02">
+				<button class="result-button button">計算結果</button><br>
+				<div th:if=${recordDateForm} th:object="${recordDateForm}" class="recordDate-error">
+					<span th:if="${#fields.hasErrors('recordDate')}" th:errors="*{recordDate}" class="text-danger"></span>
+				</div>
 			</form>
 		</div>
 		

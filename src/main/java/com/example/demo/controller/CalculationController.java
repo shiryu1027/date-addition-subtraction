@@ -1,25 +1,22 @@
 package com.example.demo.controller;
 
 import java.security.Principal;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.CalcData;
 import com.example.demo.form.CalcDataForm;
+import com.example.demo.form.RecordDateForm;
 import com.example.demo.service.AutoAdditionSubtractionCodeService;
 import com.example.demo.service.CalculationLogicService;
 import com.example.demo.service.CalculationService;
@@ -61,7 +58,7 @@ public class CalculationController {
 	
 	/* 加減算用データの新規登録画面の表示 */
 	@GetMapping("/insert")
-	public String insertDisplay(Principal principal, Model model) {
+	public String insertDisplay(@ModelAttribute CalcDataForm form, Principal principal, Model model) {
 		
 		String name = principal.getName();
 		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
@@ -75,12 +72,8 @@ public class CalculationController {
 	public String insert(@Validated @ModelAttribute CalcDataForm form, BindingResult result, Principal principal, Model model) {
 		
 		if (result.hasErrors()) {
-			List<String> errorList = new ArrayList<String>();
-			for (ObjectError error : result.getAllErrors()) {
-				errorList.add(error.getDefaultMessage());
-			}
-			model.addAttribute("validationError", errorList);
-			return insertDisplay(principal, model);
+			
+			return insertDisplay(form, principal, model);
 		}
 		
 		nicknameService.autoNickname(form);
@@ -92,7 +85,11 @@ public class CalculationController {
 	
 	/* 計算用基準日を指定、その後計算実行 */
 	@PostMapping("/result")
-	public String result(@RequestParam("date") LocalDate date, Principal principal, Model model) {
+	public String result(@Validated @ModelAttribute RecordDateForm form, BindingResult result, Principal principal, Model model) {
+		
+		if(result.hasErrors()) {
+			return index(principal, model);
+		}
 		
 		/* サインイン情報のIDを取得 */
 		String name = principal.getName();
@@ -101,20 +98,20 @@ public class CalculationController {
 		List<CalcData> calcList = service.calcDataAll(name);
 		
 		/* 全てのデータに対して、計算を適用 */
-		List<CalcData> calcListResult = logicService.calcLogic(calcList, date);
+		List<CalcData> calcListResult = logicService.calcLogic(calcList, form.getRecordDate());
 		
 		model.addAttribute("results", calcListResult);
 		
 		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
 		
-		model.addAttribute("referenceDate", date);
+		model.addAttribute("referenceDate", form.getRecordDate());
 		
 		return "calc/index";
 	}
 	
 	/* 加減算用データを更新データ画面を表示 */
 	@GetMapping("/update/id={id}")
-	public String updateDisplay(@PathVariable("id") int id, Principal principal, Model model) {
+	public String updateDisplay(@PathVariable("id") int id,@ModelAttribute CalcDataForm form, Principal principal, Model model) {
 		
 		/* 加減算データ1件取得 */
 		CalcData calcData = service.calcDataOne(id);
@@ -132,12 +129,7 @@ public class CalculationController {
 	public String update(@Validated @ModelAttribute CalcDataForm form, BindingResult result, Model model, Principal principal, @PathVariable("id") int id) {
 		
 		if (result.hasErrors()) {
-			List<String> errorList = new ArrayList<String>();
-			for (ObjectError error : result.getAllErrors()) {
-				errorList.add(error.getDefaultMessage());
-			}
-			model.addAttribute("validationError", errorList);
-			return updateDisplay(id, principal, model);
+			return updateDisplay(id, form, principal, model);
 		}
 		
 		form.setAdditionSubtractionId(id);
