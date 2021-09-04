@@ -32,4 +32,9 @@ public class UsersService {
 		return mapper.findOne(mailAddress);
 	}
 	
+	/* ユーザー情報更新(パスワードを除く) */
+	public void updateUser(UserForm user) {
+		mapper.updateUser(user);
+	}
+	
 }

@@ -14,4 +14,7 @@ public interface UsersMapper {
 	/* サインインユーザーの取得(UserDetailsServiceImpl内からの呼び出し) */
 	AppUser findOne(String mailAddress);
 	
+	/* ユーザー情報更新(パスワードを除く) */
+	void updateUser(UserForm user);
+	
 }

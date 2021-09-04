@@ -18,4 +18,8 @@
 	INSERT INTO users(mail_address, nickname, password, role) VALUES (#{mailAddress}, #{nickname}, #{password}, #{role})
 </insert>
 
+<update id="updateUser">
+	UPDATE users SET mail_address=#{mailAddress}, nickname=#{nickname}, password=#{password} WHERE user_id=#{userId}
+</update>
+
 </mapper>

@@ -85,6 +85,10 @@ header {
 	padding-right:10px;
 }
 
+.header-right a {
+	color:white;
+}
+
 .header-right form {
 	display:inline-block;
 	font-size:19px;
