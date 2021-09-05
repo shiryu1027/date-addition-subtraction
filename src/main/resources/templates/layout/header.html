@@ -8,17 +8,28 @@ layout:decorate="~{layout/layout}">
 <body>
 <header layout:fragment="header">
 	<div class="header-content">
+	
 		<div class="header-left">
-			<h1 th:if="${nickname}"><a th:href="@{/calc/}">Date Arithmetic ~日付加減算~ </a></h1>
-			<h1 th:if=${notSignIn}><a th:href="@{/user/signIn}" >Date Arithmetic ~日付加減算~ </a></h1>
+			<h1 th:if="${nickname}">
+				<a th:href="@{/calc/}">Date Arithmetic ~日付加減算~ </a>
+			</h1>
+			<h1 th:if=${notSignIn}>
+				<a th:href="@{/user/signIn}" >Date Arithmetic ~日付加減算~ </a>
+			</h1>
 		</div>
+		
 		<div class="header-right" th:if="${nickname}">
-			<h3><a th:href="@{/user/usersUpdate}">[[${nickname}]]さん</a>、こんにちは</h3>
+			<h3>
+				<a th:href="@{/user/usersUpdate}">[[${nickname}]]さん</a>、こんにちは
+			</h3>
 			<form th:action="@{/user/signOut}" method="post">
 				<input type="submit" th:value="サインアウト">
 			</form>
 		</div>
+		
 	</div>
 </header>
 </body>
 </html>
+
+<!-- TODO:nicknameとnotSignInの変数名またはシステムを変更する可能性あり -->

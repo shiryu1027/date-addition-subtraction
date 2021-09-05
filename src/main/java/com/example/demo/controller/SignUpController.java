@@ -25,16 +25,16 @@ public class SignUpController {
 	UsersService service;
 	
 	/* サインアップ画面の表示 */
-	@GetMapping("/signUp")
+	@GetMapping("/signup")
 	public String signUpDisplay(Model model) {
 		
 		model.addAttribute("notSignIn", "");
 		
-		return "user/signUp";
+		return "user/signup";
 	}
 	
 	/* ユーザーの新規登録、その後サインイン画面にリダイレクト */
-	@PostMapping("/signUp")
+	@PostMapping("/signup")
 	public String signUp(@Validated @ModelAttribute UserForm form, BindingResult result, Model model) {
 		
 		if (result.hasErrors()) {
@@ -48,7 +48,7 @@ public class SignUpController {
 		
 		System.out.println(form);
 		service.signUp(form);
-		return "redirect:/user/signIn";
+		return "redirect:/user/signin";
 	}
 	
 }

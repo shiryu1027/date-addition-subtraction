@@ -48,17 +48,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		/* サインイン不要ページの設定 */
 		http
 			.authorizeRequests()
-				.antMatchers("/user/signIn").permitAll() // 直リンクOK
-				.antMatchers("/user/signUp").permitAll() 
+				.antMatchers("/user/signin").permitAll() // 直リンクOK
+				.antMatchers("/user/signup").permitAll() 
 				//.antMatchers("/admin").hasAuthority("ROLE_ADMIN") // 権限制御
 				.anyRequest().authenticated(); // それ以外は直リンクNG
 		
 		/* サインイン処理 */
 		http
 			.formLogin()
-				.loginProcessingUrl("/user/signIn") // サインイン処理のパス
-				.loginPage("/user/signIn") // サインインページの指定
-				.failureUrl("/user/signIn?error") // サインイン失敗時の遷移先
+				.loginProcessingUrl("/user/signin") // サインイン処理のパス
+				.loginPage("/user/signin") // サインインページの指定
+				.failureUrl("/user/signin?error") // サインイン失敗時の遷移先
 				.usernameParameter("mailAddress") // サインインページのユーザーID
 				.passwordParameter("password") // サインインページのパスワード
 				.defaultSuccessUrl("/calc/", true); // 成功後の遷移先
@@ -66,9 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		/* サインアウト処理 */
 		http
 			.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/user/signOut")) // GETメソッドでリクエストを送りたいときに付ける(DEFAULTはPOST)
-				.logoutUrl("/user/signOut") // ログアウトのリクエスト先パス
-				.logoutSuccessUrl("/user/signIn?signOut"); // ログアウト成功時の遷移先
+				.logoutRequestMatcher(new AntPathRequestMatcher("/user/signout")) // GETメソッドでリクエストを送りたいときに付ける(DEFAULTはPOST)
+				.logoutUrl("/user/signout") // ログアウトのリクエスト先パス
+				.logoutSuccessUrl("/user/signin?signout"); // ログアウト成功時の遷移先
 		
 		/* サインアウトのコントローラーはSpringセキュリティがやってくれるため不要 */
 		

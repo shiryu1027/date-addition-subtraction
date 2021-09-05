@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+/* エラーメッセージに使用 */
+span {
+	display:block;
+	margin-top:10px;
+	margin-left:40px;
+	text-align:left;
+}
+
+.form {
+	width:400px;
+}
+
+.form h3 {
+	width:80%;
+}
+
+.form form {
+	margin-top:40px;
+	text-align:center;
+}
+
+.input-date {
+	width:100%;
+	margin-bottom:25px;
+}
+
+.input-date input{
+	width:60px;
+	margin-right:10px;
+}
+
+.input-explanation {
+	margin-bottom:40px;
+}
+
+.input-explanation input {
+	width:80%;
+}

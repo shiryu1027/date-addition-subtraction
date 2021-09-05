@@ -185,3 +185,39 @@ footer {
 .button-2up {
 	margin-top:20px;
 }
+
+/*---------------------------
+	Form
+-----------------------------*/
+
+.form {
+	padding:40px 50px 60px 50px;
+	border-radius:10px;
+	margin:0 auto;
+	margin-top:40px;
+	background-color:rgba(0,0,0,0.5);
+}
+
+.form-title {
+	width:100%;
+	text-align:center;
+}
+
+.form h3 {
+	color:white;
+	font-size:29px;
+	border-bottom:solid 2px white;
+	margin:0 auto;
+	margin-bottom:30px;
+}
+
+.form label {
+	color:white;
+	font-size:20px;
+	font-weight:bold;
+}
+
+.form input {
+	padding:8px;
+	margin-top:10px;
+}

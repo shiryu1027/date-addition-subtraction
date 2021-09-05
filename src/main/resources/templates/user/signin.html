@@ -5,30 +5,34 @@ layout:decorate="~{layout/layout}">
 <head>
 	<meta charset="UTF-8">
 	<title>サインイン</title>
-	<link href="/css/user/signIn.css" rel="stylesheet">
+	<link href="/css/user/signin.css" rel="stylesheet">
+	<link href="/css/user/user.css" rel="stylesheet">
 </head>
 <body>
 <main layout:fragment="content">
 	<div class="content">
-		<div class="signIn">
-			<div class="signInTitle">
-				<h2>サインイン</h2>
+		<div class="form">
+			<div class="form-title">
+				<h3>サインイン</h3>
 			</div>
 			<p th:if="${session[SPRING_SECURITY_LAST_EXCEPTION]} != null"
 				th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"
-				class="text-danger signInError"> <!-- 認証エラーによって投げられるExceptionは、'SPRING_SECURITY_LAST_EXCEPTION'として保存される -->
+				class="text-danger form-error"> <!-- 認証エラーによって投げられるExceptionは、'SPRING_SECURITY_LAST_EXCEPTION'として保存される -->
 				ログインエラーメッセージ
 			</p>
-			<form th:action="@{/user/signIn}" method="post">
+			<form th:action="@{/user/signin}" method="post">
 				<label for="mailAddress">ユーザーID</label><br>
 				<input name="mailAddress" id="mailAddress" type="Email" placeholder="メールアドレス"><br>
 				<label for="password">パスワード</label><br>
 				<input name="password" id="password" type="password" placeholder="パスワード"><br>
 				<button class="button2">サインイン</button>
 			</form>
-			<form th:action="@{/user/signUp}" class="button-2up"><button class="button2">新規登録はこちら</button></form>
+			<form th:action="@{/user/signup}" class="button-2up"><button class="button2">新規登録はこちら</button></form>
 		</div>
 	</div>
 </main>
 </body>
 </html>
+
+<!-- signInErrorクラスをform-errorに変更(他のform系cssとの兼ね合い) -->
+<!-- button系クラスは変更予定 -->

@@ -12,23 +12,27 @@ layout:decorate="~{layout/layout}">
 	<div class="content">
 		
 		<!-- 基準日登録 -->
-		<div class="recordDate">
+		<div class="record-date">
 			<p>計算したい日付を入力して下さい
-			<form th:action="@{/calc/result}" method="post" >
-				<input name="recordDate" type="text" placeholder="1997/08/02">
+			<form th:action="@{/calc/result}" method="post">
+				<input name="recordDate" type="text" placeholder="yyyy/MM/dd">
 				<button class="result-button button">計算結果</button><br>
-				<div th:if=${recordDateForm} th:object="${recordDateForm}" class="recordDate-error">
+				<div th:if=${recordDateForm} th:object="${recordDateForm}" class="record-date-error">
 					<span th:if="${#fields.hasErrors('recordDate')}" th:errors="*{recordDate}" class="text-danger"></span>
 				</div>
 			</form>
 		</div>
 		
-		<!-- タイトル/新規作成ボタン/基準日 -->
-		<h2 th:if="${calcList}" class="calcList-title">登録データ</h2>
-		<h2 th:if="${results}" class="calcList-title">計算結果</h2>
-		<form th:action="@{/calc/insert}" class="insert-form"><button class="insert-button button">新規登録</button></form>
+		<!-- テーブルタイトル/新規作成ボタン/基準日表示/登録テーブルに戻るボタン -->
+		<h2 th:if="${calcList}" class="calc-table-title">登録データ</h2>
+		<h2 th:if="${results}" class="calc-table-title">計算結果</h2>
+		<form th:action="@{/calc/insert}" class="insert-form">
+			<button class="insert-button button">新規登録</button>
+		</form>
 		<h2 th:if="${results}" class="reference-date">基準日 : [[${referenceDate}]]</h2>
-		<form th:if="${results}" th:action="@{/calc/}" class="calc-back"><button class="calc-back-button button">登録データに戻る</button></form><br>
+		<form th:if="${results}" th:action="@{/calc/}" class="calc-back">
+			<button class="calc-back-button button">登録データに戻る</button>
+		</form><br>
 		
 		<!-- 加減算データ一覧 -->
 		<div th:if="${calcList}" class="calcList">

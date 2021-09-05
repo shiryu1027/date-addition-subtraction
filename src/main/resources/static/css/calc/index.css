@@ -34,11 +34,11 @@
 	基準日登録
 ---------------*/
 
-.recordDate {
+.record-date {
 	padding-top:15px;
 }
 
-.recordDate p {
+.record-date p {
 	display:inline-block;
 	color:white;
 	font-size:20px;
@@ -48,12 +48,12 @@
 	background-color:rgba(100,100,100,0.4);
 }
 
-.recordDate input {
+.record-date input {
 	width:200px;
 	padding:5px;
 }
 
-.recordDate-error {
+.record-date-error {
 	margin-top:10px;
 }
 
@@ -67,7 +67,7 @@
 	 加減算(計算)データ一覧 の タイトル/新規作成ボタン/基準日
 ---------------------------------------------------*/
 
-.calcList-title{
+.calc-table-title{
 	color:white;
 	font-size:23px;
 	padding:10px 20px;

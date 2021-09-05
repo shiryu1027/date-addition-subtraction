@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.form {
+	width:350px;
+}
+
+.form h3 {
+	width:50%;
+}
+
+.form input {
+	width:95%;
+	margin-bottom:25px;
+}

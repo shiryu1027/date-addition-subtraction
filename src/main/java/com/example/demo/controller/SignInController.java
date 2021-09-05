@@ -21,7 +21,7 @@ public class SignInController {
 	HttpServletRequest request;
 	
 	/* サインイン画面の表示 */
-	@GetMapping("/signIn")
+	@GetMapping("/signin")
 	public String signInDisplay(Model model) {
 		
 		model.addAttribute("notSignIn", "");
@@ -35,7 +35,7 @@ public class SignInController {
 			session.setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, null);
 		}
 		
-		return "user/signIn";
+		return "user/signin";
 	}
 	
 	/* Security.Configに指定したファイルに自動遷移(Controllerいらない) */

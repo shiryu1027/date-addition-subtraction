@@ -5,31 +5,31 @@ layout:decorate="~{layout/layout}">
 <head>
 	<meta charset="UTF-8">
 	<title>+++日付の加減算---</title>
-	<link href="/css/calc/update.css" rel="stylesheet">
+	<link href="/css/calc/calc.css" rel="stylesheet">
 </head>
 <body>
 <main layout:fragment="content">
 	<div class="content">
-		<div class="update">
+		<div class="form">
 			<!-- 加減算データ一覧 -->
-			<div class="update-title">
+			<div class="form-title">
 				<h3>加減算データ更新</h3>
 			</div>
 			<form th:action="@{/calc/update/id={id}/post (id=${calcData.additionSubtractionId})}" th:object="${calcDataForm}" method="post">
 				<div class="input-date">
-					<label>年:</label>
-					<input name="year" th:value="${calcData.year}" type="number">
-					<label>月:</label>
-					<input name="month" th:value="${calcData.month}" type="number">
-					<label>日:</label>
-					<input name="day" th:value="${calcData.day}" type="number">
+					<label for="year">年:</label>
+					<input name="year" id="year" th:value="${calcData.year}" type="number">
+					<label for="month">月:</label>
+					<input name="month" id="month" th:value="${calcData.month}" type="number">
+					<label for="date">日:</label>
+					<input name="day" id="date" th:value="${calcData.day}" type="number">
 					<span th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="text-danger"></span>
 					<span th:if="${#fields.hasErrors('month')}" th:errors="*{month}" class="text-danger"></span>
 					<span th:if="${#fields.hasErrors('day')}" th:errors="*{day}" class="text-danger"></span>
 				</div>
 				<div class="input-explanation">
-					<label>説明:</label>
-					<input name="explanation" th:value="${calcData.explanation}" type="text">
+					<label for="explanation">説明:</label>
+					<input name="explanation" id="explanation" th:value="${calcData.explanation}" type="text">
 					<span th:if="${#fields.hasErrors('explanation')}" th:errors="*{explanation}" class="text-danger"></span>
 				</div>
 				<button class="button2">更新</button>
