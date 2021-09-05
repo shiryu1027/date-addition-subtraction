@@ -1,13 +1,5 @@
 @charset "UTF-8";
 
-/* エラーメッセージに使用 */
-span {
-	display:block;
-	margin-top:10px;
-	margin-left:40px;
-	text-align:left;
-}
-
 .form {
 	width:400px;
 }

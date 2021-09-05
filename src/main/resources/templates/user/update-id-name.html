@@ -5,33 +5,29 @@ layout:decorate="~{layout/layout}">
 <head>
 	<meta charset="UTF-8">
 	<title>ユーザー情報変更</title>
-	<link href="/css/user/usersUpdate.css" rel="stylesheet">
+	<link href="/css/user/user.css" rel="stylesheet">
+	<link href="/css/user/update.css" rel="stylesheet">
 </head>
 <body>
 <main layout:fragment="content">
 	<div class="content">
-		<div class="usersUpdate">
+		<div class="form">
 			<!-- 加減算データ一覧 -->
-			<div class="update-title">
+			<div class="form-title">
 				<h3>ユーザー情報更新</h3>
 			</div>
-			<form th:action="@{/user/usersUpdate}" method="post" class="usersUpdateForm"> <!-- th:object="${userForm}" -->
+			<form th:action="@{/user/update-id-name}" method="post"> <!-- th:object="${userForm}" -->
 				<label>ユーザーID</label><br>
 				<input name="mailAddress" th:value=${userData.mailAddress} type="Email" placeholder="メールアドレス"><br>
 				<label>ニックネーム</label><br>
 				<input name="nickname" th:value=${userData.nickname} type="text" placeholder="ニックネーム"><br>
 				<button class="button2">更新</button>
 			</form>
-			<form th:action="@{/user/usersUpdatePassword}">
-				<button class="button2">パスワード変更はこちらから</button>
+			<form th:action="@{/user/update-password}">
+				<button class="button2 button-2up">パスワード変更はこちらから</button>
 			</form>
 		</div>
 	</div>
 </main>
 </body>
 </html>
-
-<!-- usersUpdate.html -> update-id-name.html -->
-<!-- usersUpdate -> form -->
-<!-- update-title -> form-title -->
-<!-- usersUpdateForm -> update-form?? -->

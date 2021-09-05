@@ -25,7 +25,7 @@ public class UsersController {
 	@Autowired
 	PasswordEncoder encoder;
 
-	@GetMapping("/usersUpdate")
+	@GetMapping("/update-id-name")
 	public String usersUpdateDisplay(Principal principal, Model model) {
 		
 		String name = principal.getName();
@@ -35,11 +35,11 @@ public class UsersController {
 		model.addAttribute("userData", userData);
 		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
 		
-		return "user/usersUpdate";
+		return "user/update-id-name";
 	}
 	
 	/* バリデーション効かない→これ専用のFormを作るべき?? */
-	@PostMapping("/usersUpdate")
+	@PostMapping("/update-id-name")
 	public String usersUpdate(@RequestParam String mailAddress, @RequestParam String nickname, Principal principal, Model model) {
 		
 		String name = principal.getName();
@@ -67,14 +67,14 @@ public class UsersController {
 		return "redirect:/calc/";
 	}
 	
-	@GetMapping("/usersUpdatePassword")
+	@GetMapping("/update-password")
 	public String usersUpdatePasswordDisplay(Principal principal, Model model) {
 		
 		String name = principal.getName();
 		
 		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
 		
-		return "user/usersUpdatePassword";
+		return "user/update-password";
 	}
 	
 	/* 課題点:
@@ -82,7 +82,7 @@ public class UsersController {
 	 *  エンコードは全く一緒じゃないので、一致させられない。
 	 *  securityconfigやuserdetailsserviceimplが使えないか調べる
 	 *  */
-	@PostMapping("/usersUpdatePassword")
+	@PostMapping("/update-password")
 	public String usersUpdatePassword(@RequestParam String password1, @RequestParam String password2, @RequestParam String password3, Principal principal, Model model) {
 		
 		String name = principal.getName();

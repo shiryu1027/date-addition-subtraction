@@ -38,6 +38,14 @@ ul {
 	list-style:none;
 }
 
+/* エラーメッセージに使用 */
+span {
+	display:block;
+	margin-top:10px;
+	margin-left:40px;
+	text-align:left;
+}
+
 
 /*----------------
 	ヘッダー/header
@@ -208,6 +216,7 @@ footer {
 	font-size:29px;
 	border-bottom:solid 2px white;
 	margin:0 auto;
+	margin-top:25px;
 	margin-bottom:30px;
 }
 

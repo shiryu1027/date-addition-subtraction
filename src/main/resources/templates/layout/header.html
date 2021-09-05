@@ -20,9 +20,9 @@ layout:decorate="~{layout/layout}">
 		
 		<div class="header-right" th:if="${nickname}">
 			<h3>
-				<a th:href="@{/user/usersUpdate}">[[${nickname}]]さん</a>、こんにちは
+				<a th:href="@{/user/update-id-name}">[[${nickname}]]さん</a>、こんにちは
 			</h3>
-			<form th:action="@{/user/signOut}" method="post">
+			<form th:action="@{/user/signout}" method="post">
 				<input type="submit" th:value="サインアウト">
 			</form>
 		</div>
