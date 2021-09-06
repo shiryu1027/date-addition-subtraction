@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entity.CalcData;
 
 @Service
-public class CalculationLogicService {
+public class CalcLogicService {
 	
 	public List<CalcData> calcLogic(List<CalcData> calcData, LocalDate date) {
 		

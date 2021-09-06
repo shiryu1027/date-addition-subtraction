@@ -19,7 +19,7 @@ import com.example.demo.form.CalcDataForm;
 import com.example.demo.form.RecordDateForm;
 import com.example.demo.service.AutoAdditionSubtractionCodeService;
 import com.example.demo.service.CalcService;
-import com.example.demo.service.CalculationLogicService;
+import com.example.demo.service.CalcLogicService;
 import com.example.demo.service.UsersService;
 
 @Controller
@@ -33,7 +33,7 @@ public class CalcController {
 	UsersService usersService;
 	
 	@Autowired
-	CalculationLogicService logicService;
+	CalcLogicService logicService;
 	
 	@Autowired
 	AutoAdditionSubtractionCodeService autoAdditionSubtractionCodeService;
