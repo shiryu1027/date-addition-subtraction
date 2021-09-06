@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+span {
+	margin-left:40px;
+}
+
 .form {
 	width:400px;
 }

@@ -7,7 +7,7 @@ import com.example.demo.form.CalcDataForm;
 @Service
 public class AutoAdditionSubtractionCodeService {
 	
-	public CalcDataForm autoNickname(CalcDataForm form) {
+	public CalcDataForm autoAdditionSubtractionCode(CalcDataForm form) {
 		
 		int year = form.getYear();
 		int month = form.getMonth();

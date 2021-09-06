@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.form input {
+	margin-bottom:0px;
+}
+
+.form span {
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.space {
+	height:25px;
+}

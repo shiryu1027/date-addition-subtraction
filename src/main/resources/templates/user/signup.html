@@ -6,6 +6,7 @@ layout:decorate="~{layout/layout}">
 	<meta charset="UTF-8">
 	<title>ユーザー新規登録</title>
 	<link href="/css/user/user.css" rel="stylesheet">
+	<link href="/css/user/signup.css" rel="stylesheet">
 </head>
 <body>
 <main layout:fragment="content">
@@ -14,21 +15,29 @@ layout:decorate="~{layout/layout}">
 			<div class="form-title">
 				<h3>新規登録</h3>
 			</div>
-			<ul th:if="${validationError}">
-				<li th:each="error : ${validationError}" >
-					<span th:text="${error}" class="text-danger"></span>
-				</li>
-			</ul>
-			<form th:action="@{/user/signup}" method="post">
-				<label>ユーザーID</label>
-				<input name="mailAddress" type="Email" placeholder="メールアドレス"><br>
-				<label>パスワード</label>
-				<input name="password" type="password" placeholder="パスワード"><br>
-				<label>ニックネーム</label>
-				<input name="nickname" type="text" placeholder="ニックネーム"><br>
+			<form th:action="@{/user/signup}" th:object="${userForm}" method="post">
+				<label for="mailAddress">ユーザーID</label>
+				<input name="mailAddress" id="mailAddress" th:value="*{mailAddress}" type="Email" placeholder="メールアドレス"><br>
+				<span th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" class="text-danger"></span>
+				<div th:if="!(${#fields.hasErrors('mailAddress')})" class="space"></div>
+				
+				<label for="password">パスワード</label>
+				<input name="password" id="password" th:value="*{password}" type="password" placeholder="パスワード"><br>
+				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+				<div th:if="!(${#fields.hasErrors('password')})" class="space"></div>
+				
+				<label for="nickname">ニックネーム</label>
+				<input name="nickname" id="nickname" th:value="*{nickname}" type="text" placeholder="ニックネーム"><br>
+				<span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="text-danger"></span>
+				<div th:if="!(${#fields.hasErrors('nickname')})" class="space"></div>
+				
 				<button class="button2">新規登録</button>
+				
 			</form>
-			<form th:action="@{/user/signin}" class="button-2up"><button class="button2">サインイン画面に戻る</button></form>
+			
+			<form th:action="@{/user/signin}" class="button-2up">
+				<button class="button2">サインイン画面に戻る</button>
+			</form>
 		</div>
 	</div>
 </main>

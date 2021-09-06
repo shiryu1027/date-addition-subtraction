@@ -32,6 +32,11 @@ public class UsersService {
 		return mapper.findOne(mailAddress);
 	}
 	
+	/* ニックネームの取得 */
+	public String getUserNickname(String mailAddress) {
+		return mapper.getUserNickname(mailAddress);
+	}
+	
 	/* ユーザー情報更新(パスワードを除く) */
 	public void updateUser(UserForm user) {
 		mapper.updateUser(user);

@@ -1,13 +1,9 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,16 +15,14 @@ import com.example.demo.service.UsersService;
 
 @Controller
 @RequestMapping("/user")
-public class SignUpController {
+public class SignupController {
 	
 	@Autowired
 	UsersService service;
 	
 	/* サインアップ画面の表示 */
 	@GetMapping("/signup")
-	public String signUpDisplay(Model model) {
-		
-		model.addAttribute("notSignIn", "");
+	public String signupDisplay(@ModelAttribute UserForm form) {
 		
 		return "user/signup";
 	}
@@ -38,16 +32,12 @@ public class SignUpController {
 	public String signUp(@Validated @ModelAttribute UserForm form, BindingResult result, Model model) {
 		
 		if (result.hasErrors()) {
-			List<String> errorList = new ArrayList<String>();
-			for (ObjectError error : result.getAllErrors()) {
-				errorList.add(error.getDefaultMessage());
-			}
-			model.addAttribute("validationError", errorList);
-			return signUpDisplay(model);
+			System.out.println(form);
+			return signupDisplay(form);
 		}
 		
-		System.out.println(form);
 		service.signUp(form);
+		
 		return "redirect:/user/signin";
 	}
 	

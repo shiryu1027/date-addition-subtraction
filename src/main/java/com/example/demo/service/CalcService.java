@@ -12,7 +12,7 @@ import com.example.demo.form.CalcDataForm;
 import com.example.demo.mapper.AdditionSubtractionMapper;
 
 @Service
-public class CalculationService {
+public class CalcService {
 	
 	@Autowired
 	AdditionSubtractionMapper mapper;
@@ -26,7 +26,7 @@ public class CalculationService {
 	}
 	
 	/* ユーザーが持つ加減算用データを取得 */
-	public List<CalcData> calcDataAll(String mailAddress) {
+	public List<CalcData> getCalcDataAll(String mailAddress) {
 		return mapper.calcDataAll(mailAddress);
 	}
 	

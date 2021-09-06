@@ -13,7 +13,7 @@ layout:decorate="~{layout/layout}">
 			<h1 th:if="${nickname}">
 				<a th:href="@{/calc/}">Date Arithmetic ~日付加減算~ </a>
 			</h1>
-			<h1 th:if=${notSignIn}>
+			<h1 th:if="${nickname} == null">
 				<a th:href="@{/user/signIn}" >Date Arithmetic ~日付加減算~ </a>
 			</h1>
 		</div>
@@ -31,5 +31,3 @@ layout:decorate="~{layout/layout}">
 </header>
 </body>
 </html>
-
-<!-- TODO:nicknameとnotSignInの変数名またはシステムを変更する可能性あり -->

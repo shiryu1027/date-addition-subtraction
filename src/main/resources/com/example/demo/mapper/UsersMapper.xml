@@ -11,12 +11,16 @@
 </resultMap>
 
 <select id="findOne" resultMap="users">
-	SELECT * FROM users WHERE mail_Address=#{mailAddress}
+	SELECT * FROM users WHERE mail_address=#{mailAddress}
 </select>
 
 <insert id="signUp">
 	INSERT INTO users(mail_address, nickname, password, role) VALUES (#{mailAddress}, #{nickname}, #{password}, #{role})
 </insert>
+
+<select id="getUserNickname" resultType="String">
+	SELECT nickname FROM users WHERE mail_address=#{mailAddress}
+</select>
 
 <update id="updateUser">
 	UPDATE users SET mail_address=#{mailAddress}, nickname=#{nickname}, password=#{password} WHERE user_id=#{userId}

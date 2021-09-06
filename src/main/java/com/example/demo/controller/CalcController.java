@@ -18,16 +18,16 @@ import com.example.demo.entity.CalcData;
 import com.example.demo.form.CalcDataForm;
 import com.example.demo.form.RecordDateForm;
 import com.example.demo.service.AutoAdditionSubtractionCodeService;
+import com.example.demo.service.CalcService;
 import com.example.demo.service.CalculationLogicService;
-import com.example.demo.service.CalculationService;
 import com.example.demo.service.UsersService;
 
 @Controller
 @RequestMapping("calc")
-public class CalculationController {
+public class CalcController {
 	
 	@Autowired
-	CalculationService service;
+	CalcService calcService;
 	
 	@Autowired
 	UsersService usersService;
@@ -36,51 +36,21 @@ public class CalculationController {
 	CalculationLogicService logicService;
 	
 	@Autowired
-	AutoAdditionSubtractionCodeService nicknameService;
+	AutoAdditionSubtractionCodeService autoAdditionSubtractionCodeService;
 	
 	/* ホームぺージ取得 */
 	@GetMapping("/")
-	public String index(Principal principal, Model model) { // Principalはサインイン情報を格納している
+	public String index(Principal principal, Model model) {
 		
-		/* サインイン情報のIDを取得 */
-		String name = principal.getName();
+		String userMailAddress = principal.getName();
 		
-		/* 加減算用データを取得 */
-		List<CalcData> calcList = service.calcDataAll(name);
-		List<CalcData> calcListForUpdate = service.calcDataAll(name);
+		String nickname = usersService.getUserNickname(userMailAddress);
+		model.addAttribute("nickname", nickname);
 		
-		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
+		List<CalcData> calcList = calcService.getCalcDataAll(userMailAddress);
 		model.addAttribute("calcList", calcList);
-		model.addAttribute("calcListForUpdate", calcListForUpdate);
 		
 		return "calc/index";
-	}
-	
-	/* 加減算用データの新規登録画面の表示 */
-	@GetMapping("/insert")
-	public String insertDisplay(@ModelAttribute CalcDataForm form, Principal principal, Model model) {
-		
-		String name = principal.getName();
-		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
-		
-		return "calc/insert";
-	}
-	
-	
-	/* 加減算用データを新規登録 */
-	@PostMapping("/insert")
-	public String insert(@Validated @ModelAttribute CalcDataForm form, BindingResult result, Principal principal, Model model) {
-		
-		if (result.hasErrors()) {
-			
-			return insertDisplay(form, principal, model);
-		}
-		
-		nicknameService.autoNickname(form);
-		
-		service.calcDataInsert(form, principal);
-		
-		return "redirect:/calc/";
 	}
 	
 	/* 計算用基準日を指定、その後計算実行 */
@@ -91,60 +61,91 @@ public class CalculationController {
 			return index(principal, model);
 		}
 		
-		/* サインイン情報のIDを取得 */
-		String name = principal.getName();
+		String UserMailAddress = principal.getName();
 		
-		/* 加減算用データを取得 */
-		List<CalcData> calcList = service.calcDataAll(name);
+		String nickname = usersService.getUserNickname(UserMailAddress);
+		model.addAttribute("nickname", nickname);
+		
+		List<CalcData> calcList = calcService.getCalcDataAll(UserMailAddress);
 		
 		/* 全てのデータに対して、計算を適用 */
 		List<CalcData> calcListResult = logicService.calcLogic(calcList, form.getRecordDate());
-		
 		model.addAttribute("results", calcListResult);
-		
-		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
 		
 		model.addAttribute("referenceDate", form.getRecordDate());
 		
 		return "calc/index";
 	}
 	
+	
+	/* 加減算用データの新規登録画面を表示 */
+	@GetMapping("/insert")
+	public String insertDisplay(@ModelAttribute CalcDataForm form, Principal principal, Model model) {
+		
+		String userMailAddress = principal.getName();
+		
+		String nickname = usersService.getUserNickname(userMailAddress);
+		model.addAttribute("nickname", nickname);
+		
+		return "calc/insert";
+	}
+	
+	/* 加減算用データをDBに新規登録 */
+	@PostMapping("/insert")
+	public String insert(@Validated @ModelAttribute CalcDataForm form, BindingResult result, Principal principal, Model model) {
+		
+		if (result.hasErrors()) {
+			return insertDisplay(form, principal, model); // formにエラーメッセージ格納
+		}
+		
+		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(form);
+		
+		calcService.calcDataInsert(form, principal);
+		
+		return "redirect:/calc/";
+	}
+	
+	
 	/* 加減算用データを更新データ画面を表示 */
 	@GetMapping("/update/id={id}")
-	public String updateDisplay(@PathVariable("id") int id,@ModelAttribute CalcDataForm form, Principal principal, Model model) {
+	public String updateDisplay(@PathVariable("id") int id, @ModelAttribute CalcDataForm form, 
+		Principal principal, Model model) {
+		
+		String UserMailAddress = principal.getName();
+		
+		String nickname = usersService.getUserNickname(UserMailAddress);
+		model.addAttribute("nickname", nickname);
 		
 		/* 加減算データ1件取得 */
-		CalcData calcData = service.calcDataOne(id);
-		
-		String name = principal.getName();
-		
+		CalcData calcData = calcService.calcDataOne(id);
 		model.addAttribute("calcData", calcData);
-		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
 		
 		return "/calc/update";
 	}
 	
 	/* 加減算用データを更新 */
 	@PostMapping("/update/id={id}/post")
-	public String update(@Validated @ModelAttribute CalcDataForm form, BindingResult result, Model model, Principal principal, @PathVariable("id") int id) {
+	public String update(@PathVariable("id") int id, @Validated @ModelAttribute CalcDataForm form, BindingResult result, 
+		Principal principal, Model model) {
 		
 		if (result.hasErrors()) {
 			return updateDisplay(id, form, principal, model);
 		}
 		
 		form.setAdditionSubtractionId(id);
-		nicknameService.autoNickname(form);
+		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(form);
 		
-		service.calcDataUpdate(form, principal);
+		calcService.calcDataUpdate(form, principal);
 		
 		return "redirect:/calc/";
 	}
+	
 	
 	/* 加減算用データの削除 */
 	@PostMapping("/delete/id={id}")
 	public String delete(@PathVariable("id") int id, Principal principal, Model model) {
 		
-		service.calcDataDelete(id);
+		calcService.calcDataDelete(id);
 		
 		return "redirect:/calc/";
 	}
