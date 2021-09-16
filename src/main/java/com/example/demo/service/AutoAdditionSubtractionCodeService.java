@@ -29,6 +29,10 @@ public class AutoAdditionSubtractionCodeService {
 			}
 		}
 		
+		if (additionSubtractionCode.equals("")) {
+			additionSubtractionCode = "0YMD";
+		}
+		
 		form.setAdditionSubtractionCode(additionSubtractionCode);
 		
 		return form;
