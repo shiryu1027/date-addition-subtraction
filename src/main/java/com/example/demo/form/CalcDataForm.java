@@ -31,4 +31,17 @@ public class CalcDataForm {
 	
 	private int userId;
 	
+	public CalcDataForm() {
+		
+	}
+	
+	public CalcDataForm(int additionSubtractionId, String additionSubtractionCode, int year, int month, int day, String explanation, int userId) {
+		this.additionSubtractionId = additionSubtractionId;
+		this.additionSubtractionCode = additionSubtractionCode;
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.explanation = explanation;
+		this.userId = userId;
+	}
 }

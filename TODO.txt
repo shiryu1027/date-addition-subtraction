@@ -10,3 +10,20 @@
    - [x] calcData条件2の計算結果がplusYearsとminusMonthsを用いた計算と一致する
    
 - CalcServiceのテスト
+ - [x] 加減算用データを1件取得する
+  - [x] mapperクラスのcalcDataOneメソッドを一回呼び出す
+  - [x] 戻り値としてCalcData型のデータを返す
+ - [x] ユーザーが持つ加減算用データを全件取得
+  - [x] mapperクラスのcalcDataAllメソッドを一回呼び出す
+  - [x] 戻り値としてList<CalcData>型のデータを返す
+ - [x] 加減算データを一件新規登録する 
+  - [x] UsersServiceクラスのgetSignInUserメソッドを一回呼び出す
+  - [x] UsersServiceクラスのgetSignInUserメソッドによって、AppUser型のデータを返す
+  -![x] appUserから持ってきたuserIdとformのuserIdが同値 --> Mock同士の比較無意味??
+  - [x] mapperクラスのcalcDataInsertメソッドを一回呼び出す
+ - [x] 既存加減算用データの更新
+  - [x] UsersServiceクラスのgetSignInUserメソッドを一回呼び出す
+  - [x] UsersServiceクラスのgetSignInUserメソッドによって、AppUser型のデータを返す
+  - [x] mapperクラスのcalcDataUpdateメソッドを一回呼び出す
+ - [x] 既存加減算用データの削除
+  - [x] mapperクラスのcalcDataDeleteメソッドを一回呼び出す
