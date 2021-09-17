@@ -32,7 +32,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.assertj:assertj-core:3.20.2'
-	
+	testImplementation 'com.h2database:h2:1.4.200'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 }
 
