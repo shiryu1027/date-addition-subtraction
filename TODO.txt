@@ -28,7 +28,7 @@
  - [x] 既存加減算用データの削除
   - [x] mapperクラスのcalcDataDeleteメソッドを一回呼び出す
 
-- AutoAdditionSubtractionCodeServiceTestのテスト
+- AutoAdditionSubtractionCodeServiceのテスト
  - [x] formの値がYear_Month_Day_100000_-100000_0のとき
   - [x] additionSubtractionCodeは+1000000Y-100000Mである
  - [x] formの値がYear_Month_Day_-100000_0_100000のとき
@@ -36,3 +36,9 @@
  - [x] formの値がYear_Month_Day_0_0_0のとき
   - [x] additionSubtractionCodeは"0YMD"である
   ※全パターンやりたいが、ここでは一旦省略
+  
+- UserDetailsServiceImplのテスト
+ - [x] ユーザ名が存在するとき、ユーザ詳細を取得する
+ - [x] ユーザ名が存在しないとき、例外をスローする
+
+ 
