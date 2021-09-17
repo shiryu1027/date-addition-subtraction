@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.demo.form.CalcDataForm;
 
 @SpringBootTest
-@DisplayName("AutoAdditionSubtractionCodeServiceTestのテスト")
+@DisplayName("AutoAdditionSubtractionCodeServiceのテスト")
 class AutoAdditionSubtractionCodeServiceTest {
 	
 	CalcDataForm calcDataForm;
