@@ -41,4 +41,17 @@
  - [x] ユーザ名が存在するとき、ユーザ詳細を取得する
  - [x] ユーザ名が存在しないとき、例外をスローする
 
+- UsersServiceのテスト
+ - [x] ユーザーの新規登録
+  - [x] パスワードを暗号化するメソッドが呼ばれている
+  - [x] roleに"ROLE_GENERAL"が追加されている
+  - [x] UserMapperのsignUpメソッドが一回呼ばれる
+ - [x] サインイン情報の取得
+  - [x] UserMapperのfindOneメソッドが一回呼ばれる
+  - [x] メールアドレスから、AppUser型のユーザーデータを返す
+ - [x] ニックネームの取得
+  - [x] UserMapperのgetUserNicknameメソッドが一回呼ばれる
+  - [x] mailAddressからニックネームが取得できる
+ - [x] ユーザー情報更新
+  - [x] UserMapperのupdateUserメソッドが一回呼ばれる
  
