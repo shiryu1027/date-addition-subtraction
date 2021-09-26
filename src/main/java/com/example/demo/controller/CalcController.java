@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.entity.DateFormula;
 import com.example.demo.entity.Result;
 import com.example.demo.form.BaseDateForm;
+import com.example.demo.form.DateFormulaForm;
 import com.example.demo.service.AutoAdditionSubtractionCodeService;
 import com.example.demo.service.CalcLogicService;
 import com.example.demo.service.CalcService;
@@ -79,7 +80,7 @@ public class CalcController {
 	
 	/* 計算式の新規登録画面を表示 */
 	@GetMapping("/add")
-	public String addDisplay(@ModelAttribute DateFormula form, Principal principal, Model model) {
+	public String addDisplay(@ModelAttribute DateFormulaForm form, Principal principal, Model model) {
 		
 		String mailAddress = principal.getName();
 		
@@ -90,7 +91,7 @@ public class CalcController {
 	
 	/* 加減算用データをDBに新規登録 */
 	@PostMapping("/add")
-	public String add(@Validated @ModelAttribute DateFormula form, BindingResult result, 
+	public String add(@Validated @ModelAttribute DateFormulaForm form, BindingResult result, 
 		Principal principal, Model model) {
 		
 		if (result.hasErrors()) {
@@ -108,7 +109,7 @@ public class CalcController {
 	
 	/* 加減算用データを更新データ画面を表示 */
 	@GetMapping("/update/id={id}")
-	public String updateDisplay(@PathVariable("id") int id, @ModelAttribute DateFormula form, 
+	public String updateDisplay(@PathVariable("id") int id, @ModelAttribute DateFormulaForm form, 
 		Principal principal, Model model) {
 		
 		String mailAddress = principal.getName();
@@ -116,14 +117,14 @@ public class CalcController {
 		DateFormula dateFormula = calcService.getDateFormula(id);
 		
 		model.addAttribute("username", userService.getUsername(mailAddress));
-		model.addAttribute("calcData", dateFormula);
+		model.addAttribute("dateFormula", dateFormula);
 		
 		return "/calc/update";
 	}
 	
 	/* 加減算用データを更新 */
 	@PostMapping("/update/id={id}/post")
-	public String update(@PathVariable("id") int id, @Validated @ModelAttribute DateFormula form, BindingResult result, 
+	public String update(@PathVariable("id") int id, @Validated @ModelAttribute DateFormulaForm form, BindingResult result, 
 		Principal principal, Model model) {
 		
 		if (result.hasErrors()) {
@@ -131,7 +132,7 @@ public class CalcController {
 		}
 		
 		DateFormula dateFormula = modelMapper.map(form, DateFormula.class);
-		dateFormula.setAdditionSubtractionId(id);
+		dateFormula.setDateFormulaId(id);
 		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(dateFormula);
 		
 		calcService.alterDateFormula(dateFormula, principal);

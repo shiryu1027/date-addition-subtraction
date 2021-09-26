@@ -51,20 +51,20 @@ layout:decorate="~{layout/layout}">
 				</thead>
 				<tbody>
 					<tr th:each="data:${formulas}" th:object="${data}">
-						<td class="th-id" th:text="*{additionSubtractionCode}"></td>
+						<td class="th-id" th:text="*{dateFormulaCode}"></td>
 						<td class="th-date" th:text="*{year}"></td>
 						<td class="th-date" th:text="*{month}"></td>
 						<td class="th-date" th:text="*{day}"></td>
 						<td class="th-explanation" th:text="*{explanation}"></td>
 						<!-- 更新ボタン -->
 						<td class="th-button">
-							<form th:action="@{/calc/update/id={id}(id=*{additionSubtractionId})}">
+							<form th:action="@{/calc/update/id={id}(id=*{dateFormulaId})}">
 								<button class="button3">更新</button>
 							</form>
 						</td>
 						
 						<td class="th-button">
-							<form th:action="@{/calc/delete/id={id}(id=*{additionSubtractionId})}" method="post">
+							<form th:action="@{/calc/delete/id={id}(id=*{dateFormulaId})}" method="post">
 								<button class="button3">削除</button>
 							</form>
 						</td>

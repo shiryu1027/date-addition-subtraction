@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class DateFormula {
 	
-	private int additionSubtractionId;
+	private int dateFormulaId;
 	
-	private String additionSubtractionCode;
+	private String dateFormulaCode;
 	
 	private int year;
 	
@@ -25,9 +25,9 @@ public class DateFormula {
 		
 	}
 	
-	public DateFormula(int additionSubtractionId, String additionSubtractionCode, int year, int month, int day, String explanation, int userId) {
-		this.additionSubtractionId = additionSubtractionId;
-		this.additionSubtractionCode = additionSubtractionCode;
+	public DateFormula(int dateFormulaId, String dateFormulaCode, int year, int month, int day, String explanation, int userId) {
+		this.dateFormulaId = dateFormulaId;
+		this.dateFormulaCode = dateFormulaCode;
 		this.year = year;
 		this.month = month;
 		this.day = day;

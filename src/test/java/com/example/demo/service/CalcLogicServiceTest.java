@@ -58,11 +58,11 @@ class CalcLogicServiceTest {
 			dateFormula = new ArrayList<DateFormula>();
 			DateFormula calcData1 = new DateFormula();
 			DateFormula calcData2 = new DateFormula();
-			calcData1.setAdditionSubtractionCode("+3Y-2M+1D");
+			calcData1.setDateFormulaCode("+3Y-2M+1D");
 			calcData1.setYear(3);
 			calcData1.setMonth(-2);
 			calcData1.setDay(1);
-			calcData2.setAdditionSubtractionCode("-10Y+5M-11D");
+			calcData2.setDateFormulaCode("-10Y+5M-11D");
 			calcData2.setYear(-10);
 			calcData2.setMonth(5);
 			calcData2.setDay(-11);

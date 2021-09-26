@@ -16,7 +16,7 @@ layout:decorate="~{layout/layout}">
 				<h3>加減算データ新規登録</h3>
 			</div>
 			
-			<form th:action="@{/calc/add}" method="post" th:if="${calcDataForm}" th:object="${calcDataForm}">
+			<form th:action="@{/calc/add}" method="post" th:if="${dateFormulaForm}" th:object="${dateFormulaForm}">
 				<div class="input-date">
 					<label for=year>年:</label>
 					<input name="year" id="year" type="number" value="0">

@@ -33,7 +33,7 @@ public class AutoAdditionSubtractionCodeService {
 			additionSubtractionCode = "0YMD";
 		}
 		
-		dateFormula.setAdditionSubtractionCode(additionSubtractionCode);
+		dateFormula.setDateFormulaCode(additionSubtractionCode);
 		
 		return dateFormula;
 	}

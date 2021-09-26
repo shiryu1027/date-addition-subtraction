@@ -3,8 +3,8 @@
 <mapper namespace="com.example.demo.mapper.AdditionSubtractionMapper">
 
 <resultMap type="com.example.demo.entity.DateFormula" id="calc">
-	<id column="addition_subtraction_id" property="additionSubtractionId" />
-	<result column="addition_subtraction_code" property="additionSubtractionCode" />
+	<id column="date_formula_id" property="dateFormulaId" />
+	<result column="date_formula_code" property="dateFormulaCode" />
 	<result column="year" property="year" />
 	<result column="month" property="month" />
 	<result column="day" property="day" />
@@ -14,36 +14,36 @@
 
 <select id="calcDataOne" resultMap="calc">
 	SELECT *
-	FROM addition_subtraction
-	WHERE addition_subtraction_id=#{id}
+	FROM date_formulas
+	WHERE date_formula_id=#{id}
 </select>
 
 <select id="calcDataAll" resultMap="calc">
 	SELECT * 
-	FROM addition_subtraction 
+	FROM date_formulas 
 	WHERE user_id=(
 		SELECT user_id
 		FROM users
 		WHERE mail_address=#{mailAddress}
 	)
-	ORDER BY addition_subtraction_id DESC
+	ORDER BY date_formula_id DESC
 	
 </select>
 
 <insert id="calcDataInsert">
-	INSERT INTO addition_subtraction (addition_subtraction_code, year, month, day, explanation, user_id)
-	VALUES (#{additionSubtractionCode}, #{year}, #{month}, #{day}, #{explanation}, #{userId})
+	INSERT INTO date_formulas (date_formula_code, year, month, day, explanation, user_id)
+	VALUES (#{dateFormulaCode}, #{year}, #{month}, #{day}, #{explanation}, #{userId})
 </insert>
 
 <update id="calcDataUpdate">
-	UPDATE addition_subtraction
-	SET addition_subtraction_code=#{additionSubtractionCode}, year=#{year}, month=#{month}, day=#{day}, explanation=#{explanation}, user_id=#{userId}
-	WHERE addition_subtraction_id=#{additionSubtractionId}
+	UPDATE date_formulas
+	SET date_formula_code=#{dateFormulaCode}, year=#{year}, month=#{month}, day=#{day}, explanation=#{explanation}, user_id=#{userId}
+	WHERE date_formula_id=#{dateFormulaId}
 </update>
 
 <delete id="calcDataDelete">
-	DELETE FROM addition_subtraction
-	WHERE addition_subtraction_id=#{id}
+	DELETE FROM date_formulas
+	WHERE date_formula_id=#{id}
 </delete>
 
 </mapper>

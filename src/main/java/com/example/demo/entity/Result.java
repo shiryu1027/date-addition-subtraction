@@ -13,11 +13,11 @@ public class Result {
 	
 	/* dateFormulaのgetterは使えないので、中身のgetterを作成 */
 	public int getAdditionSubtractionId() {
-		return this.dateFormula.getAdditionSubtractionId();
+		return this.dateFormula.getDateFormulaId();
 	}
 	
 	public String getAdditionSubtractionCode () {
-		return this.dateFormula.getAdditionSubtractionCode();
+		return this.dateFormula.getDateFormulaCode();
 	}
 	
 	public int getYear() {

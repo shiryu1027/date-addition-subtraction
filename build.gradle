@@ -35,7 +35,7 @@ dependencies {
 	testImplementation 'com.h2database:h2:1.4.200'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
-	implementation 'org.modelmapper:modelmapper:2.3.9'
+	implementation 'org.modelmapper.extensions:modelmapper-spring:2.4.4'
 }
 
 test {
