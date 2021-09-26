@@ -26,10 +26,10 @@ layout:decorate="~{layout/layout}">
 				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
 				<div th:if="!(${#fields.hasErrors('password')})" class="space"></div>
 				
-				<label for="nickname">ニックネーム</label>
-				<input name="nickname" id="nickname" th:value="*{nickname}" type="text" placeholder="ニックネーム"><br>
-				<span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="text-danger"></span>
-				<div th:if="!(${#fields.hasErrors('nickname')})" class="space"></div>
+				<label for="username">ユーザー名</label>
+				<input name="username" id="username" th:value="*{username}" type="text" placeholder="ニックネーム"><br>
+				<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></span>
+				<div th:if="!(${#fields.hasErrors('username')})" class="space"></div>
 				
 				<button class="button2">新規登録</button>
 				
