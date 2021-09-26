@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.AppUser;
 import com.example.demo.entity.DateFormula;
-import com.example.demo.form.CalcDataForm;
 import com.example.demo.mapper.AdditionSubtractionMapper;
 
 @Service
@@ -31,25 +30,25 @@ public class CalcService {
 	}
 	
 	/* 加減算データを新規登録 */
-	public void addDateFormula(CalcDataForm form, Principal principal) {
+	public void addDateFormula(DateFormula dateFormula, Principal principal) {
 		
 		/* ユーザー情報取得(加減算データにuser_idを登録するため) */
 		AppUser user = uService.getSignInUser(principal.getName());
 		
-		form.setUserId(user.getUserId());
+		dateFormula.setUserId(user.getUserId());
 		
 		/* 新規登録 */
-		mapper.calcDataInsert(form);
+		mapper.calcDataInsert(dateFormula);
 	}
 	
 	/* 加減算用データの更新 */
-	public void alterDateFormula(CalcDataForm form, Principal principal) {
+	public void alterDateFormula(DateFormula dateFormula, Principal principal) {
 		
 		AppUser user = uService.getSignInUser(principal.getName());
 		
-		form.setUserId(user.getUserId());
+		dateFormula.setUserId(user.getUserId());
 		
-		mapper.calcDataUpdate(form);
+		mapper.calcDataUpdate(dateFormula);
 	}
 	
 	/* 加減算用データの削除 */

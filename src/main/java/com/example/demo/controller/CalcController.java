@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.security.Principal;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.entity.DateFormula;
 import com.example.demo.entity.Result;
 import com.example.demo.form.BaseDateForm;
-import com.example.demo.form.CalcDataForm;
 import com.example.demo.service.AutoAdditionSubtractionCodeService;
 import com.example.demo.service.CalcLogicService;
 import com.example.demo.service.CalcService;
@@ -35,6 +35,9 @@ public class CalcController {
 	
 	@Autowired
 	CalcLogicService logicService;
+	
+	@Autowired
+	ModelMapper modelMapper;
 	
 	@Autowired
 	AutoAdditionSubtractionCodeService autoAdditionSubtractionCodeService;
@@ -76,7 +79,7 @@ public class CalcController {
 	
 	/* 計算式の新規登録画面を表示 */
 	@GetMapping("/add")
-	public String addDisplay(@ModelAttribute CalcDataForm form, Principal principal, Model model) {
+	public String addDisplay(@ModelAttribute DateFormula form, Principal principal, Model model) {
 		
 		String mailAddress = principal.getName();
 		
@@ -87,16 +90,17 @@ public class CalcController {
 	
 	/* 加減算用データをDBに新規登録 */
 	@PostMapping("/add")
-	public String add(@Validated @ModelAttribute CalcDataForm form, BindingResult result, 
+	public String add(@Validated @ModelAttribute DateFormula form, BindingResult result, 
 		Principal principal, Model model) {
 		
 		if (result.hasErrors()) {
 			return addDisplay(form, principal, model);
 		}
 		
-		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(form);
+		DateFormula dateFormula = modelMapper.map(form, DateFormula.class);
+		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(dateFormula);
 		
-		calcService.addDateFormula(form, principal);
+		calcService.addDateFormula(dateFormula, principal);
 		
 		return "redirect:/calc/";
 	}
@@ -104,7 +108,7 @@ public class CalcController {
 	
 	/* 加減算用データを更新データ画面を表示 */
 	@GetMapping("/update/id={id}")
-	public String updateDisplay(@PathVariable("id") int id, @ModelAttribute CalcDataForm form, 
+	public String updateDisplay(@PathVariable("id") int id, @ModelAttribute DateFormula form, 
 		Principal principal, Model model) {
 		
 		String mailAddress = principal.getName();
@@ -119,17 +123,18 @@ public class CalcController {
 	
 	/* 加減算用データを更新 */
 	@PostMapping("/update/id={id}/post")
-	public String update(@PathVariable("id") int id, @Validated @ModelAttribute CalcDataForm form, BindingResult result, 
+	public String update(@PathVariable("id") int id, @Validated @ModelAttribute DateFormula form, BindingResult result, 
 		Principal principal, Model model) {
 		
 		if (result.hasErrors()) {
 			return updateDisplay(id, form, principal, model);
 		}
 		
-		form.setAdditionSubtractionId(id);
-		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(form);
+		DateFormula dateFormula = modelMapper.map(form, DateFormula.class);
+		dateFormula.setAdditionSubtractionId(id);
+		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(dateFormula);
 		
-		calcService.alterDateFormula(form, principal);
+		calcService.alterDateFormula(dateFormula, principal);
 		
 		return "redirect:/calc/";
 	}

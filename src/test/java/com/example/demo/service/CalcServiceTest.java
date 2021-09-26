@@ -20,7 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.entity.AppUser;
 import com.example.demo.entity.DateFormula;
-import com.example.demo.form.CalcDataForm;
+import com.example.demo.form.DateFormulaForm;
 import com.example.demo.mapper.AdditionSubtractionMapper;
 
 @SpringBootTest
@@ -116,14 +116,14 @@ class CalcServiceTest {
 		int userId;
 		String mailAddress;
 		AppUser user;
-		CalcDataForm form;
+		DateFormula form;
 		
 		@BeforeEach
 		void setup() {
 			userId = 1;
 			mailAddress = "user.co,jp";
 			user = new AppUser(userId, mailAddress, "ユーザー", "password", "ROLE_GENERAL");
-			form = new CalcDataForm(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
+			form = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
 			doReturn(user).when(userService).getSignInUser(mailAddress);
 			doReturn(mailAddress).when(principal).getName();
 			target.addDateFormula(form, principal);
@@ -157,14 +157,14 @@ class CalcServiceTest {
 		int userId;
 		String mailAddress;
 		AppUser user;
-		CalcDataForm form;
+		DateFormula form;
 		
 		@BeforeEach
 		void setup() {
 			userId = 1;
 			mailAddress = "user.co,jp";
 			user = new AppUser(userId, mailAddress, "ユーザー", "password", "ROLE_GENERAL");
-			form = new CalcDataForm(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
+			form = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
 			doReturn(user).when(userService).getSignInUser(mailAddress);
 			doReturn(mailAddress).when(principal).getName();
 			target.alterDateFormula(form, principal);

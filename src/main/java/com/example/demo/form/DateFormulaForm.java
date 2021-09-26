@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class CalcDataForm {
+public class DateFormulaForm {
 	
 	private int additionSubtractionId;
 	
@@ -31,11 +31,11 @@ public class CalcDataForm {
 	
 	private int userId;
 	
-	public CalcDataForm() {
+	public DateFormulaForm() {
 		
 	}
 	
-	public CalcDataForm(int additionSubtractionId, String additionSubtractionCode, int year, int month, int day, String explanation, int userId) {
+	public DateFormulaForm(int additionSubtractionId, String additionSubtractionCode, int year, int month, int day, String explanation, int userId) {
 		this.additionSubtractionId = additionSubtractionId;
 		this.additionSubtractionCode = additionSubtractionCode;
 		this.year = year;

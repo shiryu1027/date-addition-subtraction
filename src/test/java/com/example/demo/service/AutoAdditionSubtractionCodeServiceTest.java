@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.demo.form.CalcDataForm;
+import com.example.demo.form.DateFormulaForm;
 
 @SpringBootTest
 @DisplayName("AutoAdditionSubtractionCodeServiceのテスト")
 class AutoAdditionSubtractionCodeServiceTest {
 	
-	CalcDataForm calcDataForm;
+	DateFormulaForm dateFormulaForm;
 	String actual;
 	
 	@Autowired
@@ -25,11 +25,11 @@ class AutoAdditionSubtractionCodeServiceTest {
 	class formの値がYear_Month_Day_100000_minus100000_0のとき {
 		@BeforeEach
 		void setup() {
-			calcDataForm = new CalcDataForm();
-			calcDataForm.setYear(100000);
-			calcDataForm.setMonth(-100000);
-			calcDataForm.setDay(0);
-			actual = target.autoAdditionSubtractionCode(calcDataForm).getAdditionSubtractionCode();
+			dateFormulaForm = new DateFormulaForm();
+			dateFormulaForm.setYear(100000);
+			dateFormulaForm.setMonth(-100000);
+			dateFormulaForm.setDay(0);
+			actual = target.autoAdditionSubtractionCode(dateFormulaForm).getAdditionSubtractionCode();
 		}
 		
 		@Test
@@ -42,11 +42,11 @@ class AutoAdditionSubtractionCodeServiceTest {
 	class formの値がYear_Month_Day_minus100000_0_100000のとき {
 		@BeforeEach
 		void setup() {
-			calcDataForm = new CalcDataForm();
-			calcDataForm.setYear(-100000);
-			calcDataForm.setMonth(0);
-			calcDataForm.setDay(100000);
-			actual = target.autoAdditionSubtractionCode(calcDataForm).getAdditionSubtractionCode();
+			dateFormulaForm = new DateFormulaForm();
+			dateFormulaForm.setYear(-100000);
+			dateFormulaForm.setMonth(0);
+			dateFormulaForm.setDay(100000);
+			actual = target.autoAdditionSubtractionCode(dateFormulaForm).getAdditionSubtractionCode();
 		}
 		
 		@Test
@@ -59,11 +59,11 @@ class AutoAdditionSubtractionCodeServiceTest {
 	class formの値がYear_Month_Day_0_0_0のとき {
 		@BeforeEach
 		void setup() {
-			calcDataForm = new CalcDataForm();
-			calcDataForm.setYear(0);
-			calcDataForm.setMonth(0);
-			calcDataForm.setDay(0);
-			actual = target.autoAdditionSubtractionCode(calcDataForm).getAdditionSubtractionCode();
+			dateFormulaForm = new DateFormulaForm();
+			dateFormulaForm.setYear(0);
+			dateFormulaForm.setMonth(0);
+			dateFormulaForm.setDay(0);
+			actual = target.autoAdditionSubtractionCode(dateFormulaForm).getAdditionSubtractionCode();
 		}
 		
 		@Test

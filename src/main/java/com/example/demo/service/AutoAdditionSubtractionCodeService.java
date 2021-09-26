@@ -2,16 +2,16 @@ package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.form.CalcDataForm;
+import com.example.demo.entity.DateFormula;
 
 @Service
 public class AutoAdditionSubtractionCodeService {
 	
-	public CalcDataForm autoAdditionSubtractionCode(CalcDataForm form) {
+	public DateFormula autoAdditionSubtractionCode(DateFormula dateFormula) {
 		
-		int year = form.getYear();
-		int month = form.getMonth();
-		int day = form.getDay();
+		int year = dateFormula.getYear();
+		int month = dateFormula.getMonth();
+		int day = dateFormula.getDay();
 		
 		String strYear = String.format("%1$+d", year) + "Y";
 		String strMonth = String.format("%1$+d", month) + "M";
@@ -33,9 +33,9 @@ public class AutoAdditionSubtractionCodeService {
 			additionSubtractionCode = "0YMD";
 		}
 		
-		form.setAdditionSubtractionCode(additionSubtractionCode);
+		dateFormula.setAdditionSubtractionCode(additionSubtractionCode);
 		
-		return form;
+		return dateFormula;
 	}
 	
 }

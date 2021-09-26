@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.entity.DateFormula;
-import com.example.demo.form.CalcDataForm;
+import com.example.demo.form.DateFormulaForm;
 
 @Mapper
 public interface AdditionSubtractionMapper {
@@ -17,10 +17,10 @@ public interface AdditionSubtractionMapper {
 	List<DateFormula> calcDataAll(String mailAddress);
 	
 	/* 加減算データの新規登録 */
-	void calcDataInsert(CalcDataForm form);
+	void calcDataInsert(DateFormula form);
 	
 	/* 加減算用データの更新 */
-	public void calcDataUpdate(CalcDataForm form);
+	public void calcDataUpdate(DateFormula form);
 	
 	/* 加減算用データの削除 */
 	public void calcDataDelete(int id);
