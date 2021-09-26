@@ -10,7 +10,7 @@ public class AppUser {
 	
 	private String mailAddress;
 	
-	private String nickname;
+	private String username;
 	
 	private String password;
 	
@@ -20,10 +20,10 @@ public class AppUser {
 		
 	}
 	
-	public AppUser(int userId, String mailAddress, String nickname, String password, String role) {
+	public AppUser(int userId, String mailAddress, String username, String password, String role) {
 		this.userId = userId;
 		this.mailAddress = mailAddress;
-		this.nickname = nickname;
+		this.username = username;
 		this.password = password;
 		this.role = role;
 	}

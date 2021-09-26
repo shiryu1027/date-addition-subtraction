@@ -16,8 +16,8 @@ public class UserForm {
 	private String mailAddress;
 	
 	@Length(min=1, max=40, message="40文字以内のニックネームを入力して下さい")
-	@NotEmpty(message="ニックネームは必須項目です")
-	private String nickname;
+	@NotEmpty(message="ユーザーは必須項目です")
+	private String username;
 	
 	@NotEmpty(message="パスワードは必須項目です")
 	private String password;

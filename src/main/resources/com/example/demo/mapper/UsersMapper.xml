@@ -5,7 +5,7 @@
 <resultMap type="com.example.demo.entity.AppUser" id="users">
 	<id column="user_id" property="userId" />
 	<result column="mail_address" property="mailAddress" />
-	<result column="nickname" property="nickname" />
+	<result column="username" property="username" />
 	<result column="password" property="password" />
 	<result column="role" property="role" />
 </resultMap>
@@ -15,15 +15,15 @@
 </select>
 
 <insert id="signUp">
-	INSERT INTO users(mail_address, nickname, password, role) VALUES (#{mailAddress}, #{nickname}, #{password}, #{role})
+	INSERT INTO users(mail_address, username, password, role) VALUES (#{mailAddress}, #{username}, #{password}, #{role})
 </insert>
 
-<select id="getUserNickname" resultType="String">
-	SELECT nickname FROM users WHERE mail_address=#{mailAddress}
+<select id="getUsername" resultType="String">
+	SELECT username FROM users WHERE mail_address=#{mailAddress}
 </select>
 
 <update id="updateUser">
-	UPDATE users SET mail_address=#{mailAddress}, nickname=#{nickname}, password=#{password} WHERE user_id=#{userId}
+	UPDATE users SET mail_address=#{mailAddress}, username=#{username}, password=#{password} WHERE user_id=#{userId}
 </update>
 
 </mapper>

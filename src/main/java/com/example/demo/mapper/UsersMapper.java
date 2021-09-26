@@ -15,7 +15,7 @@ public interface UsersMapper {
 	AppUser findOne(String mailAddress);
 	
 	/* ニックネームの取得 */
-	String getUserNickname(String mailAddress);
+	String getUsername(String mailAddress);
 	
 	/* ユーザー情報更新(パスワードを除く) */
 	void updateUser(UserForm user);

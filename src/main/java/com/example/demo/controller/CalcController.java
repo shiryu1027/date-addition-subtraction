@@ -42,14 +42,12 @@ public class CalcController {
 	@GetMapping("/")
 	public String index(Principal principal, Model model) {
 		
-		System.out.println(principal);
+		String mailAddress = principal.getName();
 		
-		String userMailAddress = principal.getName();
+		String username = usersService.getUsername(mailAddress);
+		model.addAttribute("nickname", username);
 		
-		String nickname = usersService.getUserNickname(userMailAddress);
-		model.addAttribute("nickname", nickname);
-		
-		List<CalcData> calcList = calcService.getCalcDataAll(userMailAddress);
+		List<CalcData> calcList = calcService.getCalcDataAll(mailAddress);
 		model.addAttribute("calcList", calcList);
 		
 		return "calc/index";
@@ -63,12 +61,12 @@ public class CalcController {
 			return index(principal, model);
 		}
 		
-		String UserMailAddress = principal.getName();
+		String mailAddress = principal.getName();
 		
-		String nickname = usersService.getUserNickname(UserMailAddress);
+		String nickname = usersService.getUsername(mailAddress);
 		model.addAttribute("nickname", nickname);
 		
-		List<CalcData> calcList = calcService.getCalcDataAll(UserMailAddress);
+		List<CalcData> calcList = calcService.getCalcDataAll(mailAddress);
 		
 		/* 全てのデータに対して、計算を適用 */
 		List<CalcData> calcListResult = logicService.calcLogic(calcList, form.getRecordDate());
@@ -84,9 +82,9 @@ public class CalcController {
 	@GetMapping("/insert")
 	public String insertDisplay(@ModelAttribute CalcDataForm form, Principal principal, Model model) {
 		
-		String userMailAddress = principal.getName();
+		String mailAddress = principal.getName();
 		
-		String nickname = usersService.getUserNickname(userMailAddress);
+		String nickname = usersService.getUsername(mailAddress);
 		model.addAttribute("nickname", nickname);
 		
 		return "calc/insert";
@@ -113,9 +111,9 @@ public class CalcController {
 	public String updateDisplay(@PathVariable("id") int id, @ModelAttribute CalcDataForm form, 
 		Principal principal, Model model) {
 		
-		String UserMailAddress = principal.getName();
+		String mailAddress = principal.getName();
 		
-		String nickname = usersService.getUserNickname(UserMailAddress);
+		String nickname = usersService.getUsername(mailAddress);
 		model.addAttribute("nickname", nickname);
 		
 		/* 加減算データ1件取得 */

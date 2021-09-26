@@ -17,7 +17,7 @@ import com.example.demo.service.UsersService;
 
 @Controller
 @RequestMapping("/user")
-public class UsersController {
+public class CalcUserController {
 	
 	@Autowired
 	UsersService usersService;
@@ -33,7 +33,7 @@ public class UsersController {
 		AppUser userData = usersService.getSignInUser(name);
 		
 		model.addAttribute("userData", userData);
-		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
+		model.addAttribute("nickname", usersService.getSignInUser(name).getUsername());
 		
 		return "user/update-id-name";
 	}
@@ -59,7 +59,7 @@ public class UsersController {
 		form.setUserId(user.getUserId());
 		form.setPassword(user.getPassword());
 		form.setMailAddress(mailAddress);
-		form.setNickname(nickname);
+		form.setUsername(nickname);
 		
 		System.out.println(form);
 		usersService.updateUser(form);
@@ -72,7 +72,7 @@ public class UsersController {
 		
 		String name = principal.getName();
 		
-		model.addAttribute("nickname", usersService.getSignInUser(name).getNickname());
+		model.addAttribute("nickname", usersService.getSignInUser(name).getUsername());
 		
 		return "user/update-password";
 	}
@@ -93,7 +93,7 @@ public class UsersController {
 		
 		form.setUserId(user.getUserId());
 		form.setMailAddress(user.getMailAddress());
-		form.setNickname(user.getNickname());
+		form.setUsername(user.getUsername());
 		
 		System.out.println(user.getPassword());
 		System.out.println(encoder.encode(password1));

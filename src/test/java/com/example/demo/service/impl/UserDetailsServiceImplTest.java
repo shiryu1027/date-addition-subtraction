@@ -47,7 +47,7 @@ class UserDetailsServiceImplTest {
 		signInUser = new AppUser();
 		signInUser.setUserId(1);
 		signInUser.setMailAddress(username);
-		signInUser.setNickname("ユーザー");
+		signInUser.setUsername("ユーザー");
 		signInUser.setPassword("password");
 		signInUser.setRole("ROLE_GENERAL");
 		doReturn(signInUser).when(usersService).getSignInUser(username);

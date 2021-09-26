@@ -52,7 +52,7 @@ class UsersServiceTest {
 			userForm = new UserForm();
 			userForm.setUserId(1);
 			userForm.setMailAddress("user@co.jp");
-			userForm.setNickname("ユーザー");
+			userForm.setUsername("ユーザー");
 			userForm.setPassword("password");
 			doNothing().when(mapper).signUp(userForm);
 			doReturn("encryptionPassword").when(encoder).encode("password");
@@ -88,7 +88,7 @@ class UsersServiceTest {
 			appUser = new AppUser();
 			appUser.setUserId(1);
 			appUser.setMailAddress("user@co.jp");
-			appUser.setNickname("ユーザー");
+			appUser.setUsername("ユーザー");
 			appUser.setPassword("password");
 			doReturn(appUser).when(mapper).findOne(mailAddress);
 			actual = target.getSignInUser(mailAddress);
@@ -117,14 +117,14 @@ class UsersServiceTest {
 		void setup() {
 			mailAddress = "user@co.jp";
 			nickname = "ユーザー";
-			doReturn(nickname).when(mapper).getUserNickname(mailAddress);
-			actual = target.getUserNickname(mailAddress);
+			doReturn(nickname).when(mapper).getUsername(mailAddress);
+			actual = target.getUsername(mailAddress);
 		}
 		
 		@Test
 		void UserMapperのgetUserNicknameメソッドが一回呼ばれる() throws Exception {
 			
-			verify(mapper,times(1)).getUserNickname(mailAddress);
+			verify(mapper,times(1)).getUsername(mailAddress);
 		}
 		
 		@Test
@@ -143,7 +143,7 @@ class UsersServiceTest {
 			userForm = new UserForm();
 			userForm.setUserId(1);
 			userForm.setMailAddress("user@co.jp");
-			userForm.setNickname("ユーザー");
+			userForm.setUsername("ユーザー");
 			userForm.setPassword("password");
 			userForm.setRole("ROLE_GENERAL");
 			doNothing().when(mapper).updateUser(userForm);
