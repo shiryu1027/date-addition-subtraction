@@ -1,7 +1,5 @@
 package com.example.demo.entity;
 
-import java.time.LocalDate;
-
 import lombok.Data;
 
 @Data
@@ -21,7 +19,7 @@ public class DateFormula {
 	
 	private int userId;
 	
-	private LocalDate calcResult;
+	//private LocalDate calcResult;
 	
 	public DateFormula() {
 		

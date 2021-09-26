@@ -10,4 +10,33 @@ public class Result {
 	private DateFormula dateFormula;
 	
 	private LocalDate calcResult;
+	
+	/* dateFormulaのgetterは使えないので、中身のgetterを作成 */
+	public int getAdditionSubtractionId() {
+		return this.dateFormula.getAdditionSubtractionId();
+	}
+	
+	public String getAdditionSubtractionCode () {
+		return this.dateFormula.getAdditionSubtractionCode();
+	}
+	
+	public int getYear() {
+		return this.dateFormula.getYear();
+	}
+	
+	public int getMonth() {
+		return this.dateFormula.getMonth();
+	}
+	
+	public int getDay() {
+		return this.dateFormula.getDay();
+	}
+	
+	public String getExplanation() {
+		return this.dateFormula.getExplanation();
+	}
+	
+	public int getUserId () {
+		return this.dateFormula.getUserId();
+	}
 }
