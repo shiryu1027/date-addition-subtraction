@@ -9,10 +9,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 
 @Data
-public class RecordDateForm {
+public class BaseDateForm {
 	
 	@DateTimeFormat(pattern="yyyy/MM/dd")
 	@NotNull(message="yyyy/MM/ddの形で入力して下さい")
-	private LocalDate recordDate;
+	private LocalDate baseDate;
 	
 }

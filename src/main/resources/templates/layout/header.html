@@ -10,17 +10,17 @@ layout:decorate="~{layout/layout}">
 	<div class="header-content">
 	
 		<div class="header-left">
-			<h1 th:if="${nickname}">
+			<h1 th:if="${username}">
 				<a th:href="@{/calc/}">Date Arithmetic ~日付加減算~ </a>
 			</h1>
-			<h1 th:if="${nickname} == null">
+			<h1 th:if="${username} == null">
 				<a th:href="@{/user/signIn}" >Date Arithmetic ~日付加減算~ </a>
 			</h1>
 		</div>
 		
-		<div class="header-right" th:if="${nickname}">
+		<div class="header-right" th:if="${username}">
 			<h3>
-				<a th:href="@{/user/update-id-name}">[[${nickname}]]さん</a>、こんにちは
+				<a th:href="@{/user/update-id-name}">[[${username}]]さん</a>、こんにちは
 			</h3>
 			<form th:action="@{/user/signout}" method="post">
 				<input type="submit" th:value="サインアウト">

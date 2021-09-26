@@ -19,7 +19,7 @@ import com.example.demo.form.UserForm;
 import com.example.demo.mapper.UsersMapper;
 
 @SpringBootTest
-class UsersServiceTest {
+class UserServiceTest {
 	
 	private MockitoSession session;
 	
@@ -30,7 +30,7 @@ class UsersServiceTest {
 	PasswordEncoder encoder;
 	
 	@InjectMocks
-	UsersService target;
+	UserService target;
 	
 	@BeforeEach
 	void setup() {

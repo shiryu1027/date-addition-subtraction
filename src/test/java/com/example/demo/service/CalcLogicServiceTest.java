@@ -15,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.entity.CalcData;
+import com.example.demo.entity.DateFormula;
+import com.example.demo.entity.Result;
 
 @SpringBootTest
 @Transactional
@@ -28,19 +29,19 @@ class CalcLogicServiceTest {
 	@Nested
 	class calcDataのsizeが0件のとき {
 		
-		private List<CalcData> calcData;
+		private List<DateFormula> dateFormula;
 		LocalDate recordDate;
 		
 		@BeforeEach
 		void setup() {
-			calcData = new ArrayList<CalcData>();
+			dateFormula = new ArrayList<DateFormula>();
 			DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			recordDate = LocalDate.parse("1997/10/27", fmt);
 		}
 		
 		@Test
 		void calcResultのsizeは0である() {
-			List<CalcData> calcDataResult = calcLogicService.calcLogic(calcData, recordDate);
+			List<Result> calcDataResult = calcLogicService.calcLogic(dateFormula, recordDate);
 			assertThat(calcDataResult.size()).isEqualTo(0);
 		}
 		
@@ -49,14 +50,14 @@ class CalcLogicServiceTest {
 	@Nested
 	class calcDataのsizeが2件のとき {
 		
-		private List<CalcData> calcData;
+		private List<DateFormula> dateFormula;
 		LocalDate recordDate;
 		
 		@BeforeEach
 		void setup() {
-			calcData = new ArrayList<CalcData>();
-			CalcData calcData1 = new CalcData();
-			CalcData calcData2 = new CalcData();
+			dateFormula = new ArrayList<DateFormula>();
+			DateFormula calcData1 = new DateFormula();
+			DateFormula calcData2 = new DateFormula();
 			calcData1.setAdditionSubtractionCode("+3Y-2M+1D");
 			calcData1.setYear(3);
 			calcData1.setMonth(-2);
@@ -65,28 +66,28 @@ class CalcLogicServiceTest {
 			calcData2.setYear(-10);
 			calcData2.setMonth(5);
 			calcData2.setDay(-11);
-			calcData.add(calcData1);
-			calcData.add(calcData2);
+			dateFormula.add(calcData1);
+			dateFormula.add(calcData2);
 			DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			recordDate = LocalDate.parse("1997/10/27", fmt);
 		}
 		
 		@Test
 		void calcResultのsizeは2である() {
-			List<CalcData> calcDataResult = calcLogicService.calcLogic(calcData, recordDate);
+			List<Result> calcDataResult = calcLogicService.calcLogic(dateFormula, recordDate);
 			assertThat(calcDataResult.size()).isEqualTo(2);
 		}
 		
 		@Test
 		void calcData条件1の計算結果がplusYearsとminusMonthsを用いた計算と一致する() {
-			List<CalcData> calcDataResult = calcLogicService.calcLogic(calcData, recordDate);
+			List<Result> calcDataResult = calcLogicService.calcLogic(dateFormula, recordDate);
 			assertThat(calcDataResult.get(0).getCalcResult())
 				.isEqualTo(recordDate.plusYears(3).minusMonths(2).plusDays(1));
 		}
 		
 		@Test
 		void calcData条件2の計算結果がplusYearsとminusMonthsを用いた計算と一致する() {
-			List<CalcData> calcDataResult = calcLogicService.calcLogic(calcData, recordDate);
+			List<Result> calcDataResult = calcLogicService.calcLogic(dateFormula, recordDate);
 			assertThat(calcDataResult.get(1).getCalcResult())
 				.isEqualTo(recordDate.minusYears(10).plusMonths(5).minusDays(11));
 		}

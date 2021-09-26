@@ -19,7 +19,7 @@ import org.mockito.MockitoSession;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.entity.AppUser;
-import com.example.demo.entity.CalcData;
+import com.example.demo.entity.DateFormula;
 import com.example.demo.form.CalcDataForm;
 import com.example.demo.mapper.AdditionSubtractionMapper;
 
@@ -33,7 +33,7 @@ class CalcServiceTest {
 	private AdditionSubtractionMapper mapper;
 	
 	@Mock
-	private UsersService usersService;
+	private UserService userService;
 	
 	@Mock
 	private Principal principal;
@@ -55,14 +55,14 @@ class CalcServiceTest {
 	class 加減算用データを1件取得する {
 		
 		int id;
-		CalcData actual;
+		DateFormula actual;
 		
 		@BeforeEach
 		void setup() {
 			id = 1;
-			CalcData calcData = new CalcData(id, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前一日後", 1);;
-			doReturn(calcData).when(mapper).calcDataOne(1);
-			actual = target.calcDataOne(id);
+			DateFormula dateFormula = new DateFormula(id, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前一日後", 1);;
+			doReturn(dateFormula).when(mapper).calcDataOne(1);
+			actual = target.getDateFormula(id);
 		}
 		
 		@Test
@@ -81,22 +81,22 @@ class CalcServiceTest {
 		
 		int userId;
 		String mailAddress;
-		List<CalcData> actual;
+		List<DateFormula> actual;
 		
 		@BeforeEach
 		void setup() {
 			// userId=1のメールアドレスがuser@co.jpだと仮定
 			userId = 1;
 			mailAddress = "user@co.jp";
-			List<CalcData> list = new ArrayList<CalcData>();
-			CalcData calcData1 = new CalcData(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
-			CalcData calcData2 = new CalcData(2, "+6Y-11M+10D", 6, -11, 10, "6年後11か月前10日後", userId);
-			CalcData calcData3 = new CalcData(3, "-2Y+2M-1D", -2, 2, -1, "2年前2か月後1日前", userId);
+			List<DateFormula> list = new ArrayList<DateFormula>();
+			DateFormula calcData1 = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
+			DateFormula calcData2 = new DateFormula(2, "+6Y-11M+10D", 6, -11, 10, "6年後11か月前10日後", userId);
+			DateFormula calcData3 = new DateFormula(3, "-2Y+2M-1D", -2, 2, -1, "2年前2か月後1日前", userId);
 			list.add(calcData1);
 			list.add(calcData2);
 			list.add(calcData3);
 			doReturn(list).when(mapper).calcDataAll(mailAddress);
-			actual = target.getCalcDataAll(mailAddress);
+			actual = target.getFormulas(mailAddress);
 		}
 		
 		@Test
@@ -124,19 +124,19 @@ class CalcServiceTest {
 			mailAddress = "user.co,jp";
 			user = new AppUser(userId, mailAddress, "ユーザー", "password", "ROLE_GENERAL");
 			form = new CalcDataForm(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
-			doReturn(user).when(usersService).getSignInUser(mailAddress);
+			doReturn(user).when(userService).getSignInUser(mailAddress);
 			doReturn(mailAddress).when(principal).getName();
-			target.calcDataInsert(form, principal);
+			target.addDateFormula(form, principal);
 		}
 		
 		@Test
 		void UsersServiceクラスのgetSignInUserメソッドを一回呼び出す() throws Exception{
-			verify(usersService, times(1)).getSignInUser(principal.getName());
+			verify(userService, times(1)).getSignInUser(principal.getName());
 		}
 		
 		@Test
 		void UsersServiceクラスのgetSignInUserメソッドによってAppUser型のデータを返す() throws Exception{
-			assertThat(user).isEqualTo(usersService.getSignInUser(principal.getName()));
+			assertThat(user).isEqualTo(userService.getSignInUser(principal.getName()));
 		}
 		
 		@Test
@@ -165,19 +165,19 @@ class CalcServiceTest {
 			mailAddress = "user.co,jp";
 			user = new AppUser(userId, mailAddress, "ユーザー", "password", "ROLE_GENERAL");
 			form = new CalcDataForm(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
-			doReturn(user).when(usersService).getSignInUser(mailAddress);
+			doReturn(user).when(userService).getSignInUser(mailAddress);
 			doReturn(mailAddress).when(principal).getName();
-			target.calcDataUpdate(form, principal);
+			target.alterDateFormula(form, principal);
 		}
 		
 		@Test
 		void UsersServiceクラスのgetSignInUserメソッドを一回呼び出す() throws Exception{
-			verify(usersService, times(1)).getSignInUser(principal.getName());
+			verify(userService, times(1)).getSignInUser(principal.getName());
 		}
 		
 		@Test
 		void UsersServiceクラスのgetSignInUserメソッドによってAppUser型のデータを返す() throws Exception{
-			assertThat(user).isEqualTo(usersService.getSignInUser(principal.getName()));
+			assertThat(user).isEqualTo(userService.getSignInUser(principal.getName()));
 		}
 		
 		@Test
@@ -195,7 +195,7 @@ class CalcServiceTest {
 		void setup() {
 			id = 1;
 			doNothing().when(mapper).calcDataDelete(id);
-			target.calcDataDelete(id);
+			target.deleteDateFormula(id);
 		}
 		
 		@Test

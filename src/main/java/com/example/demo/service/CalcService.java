@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.AppUser;
-import com.example.demo.entity.CalcData;
+import com.example.demo.entity.DateFormula;
 import com.example.demo.form.CalcDataForm;
 import com.example.demo.mapper.AdditionSubtractionMapper;
 
@@ -18,25 +18,24 @@ public class CalcService {
 	AdditionSubtractionMapper mapper;
 	
 	@Autowired
-	UsersService uService;
+	UserService uService;
 	
-	/* 加減算用データを取得(1件) */
-	public CalcData calcDataOne(int id) {
+	/* 計算式を1件取得 */
+	public DateFormula getDateFormula(int id) {
 		return mapper.calcDataOne(id);
 	}
 	
-	/* ユーザーが持つ加減算用データを取得 */
-	public List<CalcData> getCalcDataAll(String mailAddress) {
+	/* ユーザーが持つ加減算用データを全件取得 */
+	public List<DateFormula> getFormulas(String mailAddress) {
 		return mapper.calcDataAll(mailAddress);
 	}
 	
 	/* 加減算データを新規登録 */
-	public void calcDataInsert(CalcDataForm form, Principal principal) {
+	public void addDateFormula(CalcDataForm form, Principal principal) {
 		
 		/* ユーザー情報取得(加減算データにuser_idを登録するため) */
 		AppUser user = uService.getSignInUser(principal.getName());
 		
-		/* formにuser_idをセット */
 		form.setUserId(user.getUserId());
 		
 		/* 新規登録 */
@@ -44,7 +43,7 @@ public class CalcService {
 	}
 	
 	/* 加減算用データの更新 */
-	public void calcDataUpdate(CalcDataForm form, Principal principal) {
+	public void alterDateFormula(CalcDataForm form, Principal principal) {
 		
 		AppUser user = uService.getSignInUser(principal.getName());
 		
@@ -54,7 +53,7 @@ public class CalcService {
 	}
 	
 	/* 加減算用データの削除 */
-	public void calcDataDelete(int id) {
+	public void deleteDateFormula(int id) {
 		mapper.calcDataDelete(id);
 	}
 	

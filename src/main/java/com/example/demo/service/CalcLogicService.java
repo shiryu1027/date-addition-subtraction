@@ -6,22 +6,25 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.CalcData;
+import com.example.demo.entity.DateFormula;
+import com.example.demo.entity.Result;
 
 @Service
 public class CalcLogicService {
 	
-	public List<CalcData> calcLogic(List<CalcData> calcData, LocalDate date) {
+	public List<Result> calcLogic(List<DateFormula> dateFormula, LocalDate date) {
 		
-		List<CalcData> calcDataResult = new ArrayList<>();
+		List<Result> results = new ArrayList<>();
 		
-		for (CalcData data : calcData) {
-			LocalDate result = date.plusYears(data.getYear()).plusMonths(data.getMonth()).plusDays(data.getDay());
-			data.setCalcResult(result);
-			calcDataResult.add(data);
+		for (DateFormula data : dateFormula) {
+			Result result = new Result();
+			LocalDate calcResult = date.plusYears(data.getYear()).plusMonths(data.getMonth()).plusDays(data.getDay());
+			result.setCalcResult(calcResult);
+			result.setDateFormula(data);
+			results.add(result);
 		}
 		
-		return calcDataResult;
+		return results;
 	}
 	
 }

@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.example.demo.entity.AppUser;
-import com.example.demo.service.UsersService;
+import com.example.demo.service.UserService;
 
 @SpringBootTest
 class UserDetailsServiceImplTest {
@@ -25,7 +25,7 @@ class UserDetailsServiceImplTest {
 	private String username;
 	
 	@Mock
-	UsersService usersService;
+	UserService userService;
 	
 	@InjectMocks
 	UserDetailsServiceImpl target;
@@ -50,7 +50,7 @@ class UserDetailsServiceImplTest {
 		signInUser.setUsername("ユーザー");
 		signInUser.setPassword("password");
 		signInUser.setRole("ROLE_GENERAL");
-		doReturn(signInUser).when(usersService).getSignInUser(username);
+		doReturn(signInUser).when(userService).getSignInUser(username);
 		
 		// 実行
 		UserDetails actual = target.loadUserByUsername(username);
@@ -62,7 +62,7 @@ class UserDetailsServiceImplTest {
 	@Test
 	void ユーザ名が存在しないとき例外をスローする() {
 		
-		doReturn(signInUser).when(usersService).getSignInUser(username);
+		doReturn(signInUser).when(userService).getSignInUser(username);
 		
 		assertThatThrownBy(
 				() -> {target.loadUserByUsername(username);}

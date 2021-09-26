@@ -9,7 +9,7 @@ import com.example.demo.form.UserForm;
 import com.example.demo.mapper.UsersMapper;
 
 @Service
-public class UsersService {
+public class UserService {
 	
 	@Autowired
 	UsersMapper mapper;

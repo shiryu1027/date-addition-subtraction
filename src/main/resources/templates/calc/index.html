@@ -15,27 +15,27 @@ layout:decorate="~{layout/layout}">
 		<div class="record-date">
 			<p>計算したい日付を入力して下さい
 			<form th:action="@{/calc/result}" method="post">
-				<input name="recordDate" type="text" placeholder="yyyy/MM/dd">
+				<input name="baseDate" type="text" placeholder="yyyy/MM/dd">
 				<button class="result-button button">計算結果</button><br>
-				<div th:if=${recordDateForm} th:object="${recordDateForm}" class="record-date-error">
-					<span th:if="${#fields.hasErrors('recordDate')}" th:errors="*{recordDate}" class="text-danger"></span>
+				<div th:if=${baseDateForm} th:object="${baseDateForm}" class="record-date-error">
+					<span th:if="${#fields.hasErrors('baseDate')}" th:errors="*{baseDate}" class="text-danger"></span>
 				</div>
 			</form>
 		</div>
 		
 		<!-- テーブルタイトル/新規作成ボタン/基準日表示/登録テーブルに戻るボタン -->
-		<h2 th:if="${calcList}" class="calc-table-title">登録データ</h2>
+		<h2 th:if="${formulas}" class="calc-table-title">登録データ</h2>
 		<h2 th:if="${results}" class="calc-table-title">計算結果</h2>
-		<form th:action="@{/calc/insert}" class="insert-form">
+		<form th:action="@{/calc/add}" class="insert-form">
 			<button class="insert-button button">新規登録</button>
 		</form>
-		<h2 th:if="${results}" class="reference-date">基準日 : [[${referenceDate}]]</h2>
+		<h2 th:if="${results}" class="reference-date">基準日 : [[${baseDate}]]</h2>
 		<form th:if="${results}" th:action="@{/calc/}" class="calc-back">
 			<button class="calc-back-button button">登録データに戻る</button>
 		</form><br>
 		
 		<!-- 加減算データ一覧 -->
-		<div th:if="${calcList}" class="calcList">
+		<div th:if="${formulas}" class="formulas">
 			<table>
 				<thead>
 					<tr>
@@ -50,7 +50,7 @@ layout:decorate="~{layout/layout}">
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="data:${calcList}" th:object="${data}">
+					<tr th:each="data:${formulas}" th:object="${data}">
 						<td class="th-id" th:text="*{additionSubtractionCode}"></td>
 						<td class="th-date" th:text="*{year}"></td>
 						<td class="th-date" th:text="*{month}"></td>
@@ -74,7 +74,7 @@ layout:decorate="~{layout/layout}">
 		</div>
 		
 		<!-- 計算データ一覧 -->
-		<table th:if="${results}" class="calcList">
+		<table th:if="${results}" class="formulas">
 			<thead>
 				<tr>
 					<th class="th-id">加減算コード</th>

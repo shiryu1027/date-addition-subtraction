@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import lombok.Data;
 
 @Data
-public class CalcData {
+public class DateFormula {
 	
 	private int additionSubtractionId;
 	
@@ -23,11 +23,11 @@ public class CalcData {
 	
 	private LocalDate calcResult;
 	
-	public CalcData() {
+	public DateFormula() {
 		
 	}
 	
-	public CalcData(int additionSubtractionId, String additionSubtractionCode, int year, int month, int day, String explanation, int userId) {
+	public DateFormula(int additionSubtractionId, String additionSubtractionCode, int year, int month, int day, String explanation, int userId) {
 		this.additionSubtractionId = additionSubtractionId;
 		this.additionSubtractionCode = additionSubtractionCode;
 		this.year = year;

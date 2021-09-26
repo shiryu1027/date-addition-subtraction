@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.entity.CalcData;
+import com.example.demo.entity.DateFormula;
+import com.example.demo.entity.Result;
+import com.example.demo.form.BaseDateForm;
 import com.example.demo.form.CalcDataForm;
-import com.example.demo.form.RecordDateForm;
 import com.example.demo.service.AutoAdditionSubtractionCodeService;
 import com.example.demo.service.CalcLogicService;
 import com.example.demo.service.CalcService;
-import com.example.demo.service.UsersService;
+import com.example.demo.service.UserService;
 
 @Controller
 @RequestMapping("calc")
@@ -30,7 +31,7 @@ public class CalcController {
 	CalcService calcService;
 	
 	@Autowired
-	UsersService usersService;
+	UserService userService;
 	
 	@Autowired
 	CalcLogicService logicService;
@@ -38,24 +39,22 @@ public class CalcController {
 	@Autowired
 	AutoAdditionSubtractionCodeService autoAdditionSubtractionCodeService;
 	
-	/* ホームぺージ取得 */
+	/* トップページ取得 */
 	@GetMapping("/")
 	public String index(Principal principal, Model model) {
 		
 		String mailAddress = principal.getName();
+		List<DateFormula> formulas = calcService.getFormulas(mailAddress);
 		
-		String username = usersService.getUsername(mailAddress);
-		model.addAttribute("nickname", username);
-		
-		List<CalcData> calcList = calcService.getCalcDataAll(mailAddress);
-		model.addAttribute("calcList", calcList);
+		model.addAttribute("username", userService.getUsername(mailAddress));
+		model.addAttribute("formulas", formulas);
 		
 		return "calc/index";
 	}
 	
-	/* 計算用基準日を指定、その後計算実行 */
+	/* 基準日から計算結果を算出、トップページ取得 */
 	@PostMapping("/result")
-	public String result(@Validated @ModelAttribute RecordDateForm form, BindingResult result, Principal principal, Model model) {
+	public String result(@Validated @ModelAttribute BaseDateForm form, BindingResult result, Principal principal, Model model) {
 		
 		if(result.hasErrors()) {
 			return index(principal, model);
@@ -63,44 +62,41 @@ public class CalcController {
 		
 		String mailAddress = principal.getName();
 		
-		String nickname = usersService.getUsername(mailAddress);
-		model.addAttribute("nickname", nickname);
+		List<DateFormula> formulas = calcService.getFormulas(mailAddress);
+		List<Result> results = logicService.calcLogic(formulas, form.getBaseDate());
 		
-		List<CalcData> calcList = calcService.getCalcDataAll(mailAddress);
-		
-		/* 全てのデータに対して、計算を適用 */
-		List<CalcData> calcListResult = logicService.calcLogic(calcList, form.getRecordDate());
-		model.addAttribute("results", calcListResult);
-		
-		model.addAttribute("referenceDate", form.getRecordDate());
+		model.addAttribute("username", userService.getUsername(mailAddress));
+		model.addAttribute("results", results);
+		// Resultの中身が隠されているせいでアクセス出来ていない
+		model.addAttribute("baseDate", form.getBaseDate());
 		
 		return "calc/index";
 	}
 	
 	
-	/* 加減算用データの新規登録画面を表示 */
-	@GetMapping("/insert")
-	public String insertDisplay(@ModelAttribute CalcDataForm form, Principal principal, Model model) {
+	/* 計算式の新規登録画面を表示 */
+	@GetMapping("/add")
+	public String addDisplay(@ModelAttribute CalcDataForm form, Principal principal, Model model) {
 		
 		String mailAddress = principal.getName();
 		
-		String nickname = usersService.getUsername(mailAddress);
-		model.addAttribute("nickname", nickname);
+		model.addAttribute("username", userService.getUsername(mailAddress));
 		
-		return "calc/insert";
+		return "calc/add";
 	}
 	
 	/* 加減算用データをDBに新規登録 */
-	@PostMapping("/insert")
-	public String insert(@Validated @ModelAttribute CalcDataForm form, BindingResult result, Principal principal, Model model) {
+	@PostMapping("/add")
+	public String add(@Validated @ModelAttribute CalcDataForm form, BindingResult result, 
+		Principal principal, Model model) {
 		
 		if (result.hasErrors()) {
-			return insertDisplay(form, principal, model); // formにエラーメッセージ格納
+			return addDisplay(form, principal, model);
 		}
 		
 		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(form);
 		
-		calcService.calcDataInsert(form, principal);
+		calcService.addDateFormula(form, principal);
 		
 		return "redirect:/calc/";
 	}
@@ -113,12 +109,10 @@ public class CalcController {
 		
 		String mailAddress = principal.getName();
 		
-		String nickname = usersService.getUsername(mailAddress);
-		model.addAttribute("nickname", nickname);
+		DateFormula dateFormula = calcService.getDateFormula(id);
 		
-		/* 加減算データ1件取得 */
-		CalcData calcData = calcService.calcDataOne(id);
-		model.addAttribute("calcData", calcData);
+		model.addAttribute("username", userService.getUsername(mailAddress));
+		model.addAttribute("calcData", dateFormula);
 		
 		return "/calc/update";
 	}
@@ -135,7 +129,7 @@ public class CalcController {
 		form.setAdditionSubtractionId(id);
 		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(form);
 		
-		calcService.calcDataUpdate(form, principal);
+		calcService.alterDateFormula(form, principal);
 		
 		return "redirect:/calc/";
 	}
@@ -145,7 +139,7 @@ public class CalcController {
 	@PostMapping("/delete/id={id}")
 	public String delete(@PathVariable("id") int id, Principal principal, Model model) {
 		
-		calcService.calcDataDelete(id);
+		calcService.deleteDateFormula(id);
 		
 		return "redirect:/calc/";
 	}

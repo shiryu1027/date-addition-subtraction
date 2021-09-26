@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.AppUser;
 import com.example.demo.form.UserForm;
-import com.example.demo.service.UsersService;
+import com.example.demo.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class CalcUserController {
 	
 	@Autowired
-	UsersService usersService;
+	UserService userService;
 	
 	@Autowired
 	PasswordEncoder encoder;
@@ -30,10 +30,10 @@ public class CalcUserController {
 		
 		String name = principal.getName();
 		
-		AppUser userData = usersService.getSignInUser(name);
+		AppUser userData = userService.getSignInUser(name);
 		
 		model.addAttribute("userData", userData);
-		model.addAttribute("nickname", usersService.getSignInUser(name).getUsername());
+		model.addAttribute("nickname", userService.getSignInUser(name).getUsername());
 		
 		return "user/update-id-name";
 	}
@@ -52,7 +52,7 @@ public class CalcUserController {
 			return usersUpdateDisplay(principal, model);
 		}*/
 		
-		AppUser user = usersService.getSignInUser(name);
+		AppUser user = userService.getSignInUser(name);
 		
 		UserForm form = new UserForm();
 		
@@ -62,7 +62,7 @@ public class CalcUserController {
 		form.setUsername(nickname);
 		
 		System.out.println(form);
-		usersService.updateUser(form);
+		userService.updateUser(form);
 		
 		return "redirect:/calc/";
 	}
@@ -72,7 +72,7 @@ public class CalcUserController {
 		
 		String name = principal.getName();
 		
-		model.addAttribute("nickname", usersService.getSignInUser(name).getUsername());
+		model.addAttribute("nickname", userService.getSignInUser(name).getUsername());
 		
 		return "user/update-password";
 	}
@@ -87,7 +87,7 @@ public class CalcUserController {
 		
 		String name = principal.getName();
 		
-		AppUser user = usersService.getSignInUser(name);
+		AppUser user = userService.getSignInUser(name);
 		
 		UserForm form = new UserForm();
 		
@@ -105,7 +105,7 @@ public class CalcUserController {
 			if (password2.equals(password3)) {
 				
 				form.setPassword(encoder.encode(password2));
-				usersService.updateUser(form);
+				userService.updateUser(form);
 			}
 		}
 		
