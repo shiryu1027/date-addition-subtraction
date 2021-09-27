@@ -123,19 +123,19 @@ class CalcServiceTest {
 			mailAddress = "user.co,jp";
 			user = new AppUser(userId, mailAddress, "ユーザー", "password", "ROLE_GENERAL");
 			form = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
-			doReturn(user).when(userService).getSignInUser(mailAddress);
+			doReturn(user).when(userService).getSigninUser(mailAddress);
 			doReturn(mailAddress).when(principal).getName();
 			target.addDateFormula(form, principal);
 		}
 		
 		@Test
 		void UsersServiceクラスのgetSignInUserメソッドを一回呼び出す() throws Exception{
-			verify(userService, times(1)).getSignInUser(principal.getName());
+			verify(userService, times(1)).getSigninUser(principal.getName());
 		}
 		
 		@Test
 		void UsersServiceクラスのgetSignInUserメソッドによってAppUser型のデータを返す() throws Exception{
-			assertThat(user).isEqualTo(userService.getSignInUser(principal.getName()));
+			assertThat(user).isEqualTo(userService.getSigninUser(principal.getName()));
 		}
 		
 		@Test
@@ -164,19 +164,19 @@ class CalcServiceTest {
 			mailAddress = "user.co,jp";
 			user = new AppUser(userId, mailAddress, "ユーザー", "password", "ROLE_GENERAL");
 			form = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
-			doReturn(user).when(userService).getSignInUser(mailAddress);
+			doReturn(user).when(userService).getSigninUser(mailAddress);
 			doReturn(mailAddress).when(principal).getName();
 			target.alterDateFormula(form, principal);
 		}
 		
 		@Test
 		void UsersServiceクラスのgetSignInUserメソッドを一回呼び出す() throws Exception{
-			verify(userService, times(1)).getSignInUser(principal.getName());
+			verify(userService, times(1)).getSigninUser(principal.getName());
 		}
 		
 		@Test
 		void UsersServiceクラスのgetSignInUserメソッドによってAppUser型のデータを返す() throws Exception{
-			assertThat(user).isEqualTo(userService.getSignInUser(principal.getName()));
+			assertThat(user).isEqualTo(userService.getSigninUser(principal.getName()));
 		}
 		
 		@Test

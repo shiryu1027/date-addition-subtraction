@@ -30,10 +30,10 @@ public class CalcUserController {
 		
 		String name = principal.getName();
 		
-		AppUser userData = userService.getSignInUser(name);
+		AppUser userData = userService.getSigninUser(name);
 		
 		model.addAttribute("userData", userData);
-		model.addAttribute("nickname", userService.getSignInUser(name).getUsername());
+		model.addAttribute("nickname", userService.getSigninUser(name).getUsername());
 		
 		return "user/update-id-name";
 	}
@@ -52,7 +52,7 @@ public class CalcUserController {
 			return usersUpdateDisplay(principal, model);
 		}*/
 		
-		AppUser user = userService.getSignInUser(name);
+		AppUser user = userService.getSigninUser(name);
 		
 		UserForm form = new UserForm();
 		
@@ -62,7 +62,7 @@ public class CalcUserController {
 		form.setUsername(nickname);
 		
 		System.out.println(form);
-		userService.updateUser(form);
+		userService.alterUser(form);
 		
 		return "redirect:/calc/";
 	}
@@ -72,7 +72,7 @@ public class CalcUserController {
 		
 		String name = principal.getName();
 		
-		model.addAttribute("nickname", userService.getSignInUser(name).getUsername());
+		model.addAttribute("nickname", userService.getSigninUser(name).getUsername());
 		
 		return "user/update-password";
 	}
@@ -87,7 +87,7 @@ public class CalcUserController {
 		
 		String name = principal.getName();
 		
-		AppUser user = userService.getSignInUser(name);
+		AppUser user = userService.getSigninUser(name);
 		
 		UserForm form = new UserForm();
 		
@@ -105,7 +105,7 @@ public class CalcUserController {
 			if (password2.equals(password3)) {
 				
 				form.setPassword(encoder.encode(password2));
-				userService.updateUser(form);
+				userService.alterUser(form);
 			}
 		}
 		

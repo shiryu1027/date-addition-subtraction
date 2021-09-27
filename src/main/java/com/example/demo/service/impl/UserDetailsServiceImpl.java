@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         /* ユーザー情報取得 */
-        AppUser signInUser = service.getSignInUser(username);
+        AppUser signInUser = service.getSigninUser(username);
 
         /* ユーザーが存在しない場合 */
         if(signInUser == null) {

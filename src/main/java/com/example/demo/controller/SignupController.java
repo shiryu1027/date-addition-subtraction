@@ -35,7 +35,7 @@ public class SignupController {
 			return signupDisplay(form);
 		}
 		
-		service.signUp(form);
+		service.signup(form);
 		
 		return "redirect:/user/signin";
 	}

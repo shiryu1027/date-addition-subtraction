@@ -18,17 +18,17 @@ public class UserService {
 	PasswordEncoder encoder;
 	
 	/* ユーザー新規登録(insert) */
-	public void signUp(UserForm user) {
+	public void signup(UserForm user) {
 		
 		/* パスワード暗号化 */
 		String rawPassword = user.getPassword(); // 生のpassword取得
 		user.setPassword(encoder.encode(rawPassword)); // 暗号化
 		user.setRole("ROLE_GENERAL"); // 権限追加
-		mapper.signUp(user);
+		mapper.signup(user);
 	}
 	
 	/* サインイン情報取得 */
-	public AppUser getSignInUser(String mailAddress) {
+	public AppUser getSigninUser(String mailAddress) {
 		return mapper.findOne(mailAddress);
 	}
 	
@@ -38,7 +38,7 @@ public class UserService {
 	}
 	
 	/* ユーザー情報更新(パスワードを除く) */
-	public void updateUser(UserForm user) {
+	public void alterUser(UserForm user) {
 		mapper.updateUser(user);
 	}
 	

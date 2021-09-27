@@ -9,7 +9,7 @@ import com.example.demo.form.UserForm;
 public interface UsersMapper {
 	
 	/* ユーザー新規登録 */
-	void signUp(UserForm user);
+	void signup(UserForm user);
 	
 	/* サインインユーザーの取得(UserDetailsServiceImpl内からの呼び出し) */
 	AppUser findOne(String mailAddress);

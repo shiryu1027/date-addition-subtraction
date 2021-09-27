@@ -54,9 +54,9 @@ class UserServiceTest {
 			userForm.setMailAddress("user@co.jp");
 			userForm.setUsername("ユーザー");
 			userForm.setPassword("password");
-			doNothing().when(mapper).signUp(userForm);
+			doNothing().when(mapper).signup(userForm);
 			doReturn("encryptionPassword").when(encoder).encode("password");
-			target.signUp(userForm);
+			target.signup(userForm);
 		}
 		
 		@Test
@@ -71,7 +71,7 @@ class UserServiceTest {
 		
 		@Test
 		void UserMapperのsignUpメソッドが一回呼ばれる() throws Exception {
-			verify(mapper,times(1)).signUp(userForm);
+			verify(mapper,times(1)).signup(userForm);
 		}
 	}
 	
@@ -91,7 +91,7 @@ class UserServiceTest {
 			appUser.setUsername("ユーザー");
 			appUser.setPassword("password");
 			doReturn(appUser).when(mapper).findOne(mailAddress);
-			actual = target.getSignInUser(mailAddress);
+			actual = target.getSigninUser(mailAddress);
 		}
 		
 		@Test
@@ -147,7 +147,7 @@ class UserServiceTest {
 			userForm.setPassword("password");
 			userForm.setRole("ROLE_GENERAL");
 			doNothing().when(mapper).updateUser(userForm);
-			target.updateUser(userForm);
+			target.alterUser(userForm);
 		}
 		
 		@Test

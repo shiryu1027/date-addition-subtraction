@@ -33,7 +33,7 @@ public class CalcService {
 	public void addDateFormula(DateFormula dateFormula, Principal principal) {
 		
 		/* ユーザー情報取得(加減算データにuser_idを登録するため) */
-		AppUser user = uService.getSignInUser(principal.getName());
+		AppUser user = uService.getSigninUser(principal.getName());
 		
 		dateFormula.setUserId(user.getUserId());
 		
@@ -44,7 +44,7 @@ public class CalcService {
 	/* 加減算用データの更新 */
 	public void alterDateFormula(DateFormula dateFormula, Principal principal) {
 		
-		AppUser user = uService.getSignInUser(principal.getName());
+		AppUser user = uService.getSigninUser(principal.getName());
 		
 		dateFormula.setUserId(user.getUserId());
 		
