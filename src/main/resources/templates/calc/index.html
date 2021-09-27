@@ -58,7 +58,7 @@ layout:decorate="~{layout/layout}">
 						<td class="th-explanation" th:text="*{explanation}"></td>
 						<!-- 更新ボタン -->
 						<td class="th-button">
-							<form th:action="@{/calc/update/id={id}(id=*{dateFormulaId})}">
+							<form th:action="@{/calc/alter/id={id}(id=*{dateFormulaId})}">
 								<button class="button3">更新</button>
 							</form>
 						</td>

@@ -15,7 +15,7 @@ layout:decorate="~{layout/layout}">
 			<div class="form-title">
 				<h3>加減算データ更新</h3>
 			</div>
-			<form th:action="@{/calc/update/id={id}/post (id=${dateFormula.dateFormulaId})}" th:object="${dateFormulaForm}" method="post">
+			<form th:action="@{/calc/alter/id={id}/post (id=${dateFormula.dateFormulaId})}" th:object="${dateFormulaForm}" method="post">
 				<div class="input-date">
 					<label for="year">年:</label>
 					<input name="year" id="year" th:value="${dateFormula.year}" type="number">

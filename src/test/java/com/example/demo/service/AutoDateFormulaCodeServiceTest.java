@@ -13,13 +13,13 @@ import com.example.demo.entity.DateFormula;
 
 @SpringBootTest
 @DisplayName("AutoAdditionSubtractionCodeServiceのテスト")
-class AutoAdditionSubtractionCodeServiceTest {
+class AutoDateFormulaCodeServiceTest {
 	
 	DateFormula dateFormula;
 	String actual;
 	
 	@Autowired
-	AutoAdditionSubtractionCodeService target;
+	AutoDateFormulaCodeService target;
 	
 	@Nested
 	class formの値がYear_Month_Day_100000_minus100000_0のとき {
@@ -29,7 +29,7 @@ class AutoAdditionSubtractionCodeServiceTest {
 			dateFormula.setYear(100000);
 			dateFormula.setMonth(-100000);
 			dateFormula.setDay(0);
-			actual = target.autoAdditionSubtractionCode(dateFormula).getDateFormulaCode();
+			actual = target.autoDateFormulaCode(dateFormula).getDateFormulaCode();
 		}
 		
 		@Test
@@ -46,7 +46,7 @@ class AutoAdditionSubtractionCodeServiceTest {
 			dateFormula.setYear(-100000);
 			dateFormula.setMonth(0);
 			dateFormula.setDay(100000);
-			actual = target.autoAdditionSubtractionCode(dateFormula).getDateFormulaCode();
+			actual = target.autoDateFormulaCode(dateFormula).getDateFormulaCode();
 		}
 		
 		@Test
@@ -63,7 +63,7 @@ class AutoAdditionSubtractionCodeServiceTest {
 			dateFormula.setYear(0);
 			dateFormula.setMonth(0);
 			dateFormula.setDay(0);
-			actual = target.autoAdditionSubtractionCode(dateFormula).getDateFormulaCode();
+			actual = target.autoDateFormulaCode(dateFormula).getDateFormulaCode();
 		}
 		
 		@Test

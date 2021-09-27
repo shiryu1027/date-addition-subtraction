@@ -19,7 +19,7 @@ import com.example.demo.entity.DateFormula;
 import com.example.demo.entity.Result;
 import com.example.demo.form.BaseDateForm;
 import com.example.demo.form.DateFormulaForm;
-import com.example.demo.service.AutoAdditionSubtractionCodeService;
+import com.example.demo.service.AutoDateFormulaCodeService;
 import com.example.demo.service.CalcLogicService;
 import com.example.demo.service.CalcService;
 import com.example.demo.service.UserService;
@@ -35,13 +35,13 @@ public class CalcController {
 	UserService userService;
 	
 	@Autowired
-	CalcLogicService logicService;
+	CalcLogicService calcLogicService;
 	
 	@Autowired
 	ModelMapper modelMapper;
 	
 	@Autowired
-	AutoAdditionSubtractionCodeService autoAdditionSubtractionCodeService;
+	AutoDateFormulaCodeService autoDateFormulaCodeService;
 	
 	/* トップページ取得 */
 	@GetMapping("/")
@@ -58,22 +58,20 @@ public class CalcController {
 	
 	/* 基準日から計算結果を算出、トップページ取得 */
 	@PostMapping("/result")
-	public String result(@Validated @ModelAttribute BaseDateForm form, BindingResult result, Principal principal, Model model) {
+	public String result(@Validated @ModelAttribute BaseDateForm form, BindingResult result,
+			Principal principal, Model model) {
 		
 		if(result.hasErrors()) {
 			return index(principal, model);
 		}
 		
 		String mailAddress = principal.getName();
-		
 		List<DateFormula> formulas = calcService.getFormulas(mailAddress);
-		List<Result> results = logicService.calcLogic(formulas, form.getBaseDate());
+		List<Result> results = calcLogicService.getCalcResults(formulas, form.getBaseDate());
 		
 		model.addAttribute("username", userService.getUsername(mailAddress));
 		model.addAttribute("results", results);
-		// Resultの中身が隠されているせいでアクセス出来ていない
 		model.addAttribute("baseDate", form.getBaseDate());
-		
 		return "calc/index";
 	}
 	
@@ -83,7 +81,6 @@ public class CalcController {
 	public String addDisplay(@ModelAttribute DateFormulaForm form, Principal principal, Model model) {
 		
 		String mailAddress = principal.getName();
-		
 		model.addAttribute("username", userService.getUsername(mailAddress));
 		
 		return "calc/add";
@@ -92,15 +89,14 @@ public class CalcController {
 	/* 加減算用データをDBに新規登録 */
 	@PostMapping("/add")
 	public String add(@Validated @ModelAttribute DateFormulaForm form, BindingResult result, 
-		Principal principal, Model model) {
+			Principal principal, Model model) {
 		
 		if (result.hasErrors()) {
 			return addDisplay(form, principal, model);
 		}
 		
-		DateFormula dateFormula = modelMapper.map(form, DateFormula.class);
-		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(dateFormula);
-		
+		DateFormula dateFormula = modelMapper.map(form, DateFormula.class); // modelMapperはForm->Entityへの変換
+		autoDateFormulaCodeService.autoDateFormulaCode(dateFormula);
 		calcService.addDateFormula(dateFormula, principal);
 		
 		return "redirect:/calc/";
@@ -108,33 +104,31 @@ public class CalcController {
 	
 	
 	/* 加減算用データを更新データ画面を表示 */
-	@GetMapping("/update/id={id}")
-	public String updateDisplay(@PathVariable("id") int id, @ModelAttribute DateFormulaForm form, 
-		Principal principal, Model model) {
+	@GetMapping("/alter/id={id}")
+	public String alterDisplay(@PathVariable("id") int id, @ModelAttribute DateFormulaForm form, 
+			Principal principal, Model model) {
 		
 		String mailAddress = principal.getName();
-		
 		DateFormula dateFormula = calcService.getDateFormula(id);
 		
 		model.addAttribute("username", userService.getUsername(mailAddress));
 		model.addAttribute("dateFormula", dateFormula);
 		
-		return "/calc/update";
+		return "/calc/alter";
 	}
 	
 	/* 加減算用データを更新 */
-	@PostMapping("/update/id={id}/post")
-	public String update(@PathVariable("id") int id, @Validated @ModelAttribute DateFormulaForm form, BindingResult result, 
-		Principal principal, Model model) {
+	@PostMapping("/alter/id={id}/post")
+	public String alter(@PathVariable("id") int id, @Validated @ModelAttribute DateFormulaForm form, BindingResult result, 
+			Principal principal, Model model) {
 		
 		if (result.hasErrors()) {
-			return updateDisplay(id, form, principal, model);
+			return alterDisplay(id, form, principal, model);
 		}
 		
 		DateFormula dateFormula = modelMapper.map(form, DateFormula.class);
 		dateFormula.setDateFormulaId(id);
-		autoAdditionSubtractionCodeService.autoAdditionSubtractionCode(dateFormula);
-		
+		autoDateFormulaCodeService.autoDateFormulaCode(dateFormula);
 		calcService.alterDateFormula(dateFormula, principal);
 		
 		return "redirect:/calc/";

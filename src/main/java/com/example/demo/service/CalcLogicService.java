@@ -12,7 +12,7 @@ import com.example.demo.entity.Result;
 @Service
 public class CalcLogicService {
 	
-	public List<Result> calcLogic(List<DateFormula> dateFormula, LocalDate date) {
+	public List<Result> getCalcResults(List<DateFormula> dateFormula, LocalDate date) {
 		
 		List<Result> results = new ArrayList<>();
 		

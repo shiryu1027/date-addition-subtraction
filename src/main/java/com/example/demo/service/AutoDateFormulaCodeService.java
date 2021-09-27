@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entity.DateFormula;
 
 @Service
-public class AutoAdditionSubtractionCodeService {
+public class AutoDateFormulaCodeService {
 	
-	public DateFormula autoAdditionSubtractionCode(DateFormula dateFormula) {
+	public DateFormula autoDateFormulaCode(DateFormula dateFormula) {
 		
 		int year = dateFormula.getYear();
 		int month = dateFormula.getMonth();

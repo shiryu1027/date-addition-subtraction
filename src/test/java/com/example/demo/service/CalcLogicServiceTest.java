@@ -41,7 +41,7 @@ class CalcLogicServiceTest {
 		
 		@Test
 		void calcResultのsizeは0である() {
-			List<Result> calcDataResult = calcLogicService.calcLogic(dateFormula, recordDate);
+			List<Result> calcDataResult = calcLogicService.getCalcResults(dateFormula, recordDate);
 			assertThat(calcDataResult.size()).isEqualTo(0);
 		}
 		
@@ -74,20 +74,20 @@ class CalcLogicServiceTest {
 		
 		@Test
 		void calcResultのsizeは2である() {
-			List<Result> calcDataResult = calcLogicService.calcLogic(dateFormula, recordDate);
+			List<Result> calcDataResult = calcLogicService.getCalcResults(dateFormula, recordDate);
 			assertThat(calcDataResult.size()).isEqualTo(2);
 		}
 		
 		@Test
 		void calcData条件1の計算結果がplusYearsとminusMonthsを用いた計算と一致する() {
-			List<Result> calcDataResult = calcLogicService.calcLogic(dateFormula, recordDate);
+			List<Result> calcDataResult = calcLogicService.getCalcResults(dateFormula, recordDate);
 			assertThat(calcDataResult.get(0).getCalcResult())
 				.isEqualTo(recordDate.plusYears(3).minusMonths(2).plusDays(1));
 		}
 		
 		@Test
 		void calcData条件2の計算結果がplusYearsとminusMonthsを用いた計算と一致する() {
-			List<Result> calcDataResult = calcLogicService.calcLogic(dateFormula, recordDate);
+			List<Result> calcDataResult = calcLogicService.getCalcResults(dateFormula, recordDate);
 			assertThat(calcDataResult.get(1).getCalcResult())
 				.isEqualTo(recordDate.minusYears(10).plusMonths(5).minusDays(11));
 		}
