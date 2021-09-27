@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.AppUser;
 import com.example.demo.entity.DateFormula;
-import com.example.demo.mapper.AdditionSubtractionMapper;
+import com.example.demo.mapper.DateFormulasMapper;
 
 @Service
 public class CalcService {
 	
 	@Autowired
-	AdditionSubtractionMapper mapper;
+	DateFormulasMapper mapper;
 	
 	@Autowired
 	UserService uService;

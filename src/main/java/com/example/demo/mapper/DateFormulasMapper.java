@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.demo.entity.DateFormula;
 
 @Mapper
-public interface AdditionSubtractionMapper {
+public interface DateFormulasMapper {
 	
 	/* 加減算データ一件取得 */
 	public DateFormula calcDataOne(int id);

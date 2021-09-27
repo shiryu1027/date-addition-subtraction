@@ -19,8 +19,6 @@ public class DateFormula {
 	
 	private int userId;
 	
-	//private LocalDate calcResult;
-	
 	public DateFormula() {
 		
 	}
