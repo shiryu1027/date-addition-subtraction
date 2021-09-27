@@ -20,7 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.entity.AppUser;
 import com.example.demo.entity.DateFormula;
-import com.example.demo.mapper.AdditionSubtractionMapper;
+import com.example.demo.mapper.DateFormulasMapper;
 
 @SpringBootTest
 @DisplayName("CalcServiceのテスト")
@@ -29,7 +29,7 @@ class CalcServiceTest {
 	private MockitoSession session;
 	
 	@Mock
-	private AdditionSubtractionMapper mapper;
+	private DateFormulasMapper mapper;
 	
 	@Mock
 	private UserService userService;
