@@ -48,7 +48,7 @@ public class CalcController {
 	public String index(Principal principal, Model model) {
 		
 		String mailAddress = principal.getName();
-		List<DateFormula> formulas = calcService.getFormulas(mailAddress);
+		List<DateFormula> formulas = calcService.getDateFormulas(mailAddress);
 		
 		model.addAttribute("username", userService.getUsername(mailAddress));
 		model.addAttribute("formulas", formulas);
@@ -66,7 +66,7 @@ public class CalcController {
 		}
 		
 		String mailAddress = principal.getName();
-		List<DateFormula> formulas = calcService.getFormulas(mailAddress);
+		List<DateFormula> formulas = calcService.getDateFormulas(mailAddress);
 		List<Result> results = calcLogicService.getCalcResults(formulas, form.getBaseDate());
 		
 		model.addAttribute("username", userService.getUsername(mailAddress));

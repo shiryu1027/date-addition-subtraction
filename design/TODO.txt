@@ -11,22 +11,22 @@
    
 - CalcServiceのテスト
  - [x] 加減算用データを1件取得する
-  - [x] mapperクラスのcalcDataOneメソッドを一回呼び出す
-  - [x] 戻り値としてCalcData型のデータを返す
+  - [x] mapperクラスのgetDateFormulaメソッドを一回呼び出す
+  - [x] 戻り値としてDateFormula型のデータを返す
  - [x] ユーザーが持つ加減算用データを全件取得
-  - [x] mapperクラスのcalcDataAllメソッドを一回呼び出す
-  - [x] 戻り値としてList<CalcData>型のデータを返す
+  - [x] mapperクラスのgetDateFormulasメソッドを一回呼び出す
+  - [x] 戻り値としてList<DateFormula>型のデータを返す
  - [x] 加減算データを一件新規登録する 
-  - [x] UsersServiceクラスのgetSignInUserメソッドを一回呼び出す
-  - [x] UsersServiceクラスのgetSignInUserメソッドによって、AppUser型のデータを返す
+  - [x] UsersServiceクラスのgetSigninUserメソッドを一回呼び出す
+  - [x] UsersServiceクラスのgetSigninUserメソッドによって、AppUser型のデータを返す
   -![x] appUserから持ってきたuserIdとformのuserIdが同値 --> Mock同士の比較無意味??
-  - [x] mapperクラスのcalcDataInsertメソッドを一回呼び出す
+  - [x] mapperクラスのaddDateFormulaメソッドを一回呼び出す
  - [x] 既存加減算用データの更新
-  - [x] UsersServiceクラスのgetSignInUserメソッドを一回呼び出す
-  - [x] UsersServiceクラスのgetSignInUserメソッドによって、AppUser型のデータを返す
-  - [x] mapperクラスのcalcDataUpdateメソッドを一回呼び出す
+  - [x] UsersServiceクラスのgetSigninUserメソッドを一回呼び出す
+  - [x] UsersServiceクラスのgetSigninUserメソッドによって、AppUser型のデータを返す
+  - [x] mapperクラスのalterDateFormulaメソッドを一回呼び出す
  - [x] 既存加減算用データの削除
-  - [x] mapperクラスのcalcDataDeleteメソッドを一回呼び出す
+  - [x] mapperクラスのdeleteDateFormulaメソッドを一回呼び出す
 
 - AutoDateFormulaCodeServiceのテスト
  - [x] dateFormulaの値がYear_Month_Day_100000_-100000_0のとき
@@ -49,7 +49,7 @@
  - [x] ユーザーの新規登録
   - [x] パスワードを暗号化するメソッドが呼ばれている
   - [x] roleに"ROLE_GENERAL"が追加されている
-  - [x] UserMapperのsignUpメソッドが一回呼ばれる
+  - [x] UserMapperのsignupメソッドが一回呼ばれる
  - [x] サインイン情報の取得
   - [x] UserMapperのfindOneメソッドが一回呼ばれる
   - [x] メールアドレスから、AppUser型のユーザーデータを返す

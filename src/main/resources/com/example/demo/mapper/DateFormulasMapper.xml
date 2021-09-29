@@ -12,13 +12,13 @@
 	<result column="user_id" property="userId" />
 </resultMap>
 
-<select id="calcDataOne" resultMap="calc">
+<select id="selectDateFormula" resultMap="calc">
 	SELECT *
 	FROM date_formulas
 	WHERE date_formula_id=#{id}
 </select>
 
-<select id="calcDataAll" resultMap="calc">
+<select id="selectDateFormulas" resultMap="calc">
 	SELECT * 
 	FROM date_formulas 
 	WHERE user_id=(
@@ -30,18 +30,18 @@
 	
 </select>
 
-<insert id="calcDataInsert">
+<insert id="nsertDateFormula">
 	INSERT INTO date_formulas (date_formula_code, year, month, day, explanation, user_id)
 	VALUES (#{dateFormulaCode}, #{year}, #{month}, #{day}, #{explanation}, #{userId})
 </insert>
 
-<update id="calcDataUpdate">
+<update id="updateDateFormula">
 	UPDATE date_formulas
 	SET date_formula_code=#{dateFormulaCode}, year=#{year}, month=#{month}, day=#{day}, explanation=#{explanation}, user_id=#{userId}
 	WHERE date_formula_id=#{dateFormulaId}
 </update>
 
-<delete id="calcDataDelete">
+<delete id="deleteDateFormula">
 	DELETE FROM date_formulas
 	WHERE date_formula_id=#{id}
 </delete>

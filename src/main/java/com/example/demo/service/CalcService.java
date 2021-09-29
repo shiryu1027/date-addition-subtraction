@@ -21,12 +21,12 @@ public class CalcService {
 	
 	/* 計算式を1件取得 */
 	public DateFormula getDateFormula(int id) {
-		return mapper.calcDataOne(id);
+		return mapper.selectDateFormula(id);
 	}
 	
 	/* ユーザーが持つ加減算用データを全件取得 */
-	public List<DateFormula> getFormulas(String mailAddress) {
-		return mapper.calcDataAll(mailAddress);
+	public List<DateFormula> getDateFormulas(String mailAddress) {
+		return mapper.selectDateFormulas(mailAddress);
 	}
 	
 	/* 加減算データを新規登録 */
@@ -38,7 +38,7 @@ public class CalcService {
 		dateFormula.setUserId(user.getUserId());
 		
 		/* 新規登録 */
-		mapper.calcDataInsert(dateFormula);
+		mapper.insertDateFormula(dateFormula);
 	}
 	
 	/* 加減算用データの更新 */
@@ -48,12 +48,12 @@ public class CalcService {
 		
 		dateFormula.setUserId(user.getUserId());
 		
-		mapper.calcDataUpdate(dateFormula);
+		mapper.updateDateFormula(dateFormula);
 	}
 	
 	/* 加減算用データの削除 */
 	public void deleteDateFormula(int id) {
-		mapper.calcDataDelete(id);
+		mapper.deleteDateFormula(id);
 	}
 	
 }

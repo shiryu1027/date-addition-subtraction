@@ -38,7 +38,7 @@ class CalcServiceTest {
 	private Principal principal;
 	
 	@InjectMocks
-	private CalcService target;
+	private CalcService sut;
 	
 	@BeforeEach
 	void setup() {
@@ -60,18 +60,18 @@ class CalcServiceTest {
 		void setup() {
 			id = 1;
 			DateFormula dateFormula = new DateFormula(id, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前一日後", 1);;
-			doReturn(dateFormula).when(mapper).calcDataOne(1);
-			actual = target.getDateFormula(id);
+			doReturn(dateFormula).when(mapper).selectDateFormula(1);
+			actual = sut.getDateFormula(id);
 		}
 		
 		@Test
-		void mapperクラスのcalcDataOneメソッドを一回呼び出す() throws Exception {
-			verify(mapper, times(1)).calcDataOne(id);
+		void mapperクラスのgetDateFormulaメソッドを一回呼び出す() throws Exception {
+			verify(mapper, times(1)).selectDateFormula(id);
 		}
 		
 		@Test
-		void 戻り値としてCalcData型のデータを返す() throws Exception {
-			assertThat(actual).isEqualTo(mapper.calcDataOne(1));
+		void 戻り値としてDateFormula型のデータを返す() throws Exception {
+			assertThat(actual).isEqualTo(mapper.selectDateFormula(1));
 		}
 	}
 	
@@ -88,24 +88,24 @@ class CalcServiceTest {
 			userId = 1;
 			mailAddress = "user@co.jp";
 			List<DateFormula> list = new ArrayList<DateFormula>();
-			DateFormula calcData1 = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
-			DateFormula calcData2 = new DateFormula(2, "+6Y-11M+10D", 6, -11, 10, "6年後11か月前10日後", userId);
-			DateFormula calcData3 = new DateFormula(3, "-2Y+2M-1D", -2, 2, -1, "2年前2か月後1日前", userId);
-			list.add(calcData1);
-			list.add(calcData2);
-			list.add(calcData3);
-			doReturn(list).when(mapper).calcDataAll(mailAddress);
-			actual = target.getFormulas(mailAddress);
+			DateFormula dateFormula1 = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
+			DateFormula dateFormula2 = new DateFormula(2, "+6Y-11M+10D", 6, -11, 10, "6年後11か月前10日後", userId);
+			DateFormula dateFormula3 = new DateFormula(3, "-2Y+2M-1D", -2, 2, -1, "2年前2か月後1日前", userId);
+			list.add(dateFormula1);
+			list.add(dateFormula2);
+			list.add(dateFormula3);
+			doReturn(list).when(mapper).selectDateFormulas(mailAddress);
+			actual = sut.getDateFormulas(mailAddress);
 		}
 		
 		@Test
-		void mapperクラスのcalcDataAllメソッドを一回呼び出す() {
-			verify(mapper, times(1)).calcDataAll(mailAddress);
+		void mapperクラスのgetDateFormulasメソッドを一回呼び出す() {
+			verify(mapper, times(1)).selectDateFormulas(mailAddress);
 		}
 		
 		@Test
-		void 戻り値としてCalcData型のデータを返す() throws Exception {
-			assertThat(actual).isEqualTo(mapper.calcDataAll(mailAddress));
+		void 戻り値としてDateFormula型のデータを返す() throws Exception {
+			assertThat(actual).isEqualTo(mapper.selectDateFormulas(mailAddress));
 		}
 	}
 	
@@ -115,37 +115,37 @@ class CalcServiceTest {
 		int userId;
 		String mailAddress;
 		AppUser user;
-		DateFormula form;
+		DateFormula dateFormula;
 		
 		@BeforeEach
 		void setup() {
 			userId = 1;
 			mailAddress = "user.co,jp";
 			user = new AppUser(userId, mailAddress, "ユーザー", "password", "ROLE_GENERAL");
-			form = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
+			dateFormula = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
 			doReturn(user).when(userService).getSigninUser(mailAddress);
 			doReturn(mailAddress).when(principal).getName();
-			target.addDateFormula(form, principal);
+			sut.addDateFormula(dateFormula, principal);
 		}
 		
 		@Test
-		void UsersServiceクラスのgetSignInUserメソッドを一回呼び出す() throws Exception{
+		void UsersServiceクラスのgetSigninUserメソッドを一回呼び出す() throws Exception{
 			verify(userService, times(1)).getSigninUser(principal.getName());
 		}
 		
 		@Test
-		void UsersServiceクラスのgetSignInUserメソッドによってAppUser型のデータを返す() throws Exception{
+		void UsersServiceクラスのgetSigninUserメソッドによってAppUser型のデータを返す() throws Exception{
 			assertThat(user).isEqualTo(userService.getSigninUser(principal.getName()));
 		}
 		
 		@Test
 		void appUserから持ってきたuserIdとformのuserIdが同値() throws Exception{
-			assertThat(form.getUserId()).isEqualTo(user.getUserId());
+			assertThat(dateFormula.getUserId()).isEqualTo(user.getUserId());
 		}
 		
 		@Test
-		void mapperクラスのcalcDataInsertメソッドを一回呼び出す() {
-			verify(mapper, times(1)).calcDataInsert(form);
+		void mapperクラスのaddDateFormulaメソッドを一回呼び出す() {
+			verify(mapper, times(1)).insertDateFormula(dateFormula);
 		}
 		
 	}
@@ -156,32 +156,32 @@ class CalcServiceTest {
 		int userId;
 		String mailAddress;
 		AppUser user;
-		DateFormula form;
+		DateFormula dateFormula;
 		
 		@BeforeEach
 		void setup() {
 			userId = 1;
 			mailAddress = "user.co,jp";
 			user = new AppUser(userId, mailAddress, "ユーザー", "password", "ROLE_GENERAL");
-			form = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
+			dateFormula = new DateFormula(1, "+3Y-2M+1D", 3, -2, 1, "3年後2か月前1日後", userId);
 			doReturn(user).when(userService).getSigninUser(mailAddress);
 			doReturn(mailAddress).when(principal).getName();
-			target.alterDateFormula(form, principal);
+			sut.alterDateFormula(dateFormula, principal);
 		}
 		
 		@Test
-		void UsersServiceクラスのgetSignInUserメソッドを一回呼び出す() throws Exception{
+		void UsersServiceクラスのgetSigninUserメソッドを一回呼び出す() throws Exception{
 			verify(userService, times(1)).getSigninUser(principal.getName());
 		}
 		
 		@Test
-		void UsersServiceクラスのgetSignInUserメソッドによってAppUser型のデータを返す() throws Exception{
+		void UsersServiceクラスのgetSigninUserメソッドによってAppUser型のデータを返す() throws Exception{
 			assertThat(user).isEqualTo(userService.getSigninUser(principal.getName()));
 		}
 		
 		@Test
-		void mapperクラスのcalcDataInsertメソッドを一回呼び出す() {
-			verify(mapper, times(1)).calcDataUpdate(form);
+		void mapperクラスのaddDateFormulaメソッドを一回呼び出す() {
+			verify(mapper, times(1)).updateDateFormula(dateFormula);
 		}
 	}
 	
@@ -193,13 +193,13 @@ class CalcServiceTest {
 		@BeforeEach
 		void setup() {
 			id = 1;
-			doNothing().when(mapper).calcDataDelete(id);
-			target.deleteDateFormula(id);
+			doNothing().when(mapper).deleteDateFormula(id);
+			sut.deleteDateFormula(id);
 		}
 		
 		@Test
 		void mapperクラスのcalcDataOneメソッドを一回呼び出す() throws Exception {
-			verify(mapper, times(1)).calcDataDelete(id);
+			verify(mapper, times(1)).deleteDateFormula(id);
 		}
 	}
 }
