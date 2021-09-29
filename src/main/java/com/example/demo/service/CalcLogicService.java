@@ -12,15 +12,16 @@ import com.example.demo.entity.Result;
 @Service
 public class CalcLogicService {
 	
-	public List<Result> getCalcResults(List<DateFormula> dateFormula, LocalDate date) {
+	public List<Result> getCalcResults(List<DateFormula> dateFormulas, LocalDate date) {
 		
 		List<Result> results = new ArrayList<>();
 		
-		for (DateFormula data : dateFormula) {
+		for (DateFormula dateFormula : dateFormulas) {
 			Result result = new Result();
-			LocalDate calcResult = date.plusYears(data.getYear()).plusMonths(data.getMonth()).plusDays(data.getDay());
+			LocalDate calcResult = 
+					date.plusYears(dateFormula.getYear()).plusMonths(dateFormula.getMonth()).plusDays(dateFormula.getDay());
 			result.setCalcResult(calcResult);
-			result.setDateFormula(data);
+			result.setDateFormula(dateFormula);
 			results.add(result);
 		}
 		

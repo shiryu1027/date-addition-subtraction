@@ -27,69 +27,69 @@ class CalcLogicServiceTest {
 	CalcLogicService calcLogicService;
 	
 	@Nested
-	class calcDataのsizeが0件のとき {
+	class dateFormulasのsizeが0件のとき {
 		
-		private List<DateFormula> dateFormula;
-		LocalDate recordDate;
+		private List<DateFormula> dateFormulas;
+		LocalDate baseDate;
 		
 		@BeforeEach
 		void setup() {
-			dateFormula = new ArrayList<DateFormula>();
+			dateFormulas = new ArrayList<DateFormula>();
 			DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-			recordDate = LocalDate.parse("1997/10/27", fmt);
+			baseDate = LocalDate.parse("1997/10/27", fmt);
 		}
 		
 		@Test
 		void calcResultのsizeは0である() {
-			List<Result> calcDataResult = calcLogicService.getCalcResults(dateFormula, recordDate);
-			assertThat(calcDataResult.size()).isEqualTo(0);
+			List<Result> calcResults = calcLogicService.getCalcResults(dateFormulas, baseDate);
+			assertThat(calcResults.size()).isEqualTo(0);
 		}
 		
 	}
 	
 	@Nested
-	class calcDataのsizeが2件のとき {
+	class dateFormulasのsizeが2件のとき {
 		
-		private List<DateFormula> dateFormula;
-		LocalDate recordDate;
+		private List<DateFormula> dateFormulas;
+		LocalDate baseDate;
 		
 		@BeforeEach
 		void setup() {
-			dateFormula = new ArrayList<DateFormula>();
-			DateFormula calcData1 = new DateFormula();
-			DateFormula calcData2 = new DateFormula();
-			calcData1.setDateFormulaCode("+3Y-2M+1D");
-			calcData1.setYear(3);
-			calcData1.setMonth(-2);
-			calcData1.setDay(1);
-			calcData2.setDateFormulaCode("-10Y+5M-11D");
-			calcData2.setYear(-10);
-			calcData2.setMonth(5);
-			calcData2.setDay(-11);
-			dateFormula.add(calcData1);
-			dateFormula.add(calcData2);
+			dateFormulas = new ArrayList<DateFormula>();
+			DateFormula dateFormula1 = new DateFormula();
+			DateFormula dateFormula2 = new DateFormula();
+			dateFormula1.setDateFormulaCode("+3Y-2M+1D");
+			dateFormula1.setYear(3);
+			dateFormula1.setMonth(-2);
+			dateFormula1.setDay(1);
+			dateFormula2.setDateFormulaCode("-10Y+5M-11D");
+			dateFormula2.setYear(-10);
+			dateFormula2.setMonth(5);
+			dateFormula2.setDay(-11);
+			dateFormulas.add(dateFormula1);
+			dateFormulas.add(dateFormula2);
 			DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-			recordDate = LocalDate.parse("1997/10/27", fmt);
+			baseDate = LocalDate.parse("1997/10/27", fmt);
 		}
 		
 		@Test
 		void calcResultのsizeは2である() {
-			List<Result> calcDataResult = calcLogicService.getCalcResults(dateFormula, recordDate);
-			assertThat(calcDataResult.size()).isEqualTo(2);
+			List<Result> calcResult = calcLogicService.getCalcResults(dateFormulas, baseDate);
+			assertThat(calcResult.size()).isEqualTo(2);
 		}
 		
 		@Test
-		void calcData条件1の計算結果がplusYearsとminusMonthsを用いた計算と一致する() {
-			List<Result> calcDataResult = calcLogicService.getCalcResults(dateFormula, recordDate);
-			assertThat(calcDataResult.get(0).getCalcResult())
-				.isEqualTo(recordDate.plusYears(3).minusMonths(2).plusDays(1));
+		void dateFormula条件1の計算結果がplusYearsとminusMonthsを用いた計算と一致する() {
+			List<Result> calcResult = calcLogicService.getCalcResults(dateFormulas, baseDate);
+			assertThat(calcResult.get(0).getCalcResult())
+				.isEqualTo(baseDate.plusYears(3).minusMonths(2).plusDays(1));
 		}
 		
 		@Test
-		void calcData条件2の計算結果がplusYearsとminusMonthsを用いた計算と一致する() {
-			List<Result> calcDataResult = calcLogicService.getCalcResults(dateFormula, recordDate);
-			assertThat(calcDataResult.get(1).getCalcResult())
-				.isEqualTo(recordDate.minusYears(10).plusMonths(5).minusDays(11));
+		void dateFormula条件2の計算結果がplusYearsとminusMonthsを用いた計算と一致する() {
+			List<Result> calcResult = calcLogicService.getCalcResults(dateFormulas, baseDate);
+			assertThat(calcResult.get(1).getCalcResult())
+				.isEqualTo(baseDate.minusYears(10).plusMonths(5).minusDays(11));
 		}
 		
 	}

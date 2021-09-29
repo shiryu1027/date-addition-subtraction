@@ -1,13 +1,13 @@
 - CalcLogicServiceのテスト
  - [x] 加減算データと基準日を渡すと、計算結果を含んだ加減算データを返す
-  - [x] 前提条件:calcDataのsizeが0件のとき
+  - [x] 前提条件:dateFormulasのsizeが0件のとき
    - [x] calcResultのsizeは0である
-  - [x] 前提条件:calcDataのsizeが2件のとき
-        -> calcData条件1:("+3Y-2M+1D", 3, -2, 1)
-        -> calcData条件2:("-10Y+5M-11D", -10, 5, -11)
+  - [x] 前提条件:dateFormulasのsizeが2件のとき
+        -> dateFormula条件1:("+3Y-2M+1D", 3, -2, 1)
+        -> dateFormula条件2:("-10Y+5M-11D", -10, 5, -11)
    - [x] calcResultのsizeは2である。
-   - [x] calcData条件1の計算結果がplusYearsとminusMonthsを用いた計算と一致する
-   - [x] calcData条件2の計算結果がplusYearsとminusMonthsを用いた計算と一致する
+   - [x] dateFormula条件1の計算結果がplusYearsとminusMonthsを用いた計算と一致する
+   - [x] dateFormula条件2の計算結果がplusYearsとminusMonthsを用いた計算と一致する
    
 - CalcServiceのテスト
  - [x] 加減算用データを1件取得する
@@ -28,13 +28,13 @@
  - [x] 既存加減算用データの削除
   - [x] mapperクラスのcalcDataDeleteメソッドを一回呼び出す
 
-- AutoAdditionSubtractionCodeServiceのテスト
- - [x] formの値がYear_Month_Day_100000_-100000_0のとき
-  - [x] additionSubtractionCodeは+1000000Y-100000Mである
- - [x] formの値がYear_Month_Day_-100000_0_100000のとき
-  - [x] additionSubtractionCodeは-1000000Y+100000Dである
- - [x] formの値がYear_Month_Day_0_0_0のとき
-  - [x] additionSubtractionCodeは"0YMD"である
+- AutoDateFormulaCodeServiceのテスト
+ - [x] dateFormulaの値がYear_Month_Day_100000_-100000_0のとき
+  - [x] dateFormulaCodeは+1000000Y-100000Mである
+ - [x] dateFormulaの値がYear_Month_Day_-100000_0_100000のとき
+  - [x] dateFormulaCodeは-1000000Y+100000Dである
+ - [x] dateFormulaの値がYear_Month_Day_0_0_0のとき
+  - [x] dateFormulaCodeは"0YMD"である
   ※全パターンやりたいが、ここでは一旦省略
   
 - UserDetailsServiceMockImplのテスト
