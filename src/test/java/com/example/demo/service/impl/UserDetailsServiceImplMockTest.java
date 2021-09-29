@@ -10,19 +10,22 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.entity.AppUser;
 import com.example.demo.service.UserService;
 
 @SpringBootTest
-class UserDetailsServiceImplTest {
+class UserDetailsServiceImplMockTest {
 	
 	private MockitoSession session;
-	private AppUser signInUser;
-	private String username;
+	private AppUser signinUser;
+	private String mailAddress;
+	private String password;
 	
 	@Mock
 	UserService userService;
@@ -30,10 +33,20 @@ class UserDetailsServiceImplTest {
 	@InjectMocks
 	UserDetailsServiceImpl target;
 	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	@BeforeEach
 	void setup() {
 		session = Mockito.mockitoSession().initMocks(this).startMocking();
-		username="user@co.jp";
+		mailAddress = "user@gmail.co.jp";
+		password = passwordEncoder.encode("Password84");
+		signinUser = new AppUser();
+		signinUser.setUserId(1);
+		signinUser.setMailAddress(mailAddress);
+		signinUser.setUsername("ユーザー");
+		signinUser.setPassword(password);
+		signinUser.setRole("ROLE_GENERAL");
 	}
 	
 	@AfterEach
@@ -44,35 +57,27 @@ class UserDetailsServiceImplTest {
 	@Test
 	void ユーザ名が存在するときユーザ詳細を取得する() {
 		// 準備
-		signInUser = new AppUser();
-		signInUser.setUserId(1);
-		signInUser.setMailAddress(username);
-		signInUser.setUsername("ユーザー");
-		signInUser.setPassword("password");
-		signInUser.setRole("ROLE_GENERAL");
-		doReturn(signInUser).when(userService).getSignInUser(username);
+		doReturn(signinUser).when(userService).getSigninUser(mailAddress);
 		
 		// 実行
-		UserDetails actual = target.loadUserByUsername(username);
+		UserDetails actual = target.loadUserByUsername(mailAddress);
 		
 		// 検証
-		assertThat(actual.getUsername()).isEqualTo(signInUser.getMailAddress());
+		assertThat(actual.getUsername()).isEqualTo(signinUser.getMailAddress());
+		assertThat(actual.getPassword()).isEqualTo(signinUser.getPassword());
 	}
 	
 	@Test
 	void ユーザ名が存在しないとき例外をスローする() {
-		
-		doReturn(signInUser).when(userService).getSignInUser(username);
+		doReturn(null).when(userService).getSigninUser("user@yahoo.co.jp");
+		// モックを使うと、このテストはUserDetailsServiceImplTestのみのテスト(他クラスに依存しない)になってしまう
 		
 		assertThatThrownBy(
-				() -> {target.loadUserByUsername(username);}
+				() -> {target.loadUserByUsername("user@yahoo.co.jp");}
 		).isInstanceOf(
 				UsernameNotFoundException.class
 		).hasMessageContaining("user not found");
 		
-		// JUnitのアサーション
-		/*assertThrows(UsernameNotFoundException.class,
-				() -> target.loadUserByUsername(username));*/
 	}
 
 }

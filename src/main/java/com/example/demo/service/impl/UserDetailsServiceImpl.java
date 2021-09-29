@@ -23,23 +23,23 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserService service;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String mailAddress) throws UsernameNotFoundException {
 
         /* ユーザー情報取得 */
-        AppUser signInUser = service.getSigninUser(username);
+        AppUser signinUser = service.getSigninUser(mailAddress);
 
         /* ユーザーが存在しない場合 */
-        if(signInUser == null) {
+        if(signinUser == null) {
             throw new UsernameNotFoundException("user not found");
         }
 
         /* 権限List作成 */
-        GrantedAuthority authority = new SimpleGrantedAuthority(signInUser.getRole());
+        GrantedAuthority authority = new SimpleGrantedAuthority(signinUser.getRole());
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(authority);
 
         /* UserDetails生成(ユーザーID、パスワード、権限リストを必須で設定) */
-        UserDetails userDetails = (UserDetails) new User(signInUser.getMailAddress(), signInUser.getPassword(), authorities);
+        UserDetails userDetails = (UserDetails) new User(signinUser.getMailAddress(), signinUser.getPassword(), authorities);
         
         /* user情報を返す */
         return userDetails;
