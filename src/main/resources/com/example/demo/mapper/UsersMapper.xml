@@ -14,7 +14,7 @@
 	SELECT * FROM users WHERE mail_address=#{mailAddress}
 </select>
 
-<insert id="signUp">
+<insert id="signup">
 	INSERT INTO users(mail_address, username, password, role) VALUES (#{mailAddress}, #{username}, #{password}, #{role})
 </insert>
 
