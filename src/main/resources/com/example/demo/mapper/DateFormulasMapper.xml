@@ -30,7 +30,7 @@
 	
 </select>
 
-<insert id="nsertDateFormula">
+<insert id="insertDateFormula">
 	INSERT INTO date_formulas (date_formula_code, year, month, day, explanation, user_id)
 	VALUES (#{dateFormulaCode}, #{year}, #{month}, #{day}, #{explanation}, #{userId})
 </insert>
