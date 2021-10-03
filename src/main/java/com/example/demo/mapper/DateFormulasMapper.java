@@ -10,7 +10,7 @@ import com.example.demo.entity.DateFormula;
 public interface DateFormulasMapper {
 	
 	/* 加減算データ一件取得 */
-	public DateFormula selectDateFormula(int id);
+	DateFormula selectDateFormula(int id);
 	
 	/* サインインユーザーの加減算データ取得 */
 	List<DateFormula> selectDateFormulas(String mailAddress);
@@ -19,8 +19,8 @@ public interface DateFormulasMapper {
 	void insertDateFormula(DateFormula form);
 	
 	/* 加減算用データの更新 */
-	public void updateDateFormula(DateFormula form);
+	void updateDateFormula(DateFormula form);
 	
 	/* 加減算用データの削除 */
-	public void deleteDateFormula(int id);
+	void deleteDateFormula(int id);
 }
