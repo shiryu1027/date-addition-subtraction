@@ -25,7 +25,7 @@ import com.example.demo.service.CalcService;
 import com.example.demo.service.UserService;
 
 @Controller
-@RequestMapping("calc")
+@RequestMapping("/calc")
 public class CalcController {
 	
 	@Autowired
@@ -98,7 +98,6 @@ public class CalcController {
 		DateFormula dateFormula = modelMapper.map(form, DateFormula.class); // modelMapperはForm->Entityへの変換
 		autoDateFormulaCodeService.autoDateFormulaCode(dateFormula);
 		calcService.addDateFormula(dateFormula, principal);
-		
 		return "redirect:/calc/";
 	}
 	
@@ -113,21 +112,21 @@ public class CalcController {
 		
 		model.addAttribute("username", userService.getUsername(mailAddress));
 		model.addAttribute("dateFormula", dateFormula);
-		
-		return "/calc/alter";
+		return "calc/alter";
 	}
 	
 	/* 加減算用データを更新 */
 	@PostMapping("/alter/id={id}/post")
 	public String alter(@PathVariable("id") int id, @Validated @ModelAttribute DateFormulaForm form, BindingResult result, 
 			Principal principal, Model model) {
-		
 		if (result.hasErrors()) {
+			System.out.println("ここ");
 			return alterDisplay(id, form, principal, model);
 		}
 		
 		DateFormula dateFormula = modelMapper.map(form, DateFormula.class);
 		dateFormula.setDateFormulaId(id);
+		
 		autoDateFormulaCodeService.autoDateFormulaCode(dateFormula);
 		calcService.alterDateFormula(dateFormula, principal);
 		
