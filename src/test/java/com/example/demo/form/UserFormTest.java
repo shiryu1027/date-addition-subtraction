@@ -35,7 +35,7 @@ class UserFormTest{
         @ValueSource(strings = {"user@gmail.com",
         		"abcdefghijklmnopqrstuvwxyz@gmail.com",
         		"fsaglasjglweFFAogo31314ewhowegfhoeghow@yahoo.co.jp"})
-    	void 正常系(String str) {
+    	void 正常系(String str) throws Exception{
         	testUserForm.setMailAddress(str);
             // テスト実施
             validator.validate(testUserForm, bindingResult);
@@ -47,7 +47,7 @@ class UserFormTest{
         @ValueSource(strings = {"user1292194214124214214212142141232141221@gmail.com",
         		"abcdefghijklmnopqrstuvwxyz1234567890fff@ezweb.ne.jp",
         		"fsaglasjglweFFAogo31314ewhowegfhoeghowf@yahoo.co.jp"})
-    	void 異常系_文字数不正(String str) {
+    	void 異常系_文字数不正(String str) throws Exception{
         	testUserForm.setMailAddress(str);
             // テスト実施
             validator.validate(testUserForm, bindingResult);
@@ -69,7 +69,7 @@ class UserFormTest{
         @ValueSource(strings = {"password123Agrehrafs1Sfef",
         		"1kihiAks3v",
         		"gewee8ojofkew4A"})
-    	void 正常系(String str) {
+    	void 正常系(String str) throws Exception{
         	testUserForm.setPassword(str);
             // テスト実施
             validator.validate(testUserForm, bindingResult);
@@ -80,7 +80,7 @@ class UserFormTest{
     	@ParameterizedTest
         @ValueSource(strings = {"pgu8JU3kf",
         		"gea8NJH8gihfl7keukn7fJi8rj",})
-    	void 異常系_文字数不正(String str) {
+    	void 異常系_文字数不正(String str) throws Exception{
         	testUserForm.setPassword(str);
             // テスト実施
             validator.validate(testUserForm, bindingResult);
@@ -96,7 +96,7 @@ class UserFormTest{
         		"pgaasdgadfdsaf",
         		"32425454326624",
         		"BDFHHRHREHREERESDFEH"})
-    	void 異常系_文字種不正(String str) {
+    	void 異常系_文字種不正(String str) throws Exception{
         	testUserForm.setPassword(str);
             // テスト実施
             validator.validate(testUserForm, bindingResult);
@@ -109,7 +109,7 @@ class UserFormTest{
         @ValueSource(strings = {"psaokgniefiiwefewofnowenfe",
         		"3523grgert453ko9dsokodsfo9",
         		"AHRGSAGG4"})
-    	void 異常系_文字数不正かつ文字種不正(String str) {
+    	void 異常系_文字数不正かつ文字種不正(String str) throws Exception{
         	testUserForm.setPassword(str);
             // テスト実施
             validator.validate(testUserForm, bindingResult);
@@ -131,7 +131,7 @@ class UserFormTest{
     	
     	@ParameterizedTest
         @ValueSource(strings = {"k", "ユーザー123456"})
-    	void 正常系(String str) {
+    	void 正常系(String str) throws Exception{
         	testUserForm.setUsername(str);
             // テスト実施
             validator.validate(testUserForm, bindingResult);
@@ -141,7 +141,7 @@ class UserFormTest{
     	
     	@ParameterizedTest
         @ValueSource(strings = {"", "ユーザー1234567"})
-    	void 異常系_文字数不正(String str) {
+    	void 異常系_文字数不正(String str) throws Exception{
         	testUserForm.setUsername(str);
             // テスト実施
             validator.validate(testUserForm, bindingResult);

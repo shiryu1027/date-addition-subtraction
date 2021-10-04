@@ -2,7 +2,8 @@ package com.example.demo.form;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
 
@@ -26,7 +27,8 @@ public class DateFormulaForm {
 	@Min(value=-2500, message="日には-2,500以上の値を入力して下さい")
 	private int day;
 	
-	@NotBlank(message="説明は必須項目です")
+	@Length(min=1, max=50, message="説明は50文字以下で入力して下さい")
+	//@NotBlank(message="説明は必須項目です")
 	private String explanation;
 	
 	private int userId;
