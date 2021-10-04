@@ -33,7 +33,7 @@
 		- [x] 正常系
 		- [x] 異常系_文字数不正
 
-- BaseDateFormTest/CalcControllerTest
+- BaseDateFormTest/CalcControllerTest -> ControllerTestの方に記載
 	- [ ] 基準日のエラーチェック
 		- [ ] 年の正常系
 		- [ ] 年の異常系_文字数不正
