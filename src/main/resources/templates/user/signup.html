@@ -19,7 +19,9 @@ layout:decorate="~{layout/layout}">
 				<label for="mailAddress">ユーザーID</label>
 				<input name="mailAddress" id="mailAddress" th:value="*{mailAddress}" type="Email" placeholder="メールアドレス"><br>
 				<span th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" class="text-danger"></span>
-				<div th:if="!(${#fields.hasErrors('mailAddress')})" class="space"></div>
+				<span th:if="${sqlError}" th:text="${sqlError}" class="text-danger"></span>
+				<div th:if="!(${#fields.hasErrors('mailAddress')})and !(${sqlError})" class="space"></div>
+				
 				
 				<label for="password">パスワード</label>
 				<input name="password" id="password" th:value="*{password}" type="password" placeholder="パスワード"><br>

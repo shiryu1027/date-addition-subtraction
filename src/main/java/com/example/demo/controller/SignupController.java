@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,7 +36,13 @@ public class SignupController {
 			return signupDisplay(form);
 		}
 		
-		service.signup(form);
+		//一意制約のエラーをキャッチするtry-catch
+		try {
+			service.signup(form);
+		} catch(DataAccessException e) {
+			model.addAttribute("sqlError", "入力したメールアドレスは既に登録済みです");
+			return "user/signup";
+		}
 		
 		return "redirect:/user/signin";
 	}

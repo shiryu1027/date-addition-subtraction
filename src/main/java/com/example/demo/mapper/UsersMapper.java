@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.dao.DataAccessException;
 
 import com.example.demo.entity.AppUser;
 import com.example.demo.form.UserForm;
@@ -9,7 +10,7 @@ import com.example.demo.form.UserForm;
 public interface UsersMapper {
 	
 	/* ユーザー新規登録 */
-	void signup(UserForm user);
+	void signup(UserForm user) throws DataAccessException;
 	
 	/* サインインユーザーの取得(UserDetailsServiceImpl内からの呼び出し) */
 	AppUser findOne(String mailAddress);

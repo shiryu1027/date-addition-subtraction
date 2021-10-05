@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class UserService {
 	PasswordEncoder encoder;
 	
 	/* ユーザー新規登録(insert) */
-	public void signup(UserForm user) {
+	public void signup(UserForm user) throws DataAccessException{
 		
 		/* パスワード暗号化 */
 		String rawPassword = user.getPassword(); // 生のpassword取得
