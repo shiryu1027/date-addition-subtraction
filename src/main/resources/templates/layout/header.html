@@ -20,7 +20,8 @@ layout:decorate="~{layout/layout}">
 		
 		<div class="header-right" th:if="${username}">
 			<h3>
-				<a th:href="@{/user/update-id-name}">[[${username}]]さん</a>、こんにちは
+				<!-- <a th:href="@{/user/update-id-name}">[[${username}]]さん</a>、こんにちは-->
+				[[${username}]]さん、こんにちは
 			</h3>
 			<form th:action="@{/user/signout}" method="post">
 				<input type="submit" th:value="サインアウト">
