@@ -52,7 +52,7 @@ class UserFormTest{
             // テスト実施
             validator.validate(testUserForm, bindingResult);
             // 結果検証
-            assertThat(bindingResult.getFieldError().toString()).contains("50文字以内のメールアドレスを入力して下さい");
+            assertThat(bindingResult.getFieldError().toString()).contains("50文字以下のメールアドレスを入力して下さい");
     	}
     }
     
@@ -86,7 +86,7 @@ class UserFormTest{
             validator.validate(testUserForm, bindingResult);
             // 結果検証
             assertThat(bindingResult.getFieldError().toString())
-            	.contains("パスワードは大小英文字(a-z、A-Z)、数字(0-9)の3種を必ず一回は使用して下さい");
+            	.contains("パスワードは10文字以上25文字以下、大小英文字(a-z、A-Z)、数字(0-9)の3種を必ず一回は使用して下さい");
     	}
     	
     	@ParameterizedTest
@@ -102,7 +102,7 @@ class UserFormTest{
             validator.validate(testUserForm, bindingResult);
             // 結果検証
             assertThat(bindingResult.getFieldError().toString())
-            	.contains("パスワードは大小英文字(a-z、A-Z)、数字(0-9)の3種を必ず一回は使用して下さい");
+            	.contains("パスワードは10文字以上25文字以下、大小英文字(a-z、A-Z)、数字(0-9)の3種を必ず一回は使用して下さい");
     	}
     	
     	@ParameterizedTest
@@ -115,7 +115,7 @@ class UserFormTest{
             validator.validate(testUserForm, bindingResult);
             // 結果検証
             assertThat(bindingResult.getFieldError().toString())
-            	.contains("パスワードは大小英文字(a-z、A-Z)、数字(0-9)の3種を必ず一回は使用して下さい");
+            	.contains("パスワードは10文字以上25文字以下、大小英文字(a-z、A-Z)、数字(0-9)の3種を必ず一回は使用して下さい");
     	}	
     }
     
@@ -147,7 +147,7 @@ class UserFormTest{
             validator.validate(testUserForm, bindingResult);
             // 結果検証
             assertThat(bindingResult.getFieldError().toString())
-            	.contains("10文字以内のユーザーネームを入力して下さい");
+            	.contains("10文字以下のユーザーネームを入力して下さい");
     	}	
     }
 }

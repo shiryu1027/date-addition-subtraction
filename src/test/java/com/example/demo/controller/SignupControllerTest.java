@@ -68,7 +68,7 @@ class SignupControllerTest {
 		void setup() {
 			userForm = new UserForm();
 			userForm.setMailAddress("user@gmail.com");
-			userForm.setPassword("password");
+			userForm.setPassword("Password64");
 			userForm.setUsername("ユーザー");
 		}
 		

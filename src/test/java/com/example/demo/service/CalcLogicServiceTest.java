@@ -52,6 +52,7 @@ class CalcLogicServiceTest {
 		
 		private List<DateFormula> dateFormulas;
 		LocalDate baseDate;
+		private DateTimeFormatter fmt;
 		
 		@BeforeEach
 		void setup() {
@@ -68,7 +69,7 @@ class CalcLogicServiceTest {
 			dateFormula2.setDay(-11);
 			dateFormulas.add(dateFormula1);
 			dateFormulas.add(dateFormula2);
-			DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			baseDate = LocalDate.parse("1997/10/27", fmt);
 		}
 		
@@ -82,14 +83,14 @@ class CalcLogicServiceTest {
 		void dateFormula条件1の計算結果がplusYearsとminusMonthsを用いた計算と一致する() {
 			List<Result> calcResult = calcLogicService.getCalcResults(dateFormulas, baseDate);
 			assertThat(calcResult.get(0).getCalcResult())
-				.isEqualTo(baseDate.plusYears(3).minusMonths(2).plusDays(1));
+				.isEqualTo(baseDate.plusYears(3).minusMonths(2).plusDays(1).format(fmt));
 		}
 		
 		@Test
 		void dateFormula条件2の計算結果がplusYearsとminusMonthsを用いた計算と一致する() {
 			List<Result> calcResult = calcLogicService.getCalcResults(dateFormulas, baseDate);
 			assertThat(calcResult.get(1).getCalcResult())
-				.isEqualTo(baseDate.minusYears(10).plusMonths(5).minusDays(11));
+				.isEqualTo(baseDate.minusYears(10).plusMonths(5).minusDays(11).format(fmt));
 		}
 		
 	}
