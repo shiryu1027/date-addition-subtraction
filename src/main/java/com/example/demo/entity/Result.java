@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import lombok.Data;
 
@@ -36,7 +37,12 @@ public class Result {
 		return this.dateFormula.getExplanation();
 	}
 	
-	public int getUserId () {
+	public int getUserId() {
 		return this.dateFormula.getUserId();
+	}
+	
+	public String getCalcResult() {
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		return this.calcResult.format(fmt);
 	}
 }

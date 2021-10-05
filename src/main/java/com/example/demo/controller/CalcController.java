@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.security.Principal;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -69,9 +70,12 @@ public class CalcController {
 		List<DateFormula> formulas = calcService.getDateFormulas(mailAddress);
 		List<Result> results = calcLogicService.getCalcResults(formulas, form.getBaseDate());
 		
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		String baseDate = form.getBaseDate().format(fmt);
+		
 		model.addAttribute("username", userService.getUsername(mailAddress));
 		model.addAttribute("results", results);
-		model.addAttribute("baseDate", form.getBaseDate());
+		model.addAttribute("baseDate", baseDate);
 		return "calc/index";
 	}
 	
